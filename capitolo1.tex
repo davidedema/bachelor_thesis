@@ -1,0 +1,67 @@
+\chapter{Introduzione}
+\label{cha:intro}
+
+% - INTRODUZIONE AL TEMA
+% - MOTIVI DEL CASO DI STUDIO
+% - OBIETTIVI DEL LAVORO
+% - STRUTTURA 
+
+In questo primo capitolo viene introdotto il caso di studio, partendo dalla definizione del problema, definendo poi gli obiettivi desiderati
+e concludendo con una spiegazione della struttura della tesi.
+
+% INTRODUZIONE AL TEMA
+Per la mia tesi triennale mi sono voluto concentrare sul campo dell'intelligenza artificiale e la robotica. Il caso di studio identificato
+dal prof. Luigi Palopoli è l'utilizzo di Prolog, un linguaggio logico e dichiarativo, per l'implementazione di un task planner ad alto livello.
+Questo deve essere in grado di coordinare un manipolatore robotico, nel nostro caso un UR5 della Universal Robots, per l'operazione di manipolazione di blocchi.
+Il planner tramite delle primitive come \textit{ruota} e \textit{muovi} deve essere in grado di pilotare il nostro braccio robotico per la
+creazione di un pilastro. Il planner è stato concepito ad alto livello per permettere la compatibilità con più tipologie di robot e la flessibilità
+delle applicazioni. Nel caso studiato si utilizzerà il planner per la creazione appunto di un pilastro ma questa astrazione ad
+"alto livello" permette di essere usato per più compiti: ad esempio per la creazione di una costruzione come una casa o qualsiasi cosa
+che si può creare con dei blocchi di Lego. Queste primitive verrando inviate al nodo controllore del movimento che, tramite algoritmi di cinematica e
+interpolazione dei punti, troverà le configurazioni dei giunti adatte al movimento richiesto. Successivamente si è voluto implementare il tutto in un
+ambiente simulato, così da avere un riscontro anche visivo del lavoro svolto e capire le possibili applicazioni in un contesto reale.
+La simulazione è stata svolta con ROS e Gazebo, due strumenti open source ampiamente utilizzati nel mondo della robotica.
+
+% MOTIVI DEL CASO DI STUDIO
+La scelta di questo caso di studio è nata principalmente dal mio interesse verso la robotica e le applicazioni di intelligenza artificiale.
+Il caso studiato è stato un approccio nuovo che non avevo mai considerato e fin da subito mi è interessato.
+Inoltre ci sono molti modi di espandere questo lavoro, due tra questi sono la temporalizzazione degli eventi per poi ottimizzare il tempo
+di esecuzione (\textit{makespan}) finale e l'utilizzo del machine learning per istanziare i fatti iniziali.
+Sapere che questo lavoro possa essere portato avanti e migliorato è sicuramente un altro motivo principale della scelta di questo caso di studio.
+Mi sono quindi rivolto al prof. Palopoli e lui mi ha proposto di sviluppare questo progetto.
+La scelta di utilizzare Prolog è nata dal fatto che è un ottimo strumento per modellare la conoscenza in un agente.
+Esso permette di creare delle "basi di conoscenza", contenenti sia fatti che regole, su cui successivamente fare inferenza.
+Inoltre L'esecuzione di un programma prolog è comparabile alla dimostrazione di un teorema mediante la regola di inferenza della soluzione.
+Tutte queste premesse, e l'apmpio utilizzo di prolog nel mondo dell'intelligenza artificiale, ci hanno incuriosito e portato allo sviluppo del progetto.
+
+\section{Definizione del problema}
+\label{sec:defprob}
+Il caso di studio presentato non è nuovo nel mondo dell'intelligenza artificiale. L'utilizzo di linguaggi logici per applicazioni di planning è, ed era, uno
+degli approcci preferiti dalla comunità per risolvere problemi in questo dominio. Esempi di ciò sono: (inserire esempi di utilizzo di prolog
+(poi verranno approfonditi nel capitolo seguente)). Inizialmente la sfida è stata di prendere domestichezza con il linguaggio di programmazione.
+Era un paradigma che non avevo mai utilizzato e, abituato ai linguaggi imperativi come python, java, ho provato a usare lo stesso approccio che usavo con
+loro in Prolog, fallendo. Presa domestichezza la sfida diventò quella di definire un modo efficace per rappresentare l'ambiente studiato.
+Dovevo riuscire a trovare un astrazione della realtà tale che, utilizzando una stringa, riuscisse a rappresentare tutte le informazioni che mi servivano sulle proprietà
+attuali del blocco di lego. Successivamente questa si è trasformata nel riuscire a identificare le azioni base che il nostro planner doveva inviare al robot.
+Tutto ciò doveva essere svolto riuscendo a mantenere consistenza tra il mondo modellato e la base di conoscenza.
+
+\section{Obiettivi desiderati}
+\label{sec:obiettdes}
+In sede di sviluppo del progetto abbiamo voluto specializzare il planner nella costruzione di pilastri di altezza scelta dall'utente. Questi sono 
+composti dai \textit{megablocks}, dei blocchi di lego di dimensione maggiore, per facilitare la presa al nostro manipolatore. Questi saranno poi dei 
+fatti \textit{ground} all'interno della nostra base di conoscenza. Il predicato dovrà restituire tutte le possibili soluzioni che
+soddisfano il nostro problema. Successivamente una serie di azioni sarà calcolata per la costruzione del pilastro e queste verranno inviate al robot. Esso è un UR5
+del produttore Universal Robots, un manipolatore a 6 gradi di libertà. Alla sua estremità è presente un gripper a due dita che permette la presa dei blocchi.
+Tramite il piano generato, il robot dovrà costruire il pilastro richiesto con i blocchi messi a disposizione. Riceverà quindi una serie di azioni ad alto
+livello e convertirà queste in movimenti veri e propri del braccio tramite il nodo di motion planning.
+
+\section{Struttura della tesi}
+\label{sec:struttura}
+Questa tesi inizierà presentando lo stato dell'arte delle applicazioni in Prolog, sia l'uso come puro linguaggio logico che nei contesti di
+intelligenza artificiale e robotica. Vedremo l'evoluzione del linguaggio negli anni e la sua applicazione in ambiti sia di ricerca che di industria.
+Successivamente andrò a spiegare cosa è ROS e gli strumenti che ho utilizzato per simulare il robot. In questa sezione mi concentrerò sullo spiegare
+l'architettura e i nodi creati per il progetto, soffermandomi anche su concetti di cinematica e di motion planning.
+In seguito ci sarà un capitolo dedicato più dettagliatamente al caso di studio in cui il programma Prolog sarà spiegato più
+dettagliatamente e infine un capitolo dedicato alle conclusioni e ai lavori futuri.
+\newpage Iniziamo ora introducendo appunto lo stato dell'arte di prolog e le pubblicazioni più notabili, andando a dare un approfondimento anche al mondo dell'industria.
+
