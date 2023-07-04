@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  3 JUL 2023 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  4 JUL 2023 16:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/davide/Scrivania/Tesi/de_martini_davide_ice_2022_2023
-(/home/davide/Scrivania/Tesi/de_martini_davide_ice_2022_2023.tex
+**/home/davide/Scrivania/bachelor_thesis/de_martini_davide_ice_2022_2023
+(/home/davide/Scrivania/bachelor_thesis/de_martini_davide_ice_2022_2023.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
@@ -249,7 +249,7 @@ File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 Capitolo 1.
 [2
 
-] [3]) (./capitolo2.tex
+]) (./capitolo2.tex
 Capitolo 2.
 ) (./capitolo3.tex
 Capitolo 3.
@@ -259,17 +259,20 @@ Capitolo 4.
 Capitolo 5.
 )
 No file de_martini_davide_ice_2022_2023.bbl.
-[4] (./de_martini_davide_ice_2022_2023.aux) ) 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3] [4] (./de_martini_davide_ice_2022_2023.aux) ) 
 Here is how much of TeX's memory you used:
- 4778 strings out of 480163
- 73922 string characters out of 5894094
- 392353 words of memory out of 5000000
- 22666 multiletter control sequences out of 15000+600000
+ 4779 strings out of 480163
+ 73963 string characters out of 5894094
+ 394353 words of memory out of 5000000
+ 22667 multiletter control sequences out of 15000+600000
  476067 words of font info for 50 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 70i,7n,76p,355b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,7n,76p,366b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on de_martini_davide_ice_2022_2023.pdf (6 pages, 304307 bytes).
+Output written on de_martini_davide_ice_2022_2023.pdf (6 pages, 304959 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream
