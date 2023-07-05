@@ -1,5 +1,113 @@
 \chapter{Stato dell'arte}
 \label{cha:statoarte}
+In questo capitolo verranno presentati i principali lavori che compongono lo stato
+dell'arte di Prolog. In particolare verrà inizialmente introdotto il linguaggio, poi sarà presentata la storia di Prolog, partendo dalla creazione
+fino a come lo conosciamo ora. Infine verrà introdotto la sua applicazione nel mondo portando i lavori notabili, sviluppando il focus nel ambito dell'automazione e della robotica.
+\section{Prolog}
+\label{sec:prolog}
+Prolog è un linguaggio di programmazione logica, ideato da Robert Kowalski e Martin Van Emdem, implementato poi da Alain Colmerauer negli anni sessanta.
+Si basa sulla logica dei predicati di primo ordine, un sistema formale in cui gli enuciati espressi hanno delle deduzioni logiche
+che si possono trarre in modo meccanico.
+A differenza della maggior parte dei linguaggi di programmazione, Prolog è dichiarativo: la logica del programma è espressa in termini di relazioni, rappresentate da fatti e regole.
+Esso è associato spesso ad applicazioni di intelligenza artificiale e di linguistica computazionale, negli anni è stato usato per un'infinià di compiti,
+è stato addirittura impiegato come linguaggio per la creazione di un server web (VEDERE SITO SWIPROLOG). 
 
+Addentriamoci ora nei tecnicismi del linguaggio andando a descrivere la sua sintassi e semantica.
+\subsection{Sintassi}
+\label{subsec:sintassi}
+La sintassi del prolog è basata appunto sulla logica dei predicati di primo ordine, limitata però alle clausole di Horn.
+Queste sono delle disguinzioni di letterali in cui al massimo uno dei letterali è positivo. Un esempio è il seguente:
+\begin{equation}
+    \label{eq:clausolaHorn1}
+    \neg umano(X) \lor mortale(X)
+\end{equation}
+Questo significa che:
+\begin{equation}
+    \label{eq:clausolaHorn2}
+    \forall X ( \neg umano(X) \lor mortale(X) )
+\end{equation}
+Utilizzando l'equivalenza logica:
+\begin{equation}
+    \label{eq:clausolaHorn3}
+    \neg X \lor Y \equiv X \Rightarrow Y
+\end{equation}
+Quindi:
+\begin{equation}
+    \label{eq:clausolaHorn4}
+    \forall X ( umano(X) \Rightarrow mortale(X))
+\end{equation}
+In questo esempio possiamo vedere come è costituita una clausola di Horn. Se la premessa (\textit{umano}) è vera allora
+anche la conseguenza (\textit{mortale}) è vera.
+
+Le clausole possono essere senza testa:
+\begin{verbatim}
+    umano(luca).
+    padre(livio, lorenzo).
+\end{verbatim}
+Oppure con testa:
+\begin{verbatim}
+    mortale(lorenzo) :- umano(lorenzo).
+\end{verbatim}
+
+Come detto prima, la logica in Prolog è espressa in termini di relazioni tra fatti e regole, la verifica di queste relazioni
+prende il nome di \textit{query} o \textit{interrogazione}.  
+Un fatto in Prolog può essere visto come una clausola con il corpo vuoto, ad esempio:
+\begin{verbatim}
+    umano(luca).
+\end{verbatim}
+È un fatto che afferma che luca è un umano. Questo infatti è descrivibile come una regola che però è sempre vera:
+\begin{verbatim}
+    umano(luca) :- true.
+\end{verbatim}
+Una regola, invece, è una clausola completa di testa e corpo. La testa è vera solamente se anche il corpo è vero.
+Un esempio di regola è quello visto prima:
+\begin{verbatim}
+    mortale(X) :- umano(X).
+\end{verbatim}
+
+Il corpo di una regola è un insieme di predicati, questi possono essere congiunti o disgiunti. L'operatore di congiunzione è la
+virgola (\textit{,}) mentre quello di disgiunzione è il punto e virgola (\textit{;}). Prolog viene fornito di predicati predefiniti, spesso 
+utilizzati per la manipolazione di liste, aritmetica, input/output. Esempi di questi sono \textit{append}, \textit{is}, \textit{write}, \textit{read}, ecc.
+
+\subsection{Esecuzione}
+\label{subsec:esecuzione}
+L'esecuzione di un programma Prolog è basata sulla ricerca di un insieme di predicati che soddisfano una data query. Il metodo di risoluzione utilizzato è la risoluzione SLD (Selection, Linearization, and Driving).
+Questo processo di inferenza consiste in più fasi:
+\begin{enumerate}
+    \item Selezionare una clausola goal, essa rappresenta quello che si desidera dimostrare.
+    \item Unificare la clausola goal con quella del programma, quindi trovare un modo di rendere uguali i termini nelle due clausole.
+    \item Risolvere la clausola unificata, il programma userà quindi le sostituzioni fatte nella fase precedente per risolvere la clausola. Questo genererà nuove clausole che verranno aggiunte all'insieme di clausole da risolvere.
+    \item Ripetere i passaggi 2 e 3 fino a quando non si raggiunge un punto di terminazione. La strategia di scelta delle clausole  è la selezione lineare più a sinistra.
+    \item Il processo termina quando viene raggiunto uno di questi casi:
+    \begin{itemize}
+        \item Una clausola vuota viene generata dimostrando quindi che la query è vera.
+        \item Non è possibile selezionare ulteriori clausole per unificare e risolvere.
+        \item Viene raggiunto il limite di profondità o di tempo (prestabilito dall'utente).
+    \end{itemize}
+\end{enumerate}
+% AGGIUNGERE RAGIONAMENTO PER BACKTRAKING 
+Per esplorare tutte le possibili soluzioni di un problema, Prolog utilizza il \textit{backtraking}. Se durante l'esecuzione di una 
+regola o l'unificazione di un fatto si raggiunge un punto in cui non è più possibile trovare delle soluzioni, Prolog torna indietro (backtrack)
+per cercare altre possibilità. Questo processo quindi permette di riprendere l'esplorazione delle alternative non ancora considerate.
+Durante il processo di backtracking Prolog annulla tutte le assegnazioni fatte precedentemente e cerca altre alternative. Le variabili unificate vengono quindi scollegate
+per permettere la ricerca di altre soluzioni. Un esempio di questo strumento:
+\begin{verbatim}
+    padre(giovanni, maria).
+    padre(giovanni, giuseppe).
+    madre(maria, francesca).
+
+    genitore(X, Y) :- padre(X, Y).
+    genitore(X, Y) :- madre(X, Y).
+\end{verbatim}
+Se noi dovessimo eseguire la query \textit{genitore(giovanni, X)} Prolog troverebbe due soluzioni: \textit{X = maria} e \textit{X = giuseppe}. 
+Facendo così Prolog ha esplorato tutte le alternative possibili dell'albero di ricerca. 
+\section{Evoluzione di prolog}
+\label{sec:evoluzione}
+\section{Lavori notabili}
+\label{sec:lavori}
+
+% Forse può essere messo in lavori notabili idk
+% \section{Prolog in ambito di automazione e robotica}
+% \label{sec:automazione}
 
 
