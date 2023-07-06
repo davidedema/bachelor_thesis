@@ -10,9 +10,19 @@ Si basa sulla logica dei predicati di primo ordine, un sistema formale in cui gl
 che si possono trarre in modo meccanico.
 A differenza della maggior parte dei linguaggi di programmazione, Prolog è dichiarativo: la logica del programma è espressa in termini di relazioni, rappresentate da fatti e regole.
 Esso è associato spesso ad applicazioni di intelligenza artificiale e di linguistica computazionale, negli anni è stato usato per un'infinià di compiti,
-è stato addirittura impiegato come linguaggio per la creazione di un server web (VEDERE SITO SWIPROLOG). 
+è stato addirittura impiegato come linguaggio per la creazione di un server web (VEDERE SITO SWIPROLOG).
 
-Addentriamoci ora nei tecnicismi del linguaggio andando a descrivere la sua sintassi e semantica.
+%% METTERE PARTE PER I TIPI DI DATO SUPPORTATI %%
+Il dato in Prolog viene chiamato termine, esso può essere un atomo, un numero, una variabile oppure un termine composto.
+\begin{itemize}
+    \item Atomo: è un termine che non è né un numero né una variabile. Gli atomi sono usati per rappresentare nomi di oggetti, relazioni o costanti.
+    \item Numero: i numeri in Prolog possono essere sia interi che reali.
+    \item Variabili: sono usate per rappresentare oggetti o valori sconosciuti. Le variabili in Prolog iniziano con una lettera maiuscola o con il carattere di sottolineatura.
+    \item Termine composto: esso è composto da un atomo chiamato \textit{funtore} e un numero di argomenti. Il numero di argomenti è chiamato \textit{arità} del termine composto.
+          Casi speciali di termini composti sono le liste  e le stringhe.
+\end{itemize} 
+
+Addentriamoci ora nei tecnicismi del linguaggio andando a descrivere la sua sintassi.
 \subsection{Sintassi}
 \label{subsec:sintassi}
 La sintassi del prolog è basata appunto sulla logica dei predicati di primo ordine, limitata però alle clausole di Horn.
@@ -50,12 +60,13 @@ Oppure con testa:
 \end{verbatim}
 
 Come detto prima, la logica in Prolog è espressa in termini di relazioni tra fatti e regole, la verifica di queste relazioni
-prende il nome di \textit{query} o \textit{interrogazione}.  
+prende il nome di \textit{query} o \textit{interrogazione}.
 Un fatto in Prolog può essere visto come una clausola con il corpo vuoto, ad esempio:
 \begin{verbatim}
     umano(luca).
 \end{verbatim}
-È un fatto che afferma che luca è un umano. Questo infatti è descrivibile come una regola che però è sempre vera:
+In questo esempio vediamo come si può esprimere logicamente che luca sia un umano.
+Un fatto può essere visto anche come una regola che a priori è sempre vera:
 \begin{verbatim}
     umano(luca) :- true.
 \end{verbatim}
@@ -66,9 +77,26 @@ Un esempio di regola è quello visto prima:
 \end{verbatim}
 
 Il corpo di una regola è un insieme di predicati, questi possono essere congiunti o disgiunti. L'operatore di congiunzione è la
-virgola (\textit{,}) mentre quello di disgiunzione è il punto e virgola (\textit{;}). Prolog viene fornito di predicati predefiniti, spesso 
+virgola (\textit{,}) mentre quello di disgiunzione è il punto e virgola (\textit{;}). Prolog viene fornito di predicati predefiniti, spesso
 utilizzati per la manipolazione di liste, aritmetica, input/output. Esempi di questi sono \textit{append}, \textit{is}, \textit{write}, \textit{read}, ecc.
 
+L'insieme di questi 'costrutti' compone l'interità della sintassi base in prolog. Ci sono anche altri operatori, uno dei più importanti è il seguente:
+Il predicato $\backslash+$ /1 definisce la \textit{negazione come fallimento}. Ciò permette a Prolog di essere un sistema di ragionamento non monolitico.
+\begin{verbatim}
+    legale(X) :- \+ illegale(X).
+\end{verbatim}
+
+Prolog fa un uso massiccio di ricorsione, questo ci permette di definire degli algoritmi iterativi in prolog. Io stesso ne ho fatto largo uso per la mia base di conoscenza,
+un esempio è il seguente:
+\begin{verbatim}
+    list_length([], 0).
+
+    list_length([_|T], N) :-
+        list_length(T, N1),
+        N is N1 + 1.
+\end{verbatim}
+In questo esempio il predicato è utilizzato per calcolare la lunghezza di una lista, vediamo come ci sia il caso base (lista vuota) e il caso ricorsivo.
+Nel capitolo \ref{cha:descrizionecasostudio} spiegherò meglio la struttura del programma e come ho risolto i problemi incontrati in Prolog.
 \subsection{Esecuzione}
 \label{subsec:esecuzione}
 L'esecuzione di un programma Prolog è basata sulla ricerca di un insieme di predicati che soddisfano una data query. Il metodo di risoluzione utilizzato è la risoluzione SLD (Selection, Linearization, and Driving).
@@ -79,14 +107,13 @@ Questo processo di inferenza consiste in più fasi:
     \item Risolvere la clausola unificata, il programma userà quindi le sostituzioni fatte nella fase precedente per risolvere la clausola. Questo genererà nuove clausole che verranno aggiunte all'insieme di clausole da risolvere.
     \item Ripetere i passaggi 2 e 3 fino a quando non si raggiunge un punto di terminazione. La strategia di scelta delle clausole  è la selezione lineare più a sinistra.
     \item Il processo termina quando viene raggiunto uno di questi casi:
-    \begin{itemize}
-        \item Una clausola vuota viene generata dimostrando quindi che la query è vera.
-        \item Non è possibile selezionare ulteriori clausole per unificare e risolvere.
-        \item Viene raggiunto il limite di profondità o di tempo (prestabilito dall'utente).
-    \end{itemize}
+          \begin{itemize}
+              \item Una clausola vuota viene generata dimostrando quindi che la query è vera.
+              \item Non è possibile selezionare ulteriori clausole per unificare e risolvere.
+              \item Viene raggiunto il limite di profondità o di tempo (prestabilito dall'utente).
+          \end{itemize}
 \end{enumerate}
-% AGGIUNGERE RAGIONAMENTO PER BACKTRAKING 
-Per esplorare tutte le possibili soluzioni di un problema, Prolog utilizza il \textit{backtraking}. Se durante l'esecuzione di una 
+Per esplorare tutte le possibili soluzioni di un problema, Prolog utilizza il \textit{backtraking}. Se durante l'esecuzione di una
 regola o l'unificazione di un fatto si raggiunge un punto in cui non è più possibile trovare delle soluzioni, Prolog torna indietro (backtrack)
 per cercare altre possibilità. Questo processo quindi permette di riprendere l'esplorazione delle alternative non ancora considerate.
 Durante il processo di backtracking Prolog annulla tutte le assegnazioni fatte precedentemente e cerca altre alternative. Le variabili unificate vengono quindi scollegate
@@ -99,8 +126,13 @@ per permettere la ricerca di altre soluzioni. Un esempio di questo strumento:
     genitore(X, Y) :- padre(X, Y).
     genitore(X, Y) :- madre(X, Y).
 \end{verbatim}
-Se noi dovessimo eseguire la query \textit{genitore(giovanni, X)} Prolog troverebbe due soluzioni: \textit{X = maria} e \textit{X = giuseppe}. 
-Facendo così Prolog ha esplorato tutte le alternative possibili dell'albero di ricerca. 
+Se noi dovessimo eseguire la query \textit{genitore(giovanni, X)} Prolog troverebbe due soluzioni: \textit{X = maria} e \textit{X = giuseppe}.
+Facendo così Prolog ha esplorato tutte le alternative possibili dell'albero di ricerca.
+\subsection{Debugging}
+\label{subsec:debugging}
+Prolog fornisce un insieme di strumenti per il debugging, uno di questi è il \textit{trace}. Questo strumento permette di vedere l'esecuzione del programma passo passo. 
+In questo modo è possibile vedere come Prolog risolve le query e quali clausole vengono selezionate. Nella console di SWI-Prolog è possibile attivare il trace con il comando \textit{trace.} e disattivarlo con \textit{notrace.}.
+Avviandolo ad ogni chiamata di un predicato verrà mostrato il suo nome e i suoi argomenti. Inoltre verrà mostrato il risultato della sua risoluzione. Questo renderà il debugging di un programma più semplice, e permetterà di capire meglio il funzionamento di Prolog.
 \section{Evoluzione di prolog}
 \label{sec:evoluzione}
 \section{Lavori notabili}

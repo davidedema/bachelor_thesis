@@ -9,9 +9,10 @@
 \contentsline {section}{\numberline {2.1}Prolog}{4}{}%
 \contentsline {subsection}{\numberline {2.1.1}Sintassi}{4}{}%
 \contentsline {subsection}{\numberline {2.1.2}Esecuzione}{5}{}%
+\contentsline {subsection}{\numberline {2.1.3}Debugging}{6}{}%
 \contentsline {section}{\numberline {2.2}Evoluzione di prolog}{6}{}%
 \contentsline {section}{\numberline {2.3}Lavori notabili}{6}{}%
-\contentsline {chapter}{\numberline {3}Descrizione dell'architettura ROS}{6}{}%
-\contentsline {chapter}{\numberline {4}Descrizione del caso di studio}{6}{}%
+\contentsline {chapter}{\numberline {3}Descrizione del caso di studio}{6}{}%
+\contentsline {chapter}{\numberline {4}Descrizione dell'architettura ROS}{6}{}%
 \contentsline {chapter}{\numberline {5}Conclusione}{6}{}%
 \contentsline {chapter}{Bibliografia}{6}{}%
