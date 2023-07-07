@@ -1,0 +1,27 @@
+\begin{thebibliography}{1}
+
+\bibitem{horn1951sentences}
+Alfred Horn.
+\newblock On sentences which are true of direct unions of algebras.
+\newblock {\em The Journal of Symbolic Logic}, 16(1):14--21, 1951.
+
+\bibitem{korner2022fifty}
+Philipp K{\"o}rner, Michael Leuschel, Jo{\~a}o Barbosa, V{\'\i}tor~Santos
+  Costa, Ver{\'o}nica Dahl, Manuel~V Hermenegildo, Jose~F Morales, Jan
+  Wielemaker, Daniel Diaz, Salvador Abreu, et~al.
+\newblock Fifty years of prolog and beyond.
+\newblock {\em Theory and Practice of Logic Programming}, 22(6):776--858, 2022.
+
+\bibitem{kowalski1974predicate}
+Robert~A Kowalski.
+\newblock Predicate logic as a programming language.
+\newblock {\em Proceedings of IFIP}, pages 569--574, 1974.
+
+\bibitem{krause_1995}
+Paul~J. Krause.
+\newblock The art of prolog—second edition by leon sterling and ehud shapiro,
+  mit press, cambridge, ma1994, pp. 509, £19.95 (paperback), £44.94
+  (hardback), isbn 0-262-19338-8.
+\newblock {\em The Knowledge Engineering Review}, 10(4):411–411, 1995.
+
+\end{thebibliography}
