@@ -217,7 +217,7 @@ Sviluppò quindi un nuovo interprete, chiamato WAM (Warren Abstract Machine).
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.55]{images/prologimpl.png}
-    \caption{Quandro generale delle versioni di Prolog \cite{korner2022fifty}}
+    \caption{Quandro generale delle versioni di Prolog \cite{korner2022fifty}}. In grigio scuro sono riportate le versioni che ad oggi (2022 \cite{korner2022fifty}) non sono più supportate.
     \label{fig:prologimpl}
 \end{figure}
 
@@ -229,7 +229,47 @@ perchè ritenuto più efficiente.
 
 SWI-Prolog naque dalla mancanza di Quintus (un implementazione di Prolog) di chiamate ricorsive tra Prolog e C. La potenza di questa implementazione è la community che la supporta, infatti è una delle implementazioni più utilizzate al mondo sia per la ricerca che non. Oltre che la forte community
 SWI-Prolog, al contrario di GNU Prolog, è interpretato, e non compilato. Questo permette di avere un ambiente di sviluppo molto più flessibile e adatto alla ricerca.
+
+Questo, come detto in introduzione, è solo un breve riassunto delle tappe fondamentali dell'evoluzione di Prolog. Se siete interessati a una panoramica più completa vi consiglio caldamente di leggere l'articolo di K{\"o}rner \cite{korner2022fifty}. 
+Nell'articolo viene descritto in modo più dettagliato ISO Prolog e le differenze tra le varie versioni utilizzate al giorno d'oggi.
 \section{Lavori notabili}
 \label{sec:lavori}
+Lo scopo di questa sezione è di presentare i lavori più notabili che hanno utilizzato Prolog o comunque un linguaggio logico per risolvere problemi di task planning e intelligenza artificiale.
+Durante lo sviluppo del progetto è stato necessario avere dei lavori di riferimento per poterlo poi sviluppare in modo corretto.
+Premesso questo non voglio quindi entrare troppo in dettaglio, ma soltanto illustrare i lavori lasciando al lettore la possibilità di approfondirli.
 
+Un lavoro che mostra come i linguaggi di programmazione logica, e in particolare Prolog, possano essere usati per risolvere problemi di task planning è sicuramente quello di Meli \cite{meli2023logic}. In questo lavoro viene presentato lo stato dell'arte del task planning, e come questo possa essere risolto con un linguaggio di programmazione logica.
+L'articolo inizia introducendo la necessità del mondo di oggi di progettare sistemi robotici con capacità di decisione deliberativa. 
+Continua poi spiegando i requisiti per un sistema robotico deliberativo, quelli identificati sono questi moduli (vedi figura \ref{fig:delrob}): 
+    \textit{planning},
+    \textit{acting},
+    \textit{monitoring},
+    \textit{observing},
+    \textit{goal reasoning},
+    \textit{learning}.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{images/deliberativerobot.png}
+    \caption{Funzioni di un robot deliberativo \cite{meli2023logic}}
+    \label{fig:delrob}
+\end{figure}
+Un sistema robotico è quindi un gruppo di robot con un obiettivo comune, questo può essere portato a termine attraverso un insieme di azioni che possono essere compiute dal robot nel mondo.
+Il paper poi continua introducedo la tassonomia dei task planner e poi introduce i tre tipi di logica identificati per creare un task planner: \textit{logica standard}, \textit{logica temporale} e \textit{logica probabilistica}.
+Da qui il paper introduce la task usata come esempio: \textit{Peg transfer task}, in italiano compito di trasferimento perni.
+Il compito consiste nel posizionare gli elastici di un determinato colore nel perno del colore corrispondente.
+Viene poi formalizzata in \textit{PDDL}, un linguaggio di descrizione di domini di pianificazione. Questo è stato fatto con l'obiettivo, poi, di tradurlo in un linguaggio logico.
+Segue poi una descrizione della soluzione del problema nei tre tipi di logica precedentemente descritti. Conclude poi con una discussione dei risultati ottenuti spieganfo come la logica standard sia la più adatta per risolvere questo tipo di problemi.
 
+Un altro lavoro che utilizzò Prolog fu \textit{Fifth Generation Computer Systems}. Questa fu una iniziativa di 10 anni, promossa dal Giappone, che aveva come obiettivo quello di creare i computer utilizzando tanta programmazione logica e programmazione parallela.
+Questo perchè come obiettivo finale si volevano avere dei sistemi per la ricerca in ambito di intelligenza artificiale. Più informazioni a riguardo di questo progetto possono essere trovate nel lavoro di K\"orner \cite{korner2022fifty}.
+
+Anche la nota azienda IBM utilizzò Prolog per lo sviluppo di un computer capace di rispondere alle domande. Questo fu sviluppato nel 2011 e prese il nome di \textit{Watson}. Nel 2013 IBM annuciò che Watson sarebbe stato utilizzato per l'aiuto a prendere decisioni riguardo al trattamento del cancro ai polmoni. Prolog è stato usato per creare la base di conoscenza e per l'analisi del linguaggio.
+Una curiosità è che anche la nostra università ha partecipato allo sviluppo iniziale di Watson insieme ad altre università statunitensi. %come cito?.
+
+Un ultimo lavoro che utilizza Prolog per il design di un braccio robotico è \textit{Design an Arm Robot through Prolog Programming Language} \cite{mustafa2013design}. Lo scopo di questo articolo era quello di progettare un braccio robotico comandato da un programma Prolog. Nel paper viene introdotto il caso di studio fornendo al lettore le nozioni base di robot e sistema intelligente.
+Nella seconda parte poi viene spiegato il design utilizzato per il sistema Prolog e come è stato implementato, includendo anche il codice.
+
+Questi sono alcuni dei lavori più interessanti che ho trovato sia per il campo della robotica che per quello dell'intelligenza artificiale. Prolog ha una storia che conta più di 50 anni e quindi è stato utilizzato in molti altri lavori. Questa panoramica serviva per capire le potenzialità di Prolog
+e come questo sia utilizzato al giorno d'oggi. La ricerca nell'ambito di Prolog e dell'intelligenza artificiale continua a progredire, portando ad importanti sviluppi. Oltre al campo della robotica e dell'intelligenza artificiale, è rilevante menzionare anche l'intelligenza artificiale neurosimbolica. Questo approccio combina elementi di intelligenza artificiale simbolica, come Prolog, con tecniche di intelligenza artificiale ispirate al funzionamento del cervello, come le reti neurali artificiali. L'integrazione di questi due paradigmi promette di aprire nuove strade nel campo dell'intelligenza artificiale e potenzialmente superare alcune delle limitazioni dei singoli approcci. La ricerca in questo ambito è in continua evoluzione, offrendo nuove prospettive e sfide interessanti.
+
+%sa

@@ -24,4 +24,14 @@ Paul~J. Krause.
   (hardback), isbn 0-262-19338-8.
 \newblock {\em The Knowledge Engineering Review}, 10(4):411–411, 1995.
 
+\bibitem{meli2023logic}
+Fiorini~Paolo Meli~Daniele, Nakawala~Hirenkumar.
+\newblock Logic programming for deliberative robotic task planning.
+\newblock {\em Artificial Intelligence Review}, 2023.
+
+\bibitem{mustafa2013design}
+Aram Mustafa and Tarik Rashid.
+\newblock Design an arm robot through prolog programming language.
+\newblock {\em Advances in Robotics and Automation}, 1:1--6, 01 2013.
+
 \end{thebibliography}
