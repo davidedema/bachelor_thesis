@@ -2,8 +2,8 @@
 \label{cha:statoarte}
 In questo capitolo verranno presentati i principali lavori che compongono lo stato
 dell'arte di Prolog. In particolare verrà inizialmente introdotto il linguaggio, poi sarà presentata la storia di Prolog, partendo dalla creazione
-fino a come lo conosciamo ora. Infine verrà introdotto la sua applicazione nel mondo portando i lavori notabili, sviluppando il focus nel ambito dell'automazione e della robotica.
-Per la stesura di questo capitolo ho utilizzato principalmente il libro \textit{The art of Prolog} \cite{krause_1995} e il lavoro di K\"orner \cite{korner2022fifty}.
+fino a come lo conosciamo ora. Infine verrà introdotta la sua applicazione nel mondo portando i lavori notabili, sviluppando il focus nel ambito dell'automazione e della robotica.
+Per la scrittura di questo capitolo ho utilizzato varie fonti. Esse saranno riportate a inizio di ogni sezione e in ogni parte in cui sono state utilizzate.
 \section{Prolog}
 \label{sec:prolog}
 %%
@@ -16,11 +16,11 @@ Per la stesura di questo capitolo ho utilizzato principalmente il libro \textit{
 % Esso è associato spesso ad applicazioni di intelligenza artificiale e di linguistica computazionale, negli anni è stato usato per un'infinià di compiti,
 % è stato addirittura impiegato come linguaggio per la creazione di un server web (VEDERE SITO SWIPROLOG).
 
-In questa sezione verrà introdotto il linguaggio, dandogli una definizione e una descrizione della sua attuale implementazione.
+In questa sezione verrà introdotto il linguaggio, dandogli una definizione e una descrizione della sua attuale implementazione. Per la scrittura di questa sezione ho utilizzato principalmente il libro \textit{The art of Prolog} \cite{krause_1995} e il lavoro \textit{50 years of Prolog and beyond} \cite{korner2022fifty}.
 
 Ad oggi Prolog è considerato il linguaggio di programmazione logica più utilizzato e più importante. La sua evoluzione, però, non è stata lineare.
-Negli anni ha subito diverse modifiche, la cosa curiosa è che, a differenza di altri linguaggi, queste modifiche venivano integrate nel progetto principale invece che creare dei linguaggi paralleli.
-In ogni caso i pilastri del linguaggio sono rimasti invariati, qui di seguito elenco i principi fondamentali che ogni implementazione di Prolog deve rispettare:
+Negli anni ha subito diverse modifiche, la cosa curiosa è che, a differenza di altri linguaggi, queste venivano integrate nel progetto principale invece che creare dei linguaggi paralleli.
+Qui di seguito elenco i principi fondamentali che ogni implementazione di Prolog deve rispettare secondo lo studio di K\"orner et al. \cite{korner2022fifty}:
 \begin{enumerate}
     \item Il linguaggio deve essere basato sulla logica dei predicati di primo ordine utilizzando le clausole di Horn. Sia per la creazione delle basi di conoscenza che per le interrogazioni delle basi di conoscenza (query).
     \item Avere l'abilità di manipolare predicati e clausole come termini, così che i meta-predicati possano essere scritti come normali predicati.
@@ -28,7 +28,7 @@ In ogni caso i pilastri del linguaggio sono rimasti invariati, qui di seguito el
     \item Unificazione di termini arbitrari che includono variabili.
     \item Esplorazione depth-first dell'albero di ricerca.
 \end{enumerate}
-La spiegazione di questi requisiti minimi è ben descritta dall'articolo di K\"orner \cite{korner2022fifty}. I punti fondamentali per un implementazione di Prolog sono quindi: l'uso delle clausole
+I punti fondamentali per un implementazione di Prolog sono quindi: l'uso delle clausole
 di Horn, la risoluzione SLD e l'unificazione di termini arbitrari. Ci sono altre importati funzioni che un implementazione dovrebbe supportare:
 \begin{enumerate}
     \setcounter{enumi}{5}
@@ -36,15 +36,16 @@ di Horn, la risoluzione SLD e l'unificazione di termini arbitrari. Ci sono altre
     \item Possibilità di alterare il contesto dell'esecuzione durante la risoluzione.
     \item Possibilità di utilizzare la programmazione con \textit{constraints}.
 \end{enumerate} 
-Di sicuro ci sono molte altre funzioni che devono essere presenti in una implementazione di Prolog, ho voluto elencare soltanto le principali. 
+Queste sono quindi le caratteristiche che ogni implementazione di Prolog dovrebbe avere, se anche una dovesse mancare allora non si potrebbe considerare un implementazione di Prolog. 
 
-La \textit{Regola del pollice} per capire se un risolutore logico può essere considerato un implementazione di Prolog è la seguente.
+La \textit{Regola del pollice} per capire se un risolutore logico può essere considerato un implementazione di Prolog e quindi rispettare i pilastri elencati sopra è la seguente.
 Il test richiede che la ben nota regola \textit{append/3} possa essere scritta esattamente come segue
 \begin{verbatim}
     append([], X, X).
     append([H|X], Y, [H|Z]) :- append(X, Y, Z).
 \end{verbatim}
 e questa può essere interrogata in differenti modi: fare l'append tra due liste \verb+append([1,2],[c,d], R)+, oppure decostruire una lista come \verb+append(A,B,[1,2])+ o infine istanziarla con argomenti arbitrari come \verb+append([X|T],[c],[Z,Z,Z])+.
+Se la regola funziona senza anomalie, l'implementazione utilizzata può considerarsi un implementazione di Prolog.
 
 Descriviamo ora più in dettaglio la struttura di Prolog e la sua sintassi.
 %% METTERE PARTE PER I TIPI DI DATO SUPPORTATI %%
@@ -171,10 +172,11 @@ Facendo così Prolog ha esplorato tutte le alternative possibili dell'albero di 
 Prolog fornisce un insieme di strumenti per il debugging, uno di questi è il \textit{trace}. Questo strumento permette di vedere l'esecuzione del programma passo passo. 
 In questo modo è possibile vedere come Prolog risolve le query e quali clausole vengono selezionate. Nella console di SWI-Prolog è possibile attivare il trace con il comando \textit{trace.} e disattivarlo con \textit{notrace.}.
 Avviandolo ad ogni chiamata di un predicato verrà mostrato il suo nome e i suoi argomenti. Inoltre verrà mostrato il risultato della sua risoluzione. Questo renderà il debugging di un programma più semplice, e permetterà di capire meglio il funzionamento di Prolog.
+
 \section{Evoluzione di prolog}
 \label{sec:evoluzione}
 La sezione seguente si concentra sull'evoluzione del linguaggio Prolog nel corso degli anni. Sin dalla sua ideazione negli anni 70', Prolog ha subito notevoli sviluppi, adattamenti e miglioramenti per adeguarsi
-alle esigenze deglla comunità.
+alle esigenze deglla comunità. Per la scrittura di questa sezione mi sono affidato all'articolo di K\"orner et al. \cite{korner2022fifty}, il lavoro \textit{Logic programming for deliberative robotic task planning} \cite{meli2023logic} e altre fonti e articoli.
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{images/prologhist.png}
@@ -183,15 +185,14 @@ alle esigenze deglla comunità.
 \end{figure}
 
 Di seguito vedremo una panoramica delle principali tappe che hanno contrassegnato l'evoluzione di Prolog (vedi figura \ref{fig:prologhist}). Esploreremo le innovazioni chiave e i contributi accademici
-che hanno, negli anni, arricchito il linguaggio. Vedremo poi le varie varianti di Prolog che sono state sviluppate nel corso degli anni, e come esse abbiano influenzato
-il linguaggio principale.
+che hanno, negli anni, arricchito il linguaggio. Vedremo poi le due principali varianti di Prolog che sono state sviluppate nel corso degli anni, e come esse abbiano influenzato il linguaggio principale.
 
-Prolog fa parte principalmente di tre rami della ricerca: intelligenza artificiale, risoluzione automatica dei teoremi e processamento del linguaggio.
+Prolog fa parte principalmente di tre rami della ricerca: intelligenza artificiale, risoluzione automatica dei teoremi e processamento del linguaggio naturale.
 
 Il campo dell'intelligenza artificiale naque all'incirca nel 1956 e diede velocemente vita al linguaggio di programmazione funzionale LISP. Da li in poi 
 l'interesse aumentò e diede vita ad altri linguaggi più o meno ad alto livello.
 
-La soluzione automatica di teoremi è un campo della matematica che si occupa di trovare dimostrazioni automatiche di teoremi matematici. La risoluzione può essere utilizzata per ottenere una procedura semi-decisionale per la logica predicativa ed è al centro della maggior parte delle procedure di inferenza nella programmazione logica.
+La soluzione automatica di teoremi è un campo della matematica che si occupa di trovare dimostrazioni automatiche di teoremi matematici. Questa materia fece un grande passo avanti quando Alan Robinson introdusse la regola di risoluzione per inferenza nel 1965. La risoluzione può essere utilizzata per ottenere una procedura semi-decisionale per la logica predicativa ed è al centro della maggior parte delle procedure di inferenza nella programmazione logica.
 
 A seguito di questi progressi, un visionario precoce nello sviluppo del campo della programmazione logica è stato Cordall Green, che già alla fine degli anni 60 immaginava come estendere la risoluzione per costruire 
 automaticamente la soluzione di un problema. In particolare voleva applicare questo strumento per la risoluzione di domande basate sulla logica di primordine. Questo rappresentò il primo zenit della programmazione logica impiegata in applicazioni di AI.
@@ -199,16 +200,15 @@ automaticamente la soluzione di un problema. In particolare voleva applicare que
 Un altro progetto notabile è quello di Ted Elcock che sviluppò Absys, un linguaggio di programmazione dichiarativo che anticipò alcune delle funzioni di Prolog come la negazione come fallimento, operatori di aggregazione e il backtracking.
 
 Nel frattempo Alain Colmerauer stava provando a sviluppare un sistema di conversazione uomo-macchina, ciò lo portò a sviluppare Q-systems, un sistema impegato per le traduzioni da Inglese a Francese dei rapporti meteorologici Canadesi. 
-Il suo obiettivo di modificare Q-systems, per ottenere un sistema domanda e risposta, lo portò a sviluppare un linguaggio di programmazione basato sulla logica predicativa. Questo linguaggio fu chiamato Prolog, e fu sviluppato nel 1972.
-Il suo creatore, Alain Colmerauer, diede quindi vita a Prolog nel 1972. Il risultato fu non solo la prima applicazione del linguaggio naturale (NL) di quello che oggi conosciamo come Prolog, ma la base di Prolog stesso: un sistema di risoluzione
-lineare ristretto alle clausole di Horn che poteva risolvere problemi in maniera non deterministica.
+Il suo obiettivo di modificare Q-systems, per ottenere un sistema domanda e risposta, lo portò a sviluppare un linguaggio di programmazione basato sulla logica predicativa. Questo linguaggio fu chiamato Prolog, e fu sviluppato nel 1972 dal francese Alain Colmerauer.
+Il risultato fu quindi lo sviluppo di Prolog: un sistema di risoluzione lineare ristretto alle clausole di Horn che poteva risolvere problemi in maniera non deterministica.
 
 L'articolo di K{\"o}rner \cite{korner2022fifty} fornisce una panoramica completa dell'evoluzione di Prolog, e di come questo linguaggio sia stato influenzato nel corso degli anni. Io mi concentrerò soltato su alcuni aspetti chiave che hanno portato Prolog a diventare il linguaggio che conosciamo oggi.
 Se siete interessati a una panoramica più completa seguendo una linea temporale come quella in figura \ref{fig:prologhist} vi consiglio caldamente di leggere l'articolo.
 \subsection{Tappe fondamentali dell'evoluzione di Prolog}
 \label{subsec:tappe}
 Nella sua prima decade di vita Prolog subì molte variazioni, la sua prima versione fu Prolog 0, seguita da Prolog 1. In queste versioni il linguaggio
-prevedeva già qualche predicato built in che poi fu incluso nello standard ISO. Queste versioni includevano già il predicato \verb+dif/2+, questo predicato fu importante perchè fece prendere piede al concetto di unificazione. Successivamente seguì l'aggiunta
+prevedeva già qualche predicato built in che poi fu incluso nello standard ISO. Queste versioni includevano già il predicato \verb+dif/2+, con questo iniziò a prendere piede il concetto di unificazione. Successivamente seguì l'aggiunta
 della negazione come fallimento, questa fu una delle aggiunte più importanti, in quanto permise di risolvere problemi che non erano risolvibili con la sola unificazione.
 
 Nel 1974 David H.D. Warren sviluppò Warplan, un sistema di pianificazione automatica basato su Prolog. Lo sviluppo di questo progetto, che poi divento la sua tesi di dottorato, lo portò a voler ottimizzare l'interprete Prolog, siccome ritenuto lento rispetto ad altri linguaggi di più alto livello come LISP.
@@ -217,7 +217,7 @@ Sviluppò quindi un nuovo interprete, chiamato WAM (Warren Abstract Machine).
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.55]{images/prologimpl.png}
-    \caption{Quandro generale delle versioni di Prolog \cite{korner2022fifty}}. In grigio scuro sono riportate le versioni che ad oggi (2022 \cite{korner2022fifty}) non sono più supportate.
+    \caption{Quandro generale delle versioni di Prolog \cite{korner2022fifty}. In grigio scuro sono riportate le versioni che ad oggi (2022 \cite{korner2022fifty}) non sono più supportate.}
     \label{fig:prologimpl}
 \end{figure}
 
@@ -235,10 +235,10 @@ Nell'articolo viene descritto in modo più dettagliato ISO Prolog e le differenz
 \section{Lavori notabili}
 \label{sec:lavori}
 Lo scopo di questa sezione è di presentare i lavori più notabili che hanno utilizzato Prolog o comunque un linguaggio logico per risolvere problemi di task planning e intelligenza artificiale.
-Durante lo sviluppo del progetto è stato necessario avere dei lavori di riferimento per poterlo poi sviluppare in modo corretto.
+Durante lo sviluppo del progetto è stato necessario avere dei lavori di riferimento per capire come la comunità ha risolto questo tipo di problemi.
 Premesso questo non voglio quindi entrare troppo in dettaglio, ma soltanto illustrare i lavori lasciando al lettore la possibilità di approfondirli.
 
-Un lavoro che mostra come i linguaggi di programmazione logica, e in particolare Prolog, possano essere usati per risolvere problemi di task planning è sicuramente quello di Meli \cite{meli2023logic}. In questo lavoro viene presentato lo stato dell'arte del task planning, e come questo possa essere risolto con un linguaggio di programmazione logica.
+Un lavoro che mostra come i linguaggi di programmazione logica, e in particolare Prolog, possano essere usati per risolvere problemi di task planning è sicuramente quello di Meli \cite{meli2023logic}. In questo lavoro viene presentato lo stato dell'arte del task planning, e come questo possa essere creato con un linguaggio di programmazione logica.
 L'articolo inizia introducendo la necessità del mondo di oggi di progettare sistemi robotici con capacità di decisione deliberativa. 
 Continua poi spiegando i requisiti per un sistema robotico deliberativo, quelli identificati sono questi moduli (vedi figura \ref{fig:delrob}): 
     \textit{planning},
@@ -253,25 +253,25 @@ Continua poi spiegando i requisiti per un sistema robotico deliberativo, quelli 
     \caption{Funzioni di un robot deliberativo \cite{meli2023logic}}
     \label{fig:delrob}
 \end{figure}
-Un sistema robotico è quindi un gruppo di robot con un obiettivo comune, questo può essere portato a termine attraverso un insieme di azioni che possono essere compiute dal robot nel mondo.
-Il paper poi continua introducedo la tassonomia dei task planner e poi introduce i tre tipi di logica identificati per creare un task planner: \textit{logica standard}, \textit{logica temporale} e \textit{logica probabilistica}.
+Un sistema robotico è quindi un gruppo di robot con un obiettivo comune, questo può essere portato a termine attraverso un insieme di azioni che devono essere compiute dal robot nel mondo.
+Il paper poi continua introducedo la tassonomia dei task planner identificando tre macrotipologie di logica: \textit{logica standard}, \textit{logica temporale} e \textit{logica probabilistica}.
 Da qui il paper introduce la task usata come esempio: \textit{Peg transfer task}, in italiano compito di trasferimento perni.
 Il compito consiste nel posizionare gli elastici di un determinato colore nel perno del colore corrispondente.
 Viene poi formalizzata in \textit{PDDL}, un linguaggio di descrizione di domini di pianificazione. Questo è stato fatto con l'obiettivo, poi, di tradurlo in un linguaggio logico.
-Segue poi una descrizione della soluzione del problema nei tre tipi di logica precedentemente descritti. Conclude poi con una discussione dei risultati ottenuti spieganfo come la logica standard sia la più adatta per risolvere questo tipo di problemi.
+Segue poi una descrizione della soluzione del problema nei tre tipi di logica precedentemente descritti. Conclude poi con una discussione dei risultati ottenuti spiegando come la logica standard sia la più adatta per risolvere questo tipo di problemi.
 
 Un altro lavoro che utilizzò Prolog fu \textit{Fifth Generation Computer Systems}. Questa fu una iniziativa di 10 anni, promossa dal Giappone, che aveva come obiettivo quello di creare i computer utilizzando tanta programmazione logica e programmazione parallela.
 Questo perchè come obiettivo finale si volevano avere dei sistemi per la ricerca in ambito di intelligenza artificiale. Più informazioni a riguardo di questo progetto possono essere trovate nel lavoro di K\"orner \cite{korner2022fifty}.
 
 Anche la nota azienda IBM utilizzò Prolog per lo sviluppo di un computer capace di rispondere alle domande. Questo fu sviluppato nel 2011 e prese il nome di \textit{Watson}. Nel 2013 IBM annuciò che Watson sarebbe stato utilizzato per l'aiuto a prendere decisioni riguardo al trattamento del cancro ai polmoni. Prolog è stato usato per creare la base di conoscenza e per l'analisi del linguaggio.
-Una curiosità è che anche la nostra università ha partecipato allo sviluppo iniziale di Watson insieme ad altre università statunitensi. %come cito?.
+Una curiosità è che anche la nostra università ha partecipato allo sviluppo iniziale di Watson insieme ad altre università statunitensi \cite{unitnwatson}. %come cito?.
 
 Un ultimo lavoro che utilizza Prolog per il design di un braccio robotico è \textit{Design an Arm Robot through Prolog Programming Language} \cite{mustafa2013design}. Lo scopo di questo articolo era quello di progettare un braccio robotico comandato da un programma Prolog. Nel paper viene introdotto il caso di studio fornendo al lettore le nozioni base di robot e sistema intelligente.
-Nella seconda parte poi viene spiegato il design utilizzato per il sistema Prolog e come è stato implementato, includendo anche il codice.
+Nella seconda parte poi viene spiegato il design utilizzato per il sistema Prolog e come è stato implementato, includendo anche il codice Prolog utilizzato per risolvere il problema.
 
 Questi sono alcuni dei lavori più interessanti che ho trovato sia per il campo della robotica che per quello dell'intelligenza artificiale. Prolog ha una storia che conta più di 50 anni e quindi è stato utilizzato in molti altri lavori. Questa panoramica serviva per capire le potenzialità di Prolog
 e come questo sia utilizzato al giorno d'oggi. La ricerca nell'ambito di Prolog e dell'intelligenza artificiale continua a progredire, portando ad importanti sviluppi. Oltre al campo della robotica e dell'intelligenza artificiale, è rilevante menzionare anche l'intelligenza artificiale neurosimbolica. Questo approccio combina elementi di intelligenza artificiale simbolica, come Prolog, con tecniche di intelligenza artificiale ispirate al funzionamento del cervello, come le reti neurali artificiali. L'integrazione di questi due paradigmi promette di aprire nuove strade nel campo dell'intelligenza artificiale e potenzialmente superare alcune delle limitazioni dei singoli approcci. La ricerca in questo ambito è in continua evoluzione, offrendo nuove prospettive e sfide interessanti.
 
-%TODO  RILEGGERE INTERAMENTE, PRIMA PARTE DA RIVEDERE. NON MI PIACE TROPPO LA FORMA DELLA PRIMA SECTION
-%TODO  RILEGGERE TUTTO IL DOCUMENTO E CORREGGERE GLI ERRORI DI GRAMMATICA E SINTASSI
-%TODO  VEDERE SE PARTE STORIA E LAVORI NOTABILI HA FILO E SENSO.
+
+% TODO Mancano citazioni in alcune parti (se le metto non compila più)
+% ! Rivedere parte di sintassi
