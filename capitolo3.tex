@@ -106,28 +106,28 @@ Queste azioni vanno intese come astrazioni ad alto livello di azioni che il robo
 Iniziamo con la \textit{rotate\_block}, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
 L'implementazione che ho scelto per questa azione è la seguente:
 \begin{Verbatim}[numbers=left]
-    rotate_block(Block, X, Y, Z, NO) :-
-        block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
-        (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
-        L is 0,
-        add_action(rotate(Block, X, Y, Z, NO)),
-        retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
-        assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
+rotate_block(Block, X, Y, Z, NO) :-
+    block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
+    (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
+    L is 0,
+    add_action(rotate(Block, X, Y, Z, NO)),
+    retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
+    assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
 \end{Verbatim}
 Come si può vedere, la testa della nostra clausola di Horn prende in input 5 parametri: il blocco da ruotare, le sue coordinate e il nuovo orientamento. I primi 4 parametri vengono utilizzati nella riga successiva per cercare di unificare con il predicato \verb+block/13+ e ottenere così le informazioni del blocco.
 Avendo il blocco ora ne conosciamo tutte le sue proprietà tra cui l'orientamento attuale e se è un blocco composto. Quest'ultimo viene usato nell'istruzione successiva, se stiamo operando un blocco composto da più blocchi allora dobbiamo ruotare anche questi ultimi. Per farlo utilizzo il predicato \verb+rotate_list/2+ che prende in input la lista dei blocchi che compongono il blocco composto e il nuovo orientamento. Questo predicato si occupa di ruotare tutti i blocchi della lista.
 \begin{Verbatim}[numbers=left]
-    rotate_list([], NO).
+rotate_list([], NO).
 
-    rotate_list([H|T], NO) :-
-        rotate_compose(H, _, _, _, NO),
-        rotate_list(T, NO).
+rotate_list([H|T], NO) :-
+    rotate_compose(H, _, _, _, NO),
+    rotate_list(T, NO).
 
-    rotate_compose(Block, X, Y, Z, NO) :-
-        block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
-        (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
-        retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
-        assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
+rotate_compose(Block, X, Y, Z, NO) :-
+    block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
+    (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
+    retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
+    assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
 \end{Verbatim}
 Con questa serie di predicati riusciamo appunto a ruotare tutti i blocchi che compongono il blocco composto. Iteriamo inizialmente tutti gli elementi nella lista e poi li passiamo uno ad uno al predicato \verb+rotate_compose+. Questo è identico al predicato principale, l'unica differenza è che non controlla se un blocco fa parte di un blocco composto oppure no (L=1).
 
@@ -136,46 +136,94 @@ Per svolgere quest'ultima azione utilizzeremo i predicati built-in \verb+retract
 
 La seconda azione presa in considerazione è la \textit{move\_block}, questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
 \begin{Verbatim}[numbers=left]
-    move_block(Block, X, Y, Z, NX, NY, NZ) :-
-        block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
-        (list_length(MB, N), N > 1 -> move_list(MB, NX, NY, NZ); NX = NX, NY = NY, NZ = NZ),
-        L is 0,
-        add_action(move(Block, X, Y, Z, NX, NY, NZ)),
-        retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
-        assertz(block(Block, NX, NY, NZ, W, H, D, O, TL, TH, S, MB, L)).
+move_block(Block, X, Y, Z, NX, NY, NZ) :-
+    block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
+    (list_length(MB, N), N > 1 -> move_list(MB, NX, NY, NZ); NX = NX, NY = NY, NZ = NZ),
+    L is 0,
+    add_action(move(Block, X, Y, Z, NX, NY, NZ)),
+    retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
+    assertz(block(Block, NX, NY, NZ, W, H, D, O, TL, TH, S, MB, L)).
 \end{Verbatim}
 Questo predicato è molto simile se non uguale al precedente, cambia solo il fatto che non si deve ruotare il blocco e che si devono aggiornare le coordinate del blocco. La logica quindi è uguale come la sua implementazione, le uniche differenze sono che nel piano verrà aggiunta l'azione \verb+move/7+ e che il predicato \verb+block/13+ verrà aggiornato con le nuove coordinate. Anche in questo caso c'è il controllo sul blocco composto, quindi ci sarà anche l'implementazione di \verb+move_list/4+ che è molto simile a \verb+rotate_list/2+.
 
 L'ultima azione presa in considerazione per il nostro caso di studio è la \textit{link}, questa, nella realtà, è già applicata dalla \verb+move_block/7+ però per mantenere la consistenza della base di conoscenza in maniera più semplice ho deciso di implementarla come azione a parte. Questa, essenzialmente, serve a verificare se i blocchi sono impilati, se si gli "incolla" creando il blocco composto. La sua implementazione è la seguente:
 \begin{Verbatim}[numbers=left]
-    link(B1, B2, R) :-
-        block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1),
-        block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, TH2, S2, MB2, L2),
-        count(s, N),
-        all_diff([B1, B2]),
-        L1 = 0,
-        L2 = 0,
-        X1 = X2,
-        Y1 = Y2,
-        Z1 is Z2 - H2,
-        W1 = W2,
-        D1 = D2,
-        HighP is H1 + H2,
-        add_action(link(B1, B2)),
-        retract(block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1)),
-        retract(block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, TH2, S2, MB2, L2)),
-        assertz(block(B1, X1, Y1, Z1, W1, H1, D1, O1, B2, TH1, S1, MB1, 1)),
-        assertz(block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, B1, S2, MB2, 1)),
-        string_concat('s', N, PIL),
-        retract(count(s, N)),
-        N1 is N+1,
-        assertz(count(s, N1)),
-        atom_string(STACK,PIL),
-        R = STACK,
-        assertz(block(STACK, X2, Y2, Z2, W1, HighP, D1, 1, TL2, TH1, block, [B1,B2],0)).
+link(B1, B2, R) :-
+    block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1),
+    block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, TH2, S2, MB2, L2),
+    count(s, N),
+    all_diff([B1, B2]),
+    L1 = 0,
+    L2 = 0,
+    X1 = X2,
+    Y1 = Y2,
+    Z1 is Z2 - H2,
+    W1 = W2,
+    D1 = D2,
+    HighP is H1 + H2,
+    add_action(link(B1, B2)),
+    retract(block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1)),
+    retract(block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, TH2, S2, MB2, L2)),
+    assertz(block(B1, X1, Y1, Z1, W1, H1, D1, O1, B2, TH1, S1, MB1, 1)),
+    assertz(block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, B1, S2, MB2, 1)),
+    string_concat('s', N, PIL),
+    retract(count(s, N)),
+    N1 is N+1,
+    assertz(count(s, N1)),
+    atom_string(STACK,PIL),
+    R = STACK,
+    assertz(block(STACK, X2, Y2, Z2, W1, HighP, D1, 1, TL2, TH1, block, [B1,B2],0)).
 \end{Verbatim}
 Iniziamo definendo in input i due blocchi che vogliamo "incollare", R è un parametro in cui verrà salvato l'ID del blocco composto creato.
 Le due istruzioni seguenti servono a recuperare le informazioni dei due blocchi che vogliamo utilizzare cercando di unificarli con i predicati \verb+block/13+.
+L'istruzione a linea 5 serve a controllare che i due blocchi non siano uguali, questo perchè non ha senso creare un blocco composto con un solo blocco. Verifichiamo poi un insieme di precondizioni tra cui la verifica che i due blocchi non siano già parte di un blocco composto, che siano allineati e che siano della stessa dimensione.
+Successivamente ci calcoliamo l'altezza del blocco composto come somma delle altezze dei due blocchi. Aggiorniamo la base di conoscenza e creiamo aggiungiamo anche il blocco composto che avrà come ID la stringa "s" seguita da un numero che viene incrementato ad ogni blocco composto creato.
+
+Queste sono le tre azioni base che il planner deve eseguire per poter risolvere il problema, ora vediamo come vengono utilizzate per generare il piano che poi verrà eseguito dal nodo di motion planning.
 \subsection{Generatore del piano}
 \label{subsec:generatorepiano}
+La generazione del piano è il cuore del planner, è qui che vengono utilizzate le azioni base per generare il piano che verrà eseguito dal nodo di motion planning. Il task planner è composto, per il nostro scopo, principalmente da un predicato: \verb+pillar/7+.
+Questo è strutturato nel seguente modo:
+\begin{Verbatim}[numbers=left]
+pillar(X, Y, Z, High, Width, Depth, Actions) :-
+    find_blocks(Blocks),
+    valid_blocks(Blocks, High, ValidBlocks, Width, Depth),
+    nth0(0, ValidBlocks, B1),
+    nth0(1, ValidBlocks, B2),
+    stack(B1, B2, X, Y, Z, R),
+    select(BL1, ValidBlocks, ValidBlocks1),
+    select(BL2, ValidBlocks1, ValidBlocks2),
+    stackRec(ValidBlocks2, R, X, Y, Z),
+    plan(Actions).
+\end{Verbatim}
+I primi 3 argomenti sono le coordinate dove verrà costruito il pilastro, i tre seguenti sono le dimensioni del pilastro. L'ultimo argomento è l'output del planner: una lista di azioni che verranno eseguite dal nodo di motion planning.
+Il predicato inizia quindi salvando nella lista \textit{Blocks} tutti i blocchi utilizzabili, quindi con L=0, presenti nella base di conoscenza.
+Successivamente, tramite un algoritmo di esplorazione ricorsiva, trova la combinazione di blocchi adatta per soddisfare l'altezza richiesta dall'utente. Il codice prolog è il seguente:
+\begin{Verbatim}[numbers=left]
+valid_blocks(Blocks, DesiredHeight, ResultBlocks, DesiredWidth, DesiredDepth) :-
+    length(Blocks, N),               
+    between(1, N, NumBlocks),        
+    length(ResultBlocks, NumBlocks),  
+    select_blocks(Blocks, ResultBlocks, DesiredHeight, DesiredWidth, DesiredDepth). 
+
+
+select_blocks(_, [], 0.0, DesiredWidth, DesiredDepth). 
+select_blocks(Blocks, [Block|Remaining], DesiredHeight, DesiredWidth, DesiredDepth) :-
+    seleziona(Block, Blocks, RemaningBlocks), 
+    block(Block, _, _, _, DesiredWidth, Height, DesiredDepth, _, _, _, _, _, _), 
+    DesiredHeight >= Height,                
+    RemainingHeight is DesiredHeight - Height,
+    select_blocks(RemaningBlocks, Remaining, RemainingHeight, DesiredWidth, DesiredDepth). 
+
+
+seleziona(X, [X|Resto], Resto).
+seleziona(X, [Y|Resto], [Y|Resto1]) :-
+    seleziona(X, Resto, Resto1).
+\end{Verbatim}
+A prima vista può sembrare complesso ma cercherò di spiegarlo in maniera semplice ed efficace. L'entrypoint di questa "procedura" è \verb+valid_blocks/5+, il compito di questo predicato è di istanziare una lista di lunghezza compresa tra 1 e n, dove n è il numero di blocchi disponibili. Inizialmente la lista verrà istanziata a 1, nel caso l'iterazione fallisca questa verrà incrementata di 1 fino ad arrivare alla capienza massima cioè n.
+Successivamente viene chiamato il predicato \verb+select_blocks/5+, questo restituirà la lista contenente i blocchi che soddisfano i requisiti di altezza, larghezza e profondità richiesti dall'utente. Inizialmente, quindi, il programma prolog cercherà di trovare una soluzione con un solo blocco, se non la trova passerà a due blocchi e così via fino ad arrivare ad una soluzione oppure al fallimento del predicato.
+
+Trovata la lista di blocchi che soddisfa i requisiti, il programma prosegue con la creazione del pilastro. Questo viene creato tramite i predicati \verb+stack/6+ e \verb+stackRec/5+, l'ultimo è la versione ricorsiva in cui si passa la lista dei blocchi da utilizzare e l'ID del blocco composto di "base". Questi due predicati utilizzano le azioni spiegate prima per creare il pilastro. L'ultima istruzione, \verb+plan/1+, copierà le azioni create durante la generazione del pilastro nella lista Actions che verrà restituita in output dal predicato \verb+pillar/7+.
+
+Questa è quindi la soluzione al caso di studio che ho pensato e implementato. Ovviamente è migliorabile e ci sono sicuramente altri modi per risolvere questo problema, ma questo è il risultato che ho ottenuto e che ho deciso di presentare in questa tesi.
 
