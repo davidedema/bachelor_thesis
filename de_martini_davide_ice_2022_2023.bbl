@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{bratko2001prolog}
+I.~Bratko.
+\newblock {\em Prolog Programming for Artificial Intelligence}.
+\newblock International computer science series. Addison Wesley, 2001.
+
 \bibitem{horn1951sentences}
 Alfred Horn.
 \newblock On sentences which are true of direct unions of algebras.
@@ -23,6 +28,12 @@ Paul~J. Krause.
   mit press, cambridge, ma1994, pp. 509, £19.95 (paperback), £44.94
   (hardback), isbn 0-262-19338-8.
 \newblock {\em The Knowledge Engineering Review}, 10(4):411–411, 1995.
+
+\bibitem{gitrepo}
+Davide~De Martini.
+\newblock Prolog planner project.
+\newblock https://github.com/davidedema/prolog\_planner.
+\newblock Repository GitHub del progetto.
 
 \bibitem{meli2023logic}
 Fiorini~Paolo Meli~Daniele, Nakawala~Hirenkumar.
