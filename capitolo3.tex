@@ -1,36 +1,35 @@
 \chapter{Descrizione del caso di studio}
 \label{cha:descrizionecasostudio}
 In questo capitolo verrà presentato più in dettaglio il caso di studio. Verrà definito inizialmente il workflow adottato durante il periodo di tirocinio, spiegando le milestone principali raggiunte.
-Successivamente verranno spiegate le parti principali del programma Prolog, approfondendo il funzionamento e le sfide incontrate durante lo sviluppo.
+Successivamente verranno illustrate le parti principali del programma Prolog, approfondendo il funzionamento e le sfide incontrate durante lo sviluppo.
 
-Lo sviluppo del task planner è stato oggetto del mio periodo di tirocinio, il lavoro è durato complessivamente circa 4 mesi. In questi 4 mesi ho dovuto inizialmente studiare il linguaggio e i reqiusiti minimi, sviluppare un idea e successivamente implementarla con il codice.
-
+Lo sviluppo del task planner è stato oggetto del mio periodo di tirocinio, il lavoro è durato complessivamente circa 4 mesi. Durante questo periodo ho dovuto inizialmente studiare il linguaggio partendo dalle sue basi, sviluppare un idea e successivamente implementarla.
 In robotica un task planner è un componente software che si occupa di pianificare e coordinare le attività del robot al fine di raggiungere determinati obiettivi.
 Il task planner prende in input il goal, analizza il constesto in cui il robot opera e restituisce in output un piano che indica l'ordine delle azioni da eseguire per completare con successo il compito assegnato.
-Una volta generato il piano questo viene eseguito dal sistema di controllo del robot, nel mio caso il \textit{motion planner}. In sostanza, il task planner è responsabile della pianificazione delle attività del robot in modo efficiente e intelligente. È uno dei componenti fondamentali per il controllo e automazione delle applicazioni robotiche complesse.
+Una volta generato, questo viene eseguito dal sistema di controllo del robot, nel mio caso il \textit{motion planner}. In sostanza, il task planner è responsabile della pianificazione delle attività del robot in modo efficiente e intelligente. È uno dei componenti fondamentali per il controllo e automazione delle applicazioni robotiche complesse.
 
-Descriviamo ora le milestone che compongono la roadmap per lo sviluppo del progetto:
+Descriviamo ora le milestone individiate per lo sviluppo del progetto:
 \begin{itemize}
     \item Prendere domestichezza con Prolog: fase preliminare di studio del linguaggio
     \item Sviluppare il codice in Prolog: fase di sviluppo del codice
     \item Wrappare il codice Prolog con un linguaggio ad alto livello: fase di ricerca e studio della libreria adatta per il wrapping
     \item Creare la simulazione in Gazebo e ROS: fase di sviluppo della simulazione
 \end{itemize}
-In questo capitolo voglio entrare nel merito delle prime due milestones, la terza e la quarta verranno spiegate nel capitolo seguente.
+In questo capitolo voglio entrare nel merito delle prime due milestones, la terza e la quarta verranno approfondite nel capitolo \ref{cha:descrizionearchros}.
 Queste milestone verranno contestualizzate con una data indicativa sia per l'inizio che per la fine. Per ogniuna verrà indicato il lavoro svolto e il suo contributo per la realizzazione del caso di studio.
 
 \section{Prima milestone: Studio di Prolog}
 \label{sec:studioprolog}
-In questa sezione andreamo a vedere in dettaglio la prima milestone, ovvero lo studio del linguaggio Prolog. Questa milestone è stata fondamentale per lo sviluppo del task planner, in quanto mi ha permesso di capire le potenzialità del linguaggio e di capire come sviluppare il codice.
-Prolog ha una curva di apprendimento molto ripida, infatti il tempo che ho dedicato a questa è stato all'incirca di un mese e mezzo, da marzo fino a metà aprile.
-Durante questo periodo mi sono studiato lo stato dell'arte del linguaggio (vedere capitolo \ref{cha:statoarte}) e mi sono esercitato con esso.
+In questa sezione andreamo a vedere in dettaglio la prima milestone, ovvero lo studio del linguaggio Prolog. Questa è stata fondamentale per lo sviluppo del task planner, in quanto mi ha permesso di capire le potenzialità del linguaggio e come sviluppare il progetto.
+Prolog ha una curva di apprendimento molto ripida, infatti il tempo che ho dedicato a questa fase è stato all'incirca di un mese e mezzo, da marzo fino a metà aprile.
+Durante questo periodo mi sono studiato lo stato dell'arte del linguaggio, sia in ambito robotica e task planner che non (vedere capitolo \ref{cha:statoarte}) e mi sono esercitato con esso.
 
 Inizialmente sono stato introdotto al linguaggio tramite video su YouTube e articoli online. Una cosa che è stata fondamentale per
 lo studio del linguaggio è stato il libro \textit{Prolog Programming for Artificial Intelligence} \cite{bratko2001prolog} e il materiale fornito con esso.
-Questo conteneva delle esercitazioni che modellavano il noto problema del \textit{Blockworld}. In queste esercitazioni infatti veniva spiegato come costruire una base di conoscenza che contenesse al suo interno
-le informazioni necessarie per descrivere lo stato dei blocchi nello spazio tridimensionale. L'esercizio supponeva che ci fosse una telecamera posta sopra il nostro 'mondo' e che fosse ortogonale ad esso, quindi la coordinata z non poteva essere calcolata con l'osservazione.
-I blocchi erano rappresentati con il fatto \verb+see(Block,X,Y)+, questo identificava un blocco alla coordinata X e Y specificata.
-C'era anche un predicato aggiuntivo che specificava il contatto del blocco, questo era il predicato \verb+on(B1,B2)+. Questo serviva a specificare se il blocco si trovasse sopra un altro blocco oppure sopra il tavolo.
+Questo conteneva delle esercitazioni che modellavano il noto problema del \textit{Blockworld}. In queste lezioni infatti veniva spiegato come costruire una base di conoscenza che contenesse al suo interno
+le informazioni necessarie per descrivere lo stato dei blocchi nello spazio tridimensionale. L'esercizio supponeva che ci fosse una telecamera posta sopra il nostro 'mondo' e che fosse ortogonale ad esso, quindi la coordinata z non poteva essere calcolata con la sola osservazione.
+I blocchi erano rappresentati con il fatto \verb+see/3+, questo identificava un blocco alla coordinata X e Y specificata.
+C'era anche un predicato aggiuntivo che specificava il contatto del blocco, questo era il predicato \verb+on/2+. Questo serviva a specificare se il blocco si trovasse sopra un altro blocco oppure sopra il tavolo.
 Un esempio di base di conoscenza utilizzante questi fatti è la seguente:
 \begin{verbatim}
     see(a,2,5).
@@ -44,42 +43,43 @@ Un esempio di base di conoscenza utilizzante questi fatti è la seguente:
     on(e,table).
 \end{verbatim}
 Come si può notare da questo esempio, l'ipotetica telecamera individua solamente i blocchi \textit{a}, \textit{d}, \textit{e} siccome  \textit{b} e \textit{c} sono sotto \textit{a}.
-Venivano applicati approcci ricorsivi per risolvere problemi (come quello di trovare la coodinata z dei blocchi) e questo mi è stato molto utile per capire come sviluppare codice per un paradigma logico.
+Essendo uno spazio tridimensionale doveva essere identificata anche la coordinata z. Questa veniva calcolata tramite un approccio ricorsivo. La ricorsione in questi paradigmi di programmazione è ampiamente usata e questo primo esempio mi è servito per capire come funzionasse.
 L'algoritmo per calcolare la coordinata z di un blocco era il seguente:
 \begin{verbatim}
     z(Block,0) :- on(Block, table).
     z(Block,Z) :- on(Block, OtherBlock), z(OtherBlock, Z1), Z is Z1 + 1.
 \end{verbatim}
 Questo è un classico esempio di algoritmo ricorsivo in cui si ha un caso base e un caso ricorsivo. Il caso base indica che se il blocco si trova sul tavolo la sua coordinata sarà 0, quello ricorsivo invece itera finchè non trova il blocco che poggia sul tavolo, poi ricorsivamente incrementa di 1 la coordinata z.
-In seguito, verso fine marzo inizio aprile, ho provato a ampliare questo esempio cercando un modo efficiente di rappresentare la realtà. È quindi iniziato il periodo di sviluppo del codice in cui il programma ha iniziato a prendere forma. Tutte le varie versioni del programma sono documentate e reperibili nella repository GitHub del progetto \cite{gitrepo}.
 
+In seguito, verso fine marzo inizio aprile, ho provato a ampliare questo esempio cercando un modo efficiente di rappresentare la realtà. È quindi iniziato il periodo di sviluppo del codice in cui il programma ha iniziato a prendere forma. Tutte le varie versioni del programma sono documentate e reperibili nella repository GitHub del progetto \cite{gitrepo}.
 Vediamo ora come è stato sviluppato il codice del planner e le sfide incontrate.
 \section{Seconda milestone: Sviluppo del planner}
 \label{sec:sviluppoplanner}
 In questa sezione approfondiremo le fasi di creazione del planner, il codice del planner e le sfide incontrate durante lo sviluppo.
-Il periodo di sviluppo effettivo del codice del planner è iniziato verso metà aprile ed è finito all'incirca a metà giugno. Ritengo che questo sia stato il compito più impegnativo e allo stesso tempo più interessante del progetto.
+Il periodo effettivo di creazione del codice del planner è iniziato verso metà aprile ed è finito all'incirca a metà giugno. Ritengo che questo sia stato il compito più impegnativo e allo stesso tempo più interessante del progetto.
+Impegnativo perchè come detto prima Prolog non è un linguaggio semplice da imparare e creare qualcosa da 0 può risultare ostico, interessante perchè mi ha permesso di capire come funzionano i task planner e delle potenzialità di Prolog.
 Andiamo quindi a dividere questa sezione in tre parti, cioè le tre parti che compongono il programma: la rappresentazione dei blocchi, le azioni e il generatore del piano.
 
 \subsection{Rappresentazione dei blocchi}
 \label{subsec:rapprblocchi}
-Una parte fondamentale del mio progetto è stata la scelta di una convenzione per rappresentare i blocchi nella base di conoscenza. Questa, come detto nel capitolo \ref{cha:statoarte}, è composta da fatti e regole. I fatti sono le informazioni che il programma ha a disposizione per ragionare, mentre le regole sono le azioni che il programma può eseguire per modificare lo stato del mondo.
-In questa versione, che non utilizza la logica probabilistica, i fatti sono istanziati dall'utente. In questo caso si dice che sono \textit{grounded} quindi veri al 100\%.
-Premesso ciò andiamo a vedere come sono stati rappresentati i blocchi, vedendo anche l'evoluzione nelle varie versioni.
+Una parte fondamentale del mio progetto è stata la scelta della convenzione per rappresentare i blocchi nella base di conoscenza. Questa, come detto nel capitolo \ref{cha:statoarte}, è composta da fatti e regole. I fatti sono le informazioni che il programma ha a disposizione per ragionare, mentre le regole sono le azioni che il programma può eseguire per modificare lo stato del mondo.
+In questa versione, che non utilizza la logica probabilistica, i fatti sono istanziati dall'utente. In questo caso si dice che sono \textit{grounded}, quindi veri al 100\%.
+Premesso ciò andiamo a vedere come sono stati rappresentati i blocchi, presentando anche l'evoluzione nelle varie versioni.
 
 Inizialmente la rappresentazione era stata ideata con il seguente fatto:
 \begin{verbatim}
     block(ID, X, Y, Z, W, H, D, O, S).
 \end{verbatim}
 L'ID rappresenta un identificativo univoco del blocco, questo può essere ad esempio b1. La tripla X, Y, Z rappresenta le coordinate nello spazio tridimensionale della posizione del blocco, queste vengono usate per localizzare il blocco nello spazio. La tripla W, H, D rappresenta la dimensione del blocco, rispettivamente la lunghezza, l'altezza e la profondità. Infine il parametro O
-rappresenta l'orientamento del blocco rispetto al mondo. Per ragioni di semplicita non abbiamo voluto rappresentarlo con una rappresentazione canonica come gli angoli di eulero oppure i quaternioni ma, invece, con un intero che indica una posizione fissata del blocco. Questo intero ha un range da 1 a 6 e questi numeri indicano: 1 = il blocco è posizionato col la testa\footnote{Con testa mi riferisco alla parte superiore del blocco di lego} rivolta verso l'alto (posizione usuale del blocco per essere impilato), 2 = il blocco è sottosopra quindi la testa poggierà sul tavolo, 3 = il blocco poggia sul lato e la testa è verso l'interno del tavolo, 4 = il blocco poggia sul lato e la testa è verso l'esterno del tavolo, 5 = il blocco poggia sul lato e la testa è verso la parte sinistra del tavolo, 6 = il blocco poggia sul lato e la testa è verso la parte destra del tavolo.
-S rappresenta la forma del blocco che nel nostro caso di studio sarà sempre un cubo, quindi questo parametro non verrà mai utilizzato, è stato solamente aggiunto per la completezza della rappresentazione.
+rappresenta l'orientamento del blocco rispetto al mondo. Per ragioni di semplicità non abbiamo voluto rappresentarlo in una maniera canonica come gli angoli di eulero oppure i quaternioni ma, invece, con un intero che indica una posizione fissata del blocco. Questo intero ha un range da 1 a 6 e questi numeri indicano: 1 = il blocco è posizionato col la testa\footnote{Con testa mi riferisco alla parte superiore del blocco di lego} rivolta verso l'alto (posizione usuale del blocco per essere impilato), 2 = il blocco è sottosopra quindi la testa poggierà sul tavolo, 3 = il blocco poggia sul lato e la testa è verso l'interno del tavolo, 4 = il blocco poggia sul lato e la testa è verso l'esterno del tavolo, 5 = il blocco poggia sul lato e la testa è verso la parte sinistra del tavolo, 6 = il blocco poggia sul lato e la testa è verso la parte destra del tavolo.
+S rappresenta la forma del blocco che nel nostro caso di studio sarà sempre un cubo. Questo parametro quindi non verrà mai utilizzato, è stato solamente aggiunto per la completezza.
 
-Questa rappresentazione, però non era ottimale per il mio scopo. Non teneva conto del fatto che i blocchi possono essere impilati e quindi non teneva conto della relazione di contatto tra i blocchi. Dopo varie riflessioni ho quindi deciso di aggiungere due nuovi attributi al mio fatto \verb+block+:
+Questa rappresentazione, però non era ottimale per il mio scopo. Non teneva conto del fatto che i blocchi possono essere impilati e quindi della relazione di contatto tra i blocchi. Dopo varie riflessioni ho quindi deciso di aggiungere due nuovi attributi al mio fatto \verb+block+:
 \begin{verbatim}
     block(ID, X, Y, Z, W, H, D, O, CH, CL, S).
 \end{verbatim}
-Sono stati aggiunti gli attributi CH e CL. Questi servono a specificare il "contatto alto" e il "contatto basso". Con contatto alto mi riferisco al contatto che il blocco ha con la sua testa, mentre con contatto basso mi riferisco al contatto che il blocco ha con la sua base. Ad esempio se il blocco b1 dovesse essere sopra al blocco b2 il suo attributo CL sarebbe b2 mentre l'attributo CH di b2 sarebbe b1. Questo fornisce già un astrazione abbastanza adeguata per la nostra realtà, ma con l'evolvere del progetto questa non si è rivelata sufficiente.
-Era necessario infatti che venisse in qualche modo rappresentato il fatto che una volta impilati due blocchi questi venissero considerati come un unico blocco composto. Bisognava quindi trovare un modo di creare e modificare i fatti \textit{on the fly} e di rappresentare la nozione di blocco composto.
+Sono stati aggiunti gli attributi CH e CL. Questi servono a specificare il "contatto alto" e il "contatto basso". Con contatto alto mi riferisco al contatto che il blocco ha con la sua testa, mentre con contatto basso mi riferisco al contatto che il blocco ha con la sua base. Ad esempio se il blocco b1 dovesse essere sopra al blocco b2 il suo attributo CL sarebbe b2 mentre l'attributo CH di b2 sarebbe b1. Questo fornisce già un astrazione abbastanza adeguata per la nostra realtà, ma con l'evolvere del progetto non si è rivelata sufficiente.
+Era necessario infatti che venisse in qualche modo rappresentato il concetto di blocco composto da due blocchi. Bisognava quindi trovare un modo di creare e modificare i fatti \textit{on the fly} e di rappresentare la nozione di blocco composto.
 Il primo problema è stato risolto con l'aggiunta della proprietà \textit{dynamic} al predicato block. Questo permette di modificare i fatti in runtime, quindi di aggiungere e rimuovere fatti. La rimozione e l'aggiunta di nuovi fatti è possibile tramite i predicati built-in \verb+retract/1+ e \verb+assertz/1+. Il primo serve a rimuovere un fatto dalla base di conoscenza, il secondo invece serve ad aggiungerlo.
 Per rendere un predicato dinamico serve specificarlo a inizio file con la seguente direttiva: \verb+:- dynamic block/13+ nel caso del blocco.
 Per rappresentare invece il blocco composto mi sono servito di due ulteriori attributi, il predicato \verb+block/13+ è quindi così composto:
@@ -96,14 +96,15 @@ Il blocco b1 si trova in coordinate 1, 0, 0, ha dimensioni 1, 2, 1 e sopra di lu
 Il blocco b2 si trova in coordinate 1, 0, 2, ha dimensioni 1, 2, 1 e sopra di lui si trova l'aria e sotto b1, è composto da se stesso e fa parte di un blocco composto.
 Infine, il blocco composto s1 si trova in coordinate 1, 0, 0, ha dimensioni 1, 4, 1 e sopra di lui si trova l'aria e sotto il tavolo, è composto da b1 e b2 e non fa parte di un blocco composto.
 
-Questa è la rappresentazione che, ad oggi, ritengo più efficace per rappresentare questa astrazione. Avendo il progetto dei possibili scenari futuri che potrebbero richiedere una rappresentazione diversa, questa rappresentazione potrebbe cambiare in futuro.
+Questa è la rappresentazione che, ad oggi, ritengo più efficace per rappresentare questa astrazione. Avendo il progetto dei possibili scenari futuri che potrebbero richiedere una rappresentazione diversa, questa potrebbe cambiare in futuro.
 \subsection{Azioni del planner}
 \label{subsec:azioniplanner}
 Ora andremo a vedere il set di azioni che il planner può eseguire e come queste sono state implementate in Prolog. Ho individuato 3 tipi diversi di azioni:
 \textit{move\_block}, \textit{rotate\_block} e \textit{link}. Verra riportata la loro implementazione e di seguito una spiegazione del loro funzionamento.
 Queste azioni vanno intese come astrazioni ad alto livello di azioni che il robot può compiere. Il compito del task planner, quindi, non è quello di descrivere nei minimi dettagli il movimento che dovrà compiere il braccio, quello è compito del motion planner.
+Il suo scopo è di fornire un piano ad alto livello che il robot dovrà seguire per raggiungere lo stato finale desiderato.
 
-Iniziamo con la \textit{rotate\_block}, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
+Iniziamo con la \verb+rotate_block/5+, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
 L'implementazione che ho scelto per questa azione è la seguente:
 \begin{Verbatim}[numbers=left]
 rotate_block(Block, X, Y, Z, NO) :-
@@ -129,12 +130,12 @@ rotate_compose(Block, X, Y, Z, NO) :-
     retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
     assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
 \end{Verbatim}
-Con questa serie di predicati riusciamo appunto a ruotare tutti i blocchi che compongono il blocco composto. Iteriamo inizialmente tutti gli elementi nella lista e poi li passiamo uno ad uno al predicato \verb+rotate_compose+. Questo è identico al predicato principale, l'unica differenza è che non controlla se un blocco fa parte di un blocco composto oppure no (L=1).
+Con questa serie di predicati riusciamo appunto a ruotare tutti i blocchi che lo compongono. Iteriamo inizialmente tutti gli elementi nella lista e poi li passiamo uno ad uno al predicato \verb+rotate_compose/5+. Questo è identico al predicato principale, l'unica differenza è che non controlla se un blocco fa parte di un blocco composto oppure no (L=1).
 
 Tornando al predicato principale, successivamente verrà svolto il controllo per verificare che il blocco non faccia parte di un blocco composto. Svolto quest'utlimo controllo possiamo aggiungere l'azione eseguita al piano (verrà spiegata meglio nella sezione \ref{subsec:generatorepiano}) e infine aggiornare il predicato \verb+block/13+ con il nuovo orientamento.
 Per svolgere quest'ultima azione utilizzeremo i predicati built-in \verb+retract/1+ e \verb+assertz/1+ che ci permettono di rimuovere un predicato e aggiungerne uno nuovo.
 
-La seconda azione presa in considerazione è la \textit{move\_block}, questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
+La seconda azione presa in considerazione è la \verb+move_block/7+, questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
 \begin{Verbatim}[numbers=left]
 move_block(Block, X, Y, Z, NX, NY, NZ) :-
     block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
@@ -146,7 +147,7 @@ move_block(Block, X, Y, Z, NX, NY, NZ) :-
 \end{Verbatim}
 Questo predicato è molto simile se non uguale al precedente, cambia solo il fatto che non si deve ruotare il blocco e che si devono aggiornare le coordinate del blocco. La logica quindi è uguale come la sua implementazione, le uniche differenze sono che nel piano verrà aggiunta l'azione \verb+move/7+ e che il predicato \verb+block/13+ verrà aggiornato con le nuove coordinate. Anche in questo caso c'è il controllo sul blocco composto, quindi ci sarà anche l'implementazione di \verb+move_list/4+ che è molto simile a \verb+rotate_list/2+.
 
-L'ultima azione presa in considerazione per il nostro caso di studio è la \textit{link}, questa, nella realtà, è già applicata dalla \verb+move_block/7+ però per mantenere la consistenza della base di conoscenza in maniera più semplice ho deciso di implementarla come azione a parte. Questa, essenzialmente, serve a verificare se i blocchi sono impilati, se si gli "incolla" creando il blocco composto. La sua implementazione è la seguente:
+L'ultima azione presa in considerazione per il nostro caso di studio è la \verb+link/3+. Questa, essenzialmente, serve a verificare se i blocchi sono impilati, se si gli "incolla" creando il blocco composto. La sua implementazione è la seguente:
 \begin{Verbatim}[numbers=left]
 link(B1, B2, R) :-
     block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1),
@@ -196,7 +197,7 @@ pillar(X, Y, Z, High, Width, Depth, Actions) :-
     stackRec(ValidBlocks2, R, X, Y, Z),
     plan(Actions).
 \end{Verbatim}
-I primi 3 argomenti sono le coordinate dove verrà costruito il pilastro, i tre seguenti sono le dimensioni del pilastro. L'ultimo argomento è l'output del planner: una lista di azioni che verranno eseguite dal nodo di motion planning.
+I primi 3 argomenti sono le coordinate dove verrà costruito il pilastro, i tre seguenti sono le dimensioni del pilastro. L'ultimo argomento è l'output del planner cioè una lista di azioni che verranno eseguite dal nodo di motion planning.
 Il predicato inizia quindi salvando nella lista \textit{Blocks} tutti i blocchi utilizzabili, quindi con L=0, presenti nella base di conoscenza.
 Successivamente, tramite un algoritmo di esplorazione ricorsiva, trova la combinazione di blocchi adatta per soddisfare l'altezza richiesta dall'utente. Il codice prolog è il seguente:
 \begin{Verbatim}[numbers=left]
