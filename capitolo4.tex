@@ -7,7 +7,7 @@ In particolare verrà data una breve descrizione di cosa è ROS e come funziona,
 \label{sec:introduzione_ros}
 ROS (Robot Operating Systems) è un framework opensource per lo sviluppo e la programmazione di robot. ROS implementa drivers e algoritmi che sono lo stato dell'arte in robotica grazie anche alla community che negli anni si è formata e ingrandita.
 Essendo infatti un progetto opensource, ROS è sviluppato e mantenuto dalla community stessa. Questo è un grosso vantaggio infatti così facendo il supporto verso nuovi hardware sarà sempre al passo con i tempi, oltre a questo la community è molto attiva per consigli e aiuti sia per i meno esperti che non.
-Per realizzare questo capitolo mi sono documentato dalla wiki del progetto \cite{rossite} e dall'articolo \textit{ROS: an open-source Robot Operating System} \cite{inproceedings}.
+Per realizzare questo capitolo mi sono documentato dalla wiki del progetto \cite{rossite} e dall'articolo \textit{ROS: an open-source Robot Operating System} \cite{quingley2009ros}.
 
 Iniziamo questa sezione introducendo i concetti principali di un architettura ROS: i nodi, i topic e i messaggi.
 
@@ -48,6 +48,7 @@ Per capire meglio come sono strutturati questi componenti utilizziamo il famoso 
     \label{fig:turtlesim}
 \end{figure}
 I nodi sono identificati dagli ovali mentre i topic sono identificati dai rettangoli. Vediamo come i due nodi: turtlesim e draw\_square comunicano tra loro tramite i topic \verb+/turtle1/pose+ e \verb+/turtle1/cmd_vel+. Il nodo /draw\_square pubblica sul topic /cmd\_vel la traiettoria per la "tartaruga", questa sarà poi inviata al nodo del simulatore per poi essere eseguita. Quest'ultimo a sua volta pubblicherà la posa del robot al topic /pose che sarà poi letto dal nodo /draw\_square per recuperare la posizione del robot e disegnare la traiettoria.
+Il risultato è visibile in figura \ref{fig:turtlesimes}.
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.4]{images/turtlesimes.png}
@@ -56,4 +57,12 @@ I nodi sono identificati dagli ovali mentre i topic sono identificati dai rettan
 \end{figure}
 \section{Architettura utilizzata}
 \label{sec:architettura_utilizzata}
+In questa sezione mi concentrerò a illustrare l'architettura utilizzata per il mio caso di studio andando anche a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
+Utilizzerò appunto queste per dare la struttura a questo capitolo, ci erano rimaste da spiegare quindi il wrapping del codice Prolog e la creazione della simulazione.
+
+\subsection{Wrapping codice Prolog}
+\label{subsec:wrappping}
+
+\subsection{Simulazione}
+\label{subsec:simulation}
 

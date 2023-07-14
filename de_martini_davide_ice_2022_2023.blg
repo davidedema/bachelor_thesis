@@ -3,46 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: de_martini_davide_ice_2022_2023.aux
 The style file: plain.bst
 Database file #1: biblio.bib
-Warning--empty booktitle in inproceedings
 You've used 11 entries,
             2118 wiz_defined-function locations,
-            564 strings with 5908 characters,
-and the built_in function-call counts, 3409 in all, are:
-= -- 323
+            565 strings with 5923 characters,
+and the built_in function-call counts, 3378 in all, are:
+= -- 324
 > -- 170
-< -- 2
+< -- 1
 + -- 70
 - -- 58
-* -- 219
-:= -- 590
+* -- 217
+:= -- 591
 add.period$ -- 37
 call.type$ -- 11
 change.case$ -- 60
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 120
-empty$ -- 267
+cite$ -- 11
+duplicate$ -- 117
+empty$ -- 258
 format.name$ -- 58
-if$ -- 703
+if$ -- 694
 int.to.chr$ -- 0
 int.to.str$ -- 11
 missing$ -- 9
 newline$ -- 61
 num.names$ -- 22
-pop$ -- 77
+pop$ -- 71
 preamble$ -- 1
 purify$ -- 50
 quote$ -- 0
 skip$ -- 84
 stack$ -- 0
 substring$ -- 164
-swap$ -- 21
-text.length$ -- 2
+swap$ -- 20
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 42
-warning$ -- 1
+warning$ -- 0
 while$ -- 30
 width$ -- 13
-write$ -- 121
-(There was 1 warning)
+write$ -- 122

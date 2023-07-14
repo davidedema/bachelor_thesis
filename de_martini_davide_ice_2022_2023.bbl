@@ -45,11 +45,11 @@ Aram Mustafa and Tarik Rashid.
 \newblock Design an arm robot through prolog programming language.
 \newblock {\em Advances in Robotics and Automation}, 1:1--6, 01 2013.
 
-\bibitem{inproceedings}
+\bibitem{quingley2009ros}
 Morgan Quigley, Ken Conley, Brian Gerkey, Josh Faust, Tully Foote, Jeremy
   Leibs, Rob Wheeler, and Andrew Ng.
 \newblock Ros: an open-source robot operating system.
-\newblock volume~3, 01 2009.
+\newblock {\em ICRA Workshop on Open Source Software}, 3, 01 2009.
 
 \bibitem{rossite}
 ROS.
