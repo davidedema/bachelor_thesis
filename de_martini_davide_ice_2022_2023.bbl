@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{bratko2001prolog}
 I.~Bratko.
@@ -44,6 +44,18 @@ Fiorini~Paolo Meli~Daniele, Nakawala~Hirenkumar.
 Aram Mustafa and Tarik Rashid.
 \newblock Design an arm robot through prolog programming language.
 \newblock {\em Advances in Robotics and Automation}, 1:1--6, 01 2013.
+
+\bibitem{inproceedings}
+Morgan Quigley, Ken Conley, Brian Gerkey, Josh Faust, Tully Foote, Jeremy
+  Leibs, Rob Wheeler, and Andrew Ng.
+\newblock Ros: an open-source robot operating system.
+\newblock volume~3, 01 2009.
+
+\bibitem{rossite}
+ROS.
+\newblock Ros wiki.
+\newblock http://wiki.ros.org/.
+\newblock Pagina del wiki di ROS.
 
 \bibitem{unitnwatson}
 Unitn.

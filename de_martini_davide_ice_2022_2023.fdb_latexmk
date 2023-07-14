@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex de_martini_davide_ice_2022_2023"] 1689239949 "de_martini_davide_ice_2022_2023.aux" "de_martini_davide_ice_2022_2023.bbl" "de_martini_davide_ice_2022_2023" 1689263800
+["bibtex de_martini_davide_ice_2022_2023"] 1689347084 "de_martini_davide_ice_2022_2023.aux" "de_martini_davide_ice_2022_2023.bbl" "de_martini_davide_ice_2022_2023" 1689347085
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "biblio.bib" 1689063900 4180 f0a90d9812c346b55aa96374ee2b31ad ""
-  "de_martini_davide_ice_2022_2023.aux" 1689263800 5469 4e0fb25bae9e4535ea6bf941fb8975d7 "pdflatex"
+  "biblio.bib" 1689339618 4674 ff6511eeff24f55842565e0a7d26cf87 ""
+  "de_martini_davide_ice_2022_2023.aux" 1689347085 6974 af63c0063587d77cd2632061f72e6b4e "pdflatex"
   (generated)
   "de_martini_davide_ice_2022_2023.bbl"
   "de_martini_davide_ice_2022_2023.blg"
-["pdflatex"] 1689263800 "/home/davide/Scrivania/bachelor_thesis/de_martini_davide_ice_2022_2023.tex" "de_martini_davide_ice_2022_2023.pdf" "de_martini_davide_ice_2022_2023" 1689263800
+["pdflatex"] 1689347084 "/home/davide/Scrivania/bachelor_thesis/de_martini_davide_ice_2022_2023.tex" "de_martini_davide_ice_2022_2023.pdf" "de_martini_davide_ice_2022_2023" 1689347085
   "/etc/texmf/web2c/texmf.cnf" 1688369957 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1688370085 12644 c9bb3e1614a9af459f33a12d10b03ee1 ""
   "/home/davide/Scrivania/bachelor_thesis/de_martini_davide_ice_2022_2023.tex" 1689168042 6409 85e5d93b03c195a1f5b7e7663ecbe79c ""
@@ -89,15 +89,17 @@
   "capitolo1.tex" 1689064705 7467 a6a0a93a5d96167fad97db24c8b8e85f ""
   "capitolo2.tex" 1689064668 23592 039e1298db17dea9214795b91d48f555 ""
   "capitolo3.tex" 1689263800 23159 535abe9b676c69b7f26b1b8364dc4ff6 ""
-  "capitolo4.tex" 1688742769 75 28734b24ef470adbd4c4433ab68b9864 ""
+  "capitolo4.tex" 1689347082 7378 171e27712a6e82b78fb6e30d7c1d35ab ""
   "capitolo5.tex" 1688375428 47 43807ec569b63d42986393a5ca057456 ""
-  "de_martini_davide_ice_2022_2023.aux" 1689263800 5469 4e0fb25bae9e4535ea6bf941fb8975d7 "pdflatex"
-  "de_martini_davide_ice_2022_2023.bbl" 1689239949 2004 765233c60729a257d5ece7aa60056a1f "bibtex de_martini_davide_ice_2022_2023"
+  "de_martini_davide_ice_2022_2023.aux" 1689347085 6974 af63c0063587d77cd2632061f72e6b4e "pdflatex"
+  "de_martini_davide_ice_2022_2023.bbl" 1689347084 2334 fe38e8f05fa2dfc99e7056b857f1da21 "bibtex de_martini_davide_ice_2022_2023"
   "de_martini_davide_ice_2022_2023.tex" 1689168042 6409 85e5d93b03c195a1f5b7e7663ecbe79c ""
-  "de_martini_davide_ice_2022_2023.toc" 1689263800 1585 449af8ea1705e7202140b65716f2dc90 "pdflatex"
+  "de_martini_davide_ice_2022_2023.toc" 1689347085 2066 fef4d6c28e6aa3bc3b70d9d5bae123fc "pdflatex"
   "images/deliberativerobot.png" 1688913088 98911 f07ba4a1a05c6bd06bf6574549af1a19 ""
   "images/prologhist.png" 1688716650 39932 351ea7eb86ac232f79a10d0670b63428 ""
   "images/prologimpl.png" 1688738416 83589 4f449c3e6f58ee5da32c14da64774391 ""
+  "images/turtlesim.png" 1689346408 27935 6820fea8b4df3440a35c8f42f3efc018 ""
+  "images/turtlesimes.png" 1689346996 10273 627801be8bf3208317a48432d7395a3a ""
   "marchio_unitrento_colore_it_202002.eps" 1688375428 222744 5d72016d4da94ab2e0e9c383b78b1960 ""
   "pagina_iniziale.tex" 1688375428 1033 5f25b4fc8624b92a0e7fb490d0166c93 ""
   "ringraziamenti.tex" 1688390754 115 0c531eda1f4efa037de47369d208a9cc ""
