@@ -5,6 +5,18 @@ I.~Bratko.
 \newblock {\em Prolog Programming for Artificial Intelligence}.
 \newblock International computer science series. Addison Wesley, 2001.
 
+\bibitem{8941347}
+Shuang Fang, Xianghua Ma, Yang Zhao, Qian Zhang, and Yaoyao Li.
+\newblock Trajectory planning for seven-dof robotic arm based on quintic
+  polynormial.
+\newblock In {\em 2019 11th International Conference on Intelligent
+  Human-Machine Systems and Cybernetics (IHMSC)}, volume~2, pages 198--201,
+  2019.
+
+\bibitem{focchi2023locosim}
+Michele Focchi, Francesco Roscia, and Claudio Semini.
+\newblock Locosim: an open-source cross-platform robotics framework, 2023.
+
 \bibitem{horn1951sentences}
 Alfred Horn.
 \newblock On sentences which are true of direct unions of algebras.
@@ -56,6 +68,10 @@ ROS.
 \newblock Ros wiki.
 \newblock http://wiki.ros.org/.
 \newblock Pagina del wiki di ROS.
+
+\bibitem{pyswip}
+Y\"uce Tekol and contributors.
+\newblock {PySwip} v0.2.10, 2020.
 
 \bibitem{unitnwatson}
 Unitn.

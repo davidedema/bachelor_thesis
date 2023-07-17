@@ -27,7 +27,10 @@
 \contentsline {subsection}{\numberline {4.1.4}ROS services e parameter server}{17}{}%
 \contentsline {subsection}{\numberline {4.1.5}Esempio rete ROS}{18}{}%
 \contentsline {section}{\numberline {4.2}Architettura utilizzata}{18}{}%
-\contentsline {subsection}{\numberline {4.2.1}Wrapping codice Prolog}{18}{}%
-\contentsline {subsection}{\numberline {4.2.2}Simulazione}{18}{}%
-\contentsline {chapter}{\numberline {5}Conclusione}{18}{}%
-\contentsline {chapter}{Bibliografia}{18}{}%
+\contentsline {subsection}{\numberline {4.2.1}Terza milestone: Wrapping codice Prolog}{18}{}%
+\contentsline {subsection}{\numberline {4.2.2}Quarta milestone: Simulazione}{19}{}%
+\contentsline {subsubsection}{Motion planner}{19}{}%
+\contentsline {subsubsection}{Task planner}{21}{}%
+\contentsline {section}{\numberline {4.3}Difficolt\IeC {\`a} incontrate}{21}{}%
+\contentsline {chapter}{\numberline {5}Conclusione}{22}{}%
+\contentsline {chapter}{Bibliografia}{22}{}%

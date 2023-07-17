@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  14 JUL 2023 17:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  17 JUL 2023 17:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -327,29 +327,35 @@ File: images/turtlesimes.png Graphic file (type png)
 <use images/turtlesimes.png>
 Package pdftex.def Info: images/turtlesimes.png  used on input line 54.
 (pdftex.def)             Requested size: 201.54942pt x 216.40466pt.
- [17]) (./capitolo5.tex
+ [17] [18 <./images/turtlesim.png> <./images/turtlesimes.png>]
+<images/ArchROS.drawio.png, id=100, 783.92876pt x 593.21625pt>
+File: images/ArchROS.drawio.png Graphic file (type png)
+<use images/ArchROS.drawio.png>
+Package pdftex.def Info: images/ArchROS.drawio.png  used on input line 104.
+(pdftex.def)             Requested size: 391.96342pt x 296.60739pt.
+ [19] [20 <./images/ArchROS.drawio.png>] [21]) (./capitolo5.tex
 Capitolo 5.
-) (./de_martini_davide_ice_2022_2023.bbl [18 <./images/turtlesim.png> <./images/turtlesimes.png>]
-Underfull \hbox (badness 1057) in paragraph at lines 61--66
+) (./de_martini_davide_ice_2022_2023.bbl [22]
+Underfull \hbox (badness 1057) in paragraph at lines 77--82
 \OT1/cmr/m/n/10.95 unitrento-il-nuovo-ibm-faculty-award.  Pa-gi-na del we-b-ga-zi-ne di UniTn che do-cu-men-ta la
  []
 
-) [19
+) [23
 
 ] (./de_martini_davide_ice_2022_2023.aux) ) 
 Here is how much of TeX's memory you used:
- 5584 strings out of 480163
- 87437 string characters out of 5894094
- 408742 words of memory out of 5000000
- 23441 multiletter control sequences out of 15000+600000
+ 5600 strings out of 480163
+ 87794 string characters out of 5894094
+ 408805 words of memory out of 5000000
+ 23456 multiletter control sequences out of 15000+600000
  477752 words of font info for 56 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  70i,8n,76p,999b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on de_martini_davide_ice_2022_2023.pdf (21 pages, 633666 bytes).
+Output written on de_martini_davide_ice_2022_2023.pdf (25 pages, 676510 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 183 PDF objects out of 1000 (max. 8388607)
+ 109 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

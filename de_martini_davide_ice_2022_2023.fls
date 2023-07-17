@@ -431,6 +431,11 @@ INPUT ./images/turtlesimes.png
 INPUT images/turtlesimes.png
 INPUT ./images/turtlesimes.png
 INPUT ./images/turtlesimes.png
+INPUT ./images/ArchROS.drawio.png
+INPUT ./images/ArchROS.drawio.png
+INPUT images/ArchROS.drawio.png
+INPUT ./images/ArchROS.drawio.png
+INPUT ./images/ArchROS.drawio.png
 INPUT ./capitolo5.tex
 INPUT ./capitolo5.tex
 INPUT ./capitolo5.tex
