@@ -483,6 +483,10 @@ INPUT ./de_martini_davide_ice_2022_2023.bbl
 INPUT de_martini_davide_ice_2022_2023.bbl
 INPUT ./de_martini_davide_ice_2022_2023.bbl
 INPUT de_martini_davide_ice_2022_2023.bbl
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 INPUT de_martini_davide_ice_2022_2023.aux
 INPUT /home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb

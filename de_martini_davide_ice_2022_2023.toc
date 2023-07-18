@@ -33,4 +33,6 @@
 \contentsline {subsubsection}{Task planner}{21}{}%
 \contentsline {section}{\numberline {4.3}Difficolt\IeC {\`a} incontrate}{21}{}%
 \contentsline {chapter}{\numberline {5}Conclusione}{22}{}%
-\contentsline {chapter}{Bibliografia}{22}{}%
+\contentsline {section}{\numberline {5.1}Risultati ottenuti e considerazioni}{22}{}%
+\contentsline {section}{\numberline {5.2}Sviluppi futuri}{23}{}%
+\contentsline {chapter}{Bibliografia}{24}{}%

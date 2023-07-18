@@ -1,3 +1,64 @@
 \chapter{Conclusione}
 \label{cha:conclusione}
+Nel seguente elaborato è stato presentato il mio progetto sia di tirocinio che di tesi triennale. Tutte le fasi dello sviluppo, dalla progettazione alla realizzazione, sono state descritte in modo dettagliato.
+In questo capitolo conclusivo verranno presentati i risultati ottenuti e le considerazioni riguardo al progetto sviluppato. Infine verrà dedicata una sezione per le possibili evoluzioni future del progetto.
+Iniziamo quindi discutendo dei risultati ottenuti e delle considerazioni.
 
+\section{Risultati ottenuti e considerazioni}
+\label{sec:risultati}
+Il prodotto finale a cui sono arrivaato è un task planner sviluppato in prolog, il goal principale del planner è quello di risolvere il problema della costruzione di pilastri con dei blocchi di lego.
+Questo poi è stato incapsulato in un nodo ROS per rendere il planner utilizzabile in un contesto reale (e simulato). 
+Il goal prefissato dal prof. Palopoli, quindi, è stato raggiunto e completato nella sua interezza.
+
+Lo sviluppo di questo progetto mi ha fatto prendere coscienza del mondo della programmazione dichiarativa e della pianificazione automatica. 
+Ritengo che Prolog sia uno strumento molto potente e che permette di risolvere problemi complessi in modo semplice e veloce.
+Prolog è sicuramente uno dei linguaggi che più si adattano a risolvere problemi di questo tipo, le ragioni sono molteplici, qui di seguito elenco quelle che ritengo più importanti:
+\begin{itemize}
+    \item Paradigma dichiarativo: il programmatore non deve preoccuparsi di come risolvere il problema, ma deve soltanto descriverlo. 
+          Questo è particolarmente adatto ai problemi di pianificazione dove è importante descrivere il dominio del problema piuttosto che la soluzione e prolog è perfetto per questo scopo.
+    \item Motore di inferenza: Prolog dispone di un motore di inferenza integrato che utilizza un algoritmo di ricerca ad-hoc per raggiungere gli obiettivi specificati dal programma. 
+          La potenza sta nell'esplorazione automatica delle soluzioni, questo rende il planner più semplice poichè il ragionamento è delegato al motore di inferenza.
+    \item Backtracking: il backtracking consente di esplorare diverse "strade" per raggiungere lo stesso obiettivo. Se una di queste non dovesse funzionare, Prolog "torna indietro" per provarne un'altra fino a trovarne una valida.
+    \item Pattern matching: il potente strumento di pattern matching di prolog (unificazione) permette di confrontare stati con obiettivi e condizioni per stabilire che azione compiere.
+    \item Logica del prim'ordine: la logica dei predicati di prim'ordine permette a prolog di essere più espressivo e di poter descrivere in modo più semplice e naturale il dominio del problema.
+    \item Rappresentazione della conoscenza: prolog permette di rappresentare la conoscenza in modo semplice e naturale, questo è molto importante per la pianificazione automatica poichè è necessario descrivere il dominio del problema.
+\end{itemize} 
+
+Inoltre il progetto mi ha permesso di approfondire le mie conoscenze riguardo al mondo della robotica e dell'intelligenza artificiale affermandone anche il mio interesse. In questi mesi di lavoro il prof. Palopoli ha costruito un vero e proprio team composto dal prof. Roveri, il dott. Lamon e il dott. Saccon.
+Essendo questo progetto una sfida nuova che non avevo mai affrontato, ho dovuto svolgere molta ricerca e studio per poterlo portare a termine. Loro sono risultati fondamentali per questo scopo siccome erano sempre disponibili al confronto e alla discussione.
+
+I video demo dei risultati ottenuti sono disponibili nella repository del progetto \cite{gitrepo}.
+\section{Sviluppi futuri}
+\label{sec:sviluppifuturi}
+In questa sezione verranno presentati alcuni possibili sviluppi futuri del progetto. Quelli identificati da me sono principalmente 3 ma questo non significa che le possibilità di sviluppo siano limitate a queste. Riporto qui di seguito i possibili sviluppi futuri identificati:
+\begin{itemize}
+      \item Temporalizzazione delle azioni per una scelta più efficiente del piano da eseguire.
+      \item Istanziamento dei fatti tramite rete neurale.
+      \item Scenari di paralelizzazione con più agenti (legato molto al primo punto).
+\end{itemize}
+
+\subsection*{Temporalizzazione delle azioni}
+\label{subsec:temporalizzazione}
+In questo progetto le azioni sono sequenziali e atemporali, questo significa che non è possibile eseguire più azioni contemporaneamente e che non è possibile specificare il tempo di esecuzione di un'azione.
+Oltre a queste implicazioni la scelta del piano non è ottimizzata quindi non verrà scelto il piano più veloce ma il primo che rispetta i vincoli.
+
+Un lavoro futuro potrebbe essere quindi quello di aggiungere la temporalizzazione delle azioni e i vincoli temporali tra di esse. Così facendo si potrebbe ottimizzare la scelta del piano utilizzando una strategia di minimizzazione del \textit{makespan}\footnote{Tempo che passa da inizio piano a fine piano}.
+Si otterrebbe quindi una scelta del piano con criterio e quindi più efficiente e intelligente. 
+
+Un possibile modo per integrare questo aspetto è quello di usare le varie librerie di CLP\footnote{Constraint Logic Programming} presenti in SWI-Prolog. Questa permette di creare dei vincoli tra variabili e di risolverli in modo efficiente.
+
+\subsection*{Utilizzo di una rete neurale per istanziare i fatti}
+\label{subsec:neuralnet}
+Un altra possibile evoluzione sarebbe legata all'istanziazione dei fatti. Come già presentato nei precedenti capitoli, i fatti \verb+block/13+ al momento sono \textit{grounded}. 
+Questo significa che sono sempre veri siccome sono stati definiti a priori. 
+
+Un possibile miglioramento sarebbe quindi di utilizzare un implementazione di prolog neuroprobabilistica, questo renderebbe possibile istanziare i fatti tramite una rete neurale.
+L'idea sarebbe quindi di collegare un sensore, ad esempio una telecamera, al mio programma prolog e di utilizzare i dati ricevuti da essa e una rete neurale per istanziare i fatti \verb+block/13+.
+Un implementazione di prolog neuroprobabilistica è \textit{DeepProbLog} \cite{MANHAEVE2021103504} ma ne esistono anche altre.
+
+\subsection*{Scenari di paralelizzazione con più agenti}
+\label{subsec:parallel}
+L'ultimo scenario identificato è quello della possibilità di paralelizzare il piano per la cooperazione multi-agente.
+Questo sviluppo è molto legato al primo punto, infatti per poterlo realizzare è necessario che le azioni siano temporali e che quindi sia possibile eseguirle contemporaneamente.
+La sfida quindi sarebbe inizialmente di dividere le azioni che ho identificato in sotto azioni e quindi capire quando la possibilità di cooperazione tra agenti è possibile. 
+Il dott. Saccon sta già lavorando su questo aspetto e quindi questo potrebbe essere un possibile sviluppo futuro del progetto che sarà applicato realmente nell'immediato futuro.

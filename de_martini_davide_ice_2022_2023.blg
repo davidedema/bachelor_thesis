@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: de_martini_davide_ice_2022_2023.aux
 The style file: plain.bst
 Database file #1: biblio.bib
-You've used 14 entries,
+You've used 15 entries,
             2118 wiz_defined-function locations,
-            578 strings with 6368 characters,
-and the built_in function-call counts, 4420 in all, are:
-= -- 417
-> -- 229
+            586 strings with 6593 characters,
+and the built_in function-call counts, 4819 in all, are:
+= -- 453
+> -- 257
 < -- 3
-+ -- 93
-- -- 78
-* -- 281
-:= -- 752
-add.period$ -- 44
-call.type$ -- 14
-change.case$ -- 79
++ -- 104
+- -- 88
+* -- 315
+:= -- 823
+add.period$ -- 47
+call.type$ -- 15
+change.case$ -- 87
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 154
-empty$ -- 343
-format.name$ -- 78
-if$ -- 922
+cite$ -- 15
+duplicate$ -- 165
+empty$ -- 368
+format.name$ -- 88
+if$ -- 1000
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 10
-newline$ -- 74
-num.names$ -- 28
-pop$ -- 102
+int.to.str$ -- 15
+missing$ -- 11
+newline$ -- 79
+num.names$ -- 30
+pop$ -- 108
 preamble$ -- 1
-purify$ -- 66
+purify$ -- 73
 quote$ -- 0
-skip$ -- 122
+skip$ -- 129
 stack$ -- 0
-substring$ -- 207
-swap$ -- 34
+substring$ -- 230
+swap$ -- 35
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 58
 warning$ -- 0
-while$ -- 38
-width$ -- 16
-write$ -- 150
+while$ -- 41
+width$ -- 17
+write$ -- 161

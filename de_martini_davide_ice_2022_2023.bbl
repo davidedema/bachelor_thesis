@@ -41,6 +41,12 @@ Paul~J. Krause.
   (hardback), isbn 0-262-19338-8.
 \newblock {\em The Knowledge Engineering Review}, 10(4):411–411, 1995.
 
+\bibitem{MANHAEVE2021103504}
+Robin Manhaeve, Sebastijan Dumančić, Angelika Kimmig, Thomas Demeester, and
+  Luc {De Raedt}.
+\newblock Neural probabilistic logic programming in deepproblog.
+\newblock {\em Artificial Intelligence}, 298:103504, 2021.
+
 \bibitem{gitrepo}
 Davide~De Martini.
 \newblock Prolog planner project.
