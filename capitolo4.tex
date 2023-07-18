@@ -77,7 +77,7 @@ In questo modo ho potuto utilizzare il codice prolog come se fosse una libreria 
 Oltre al fattore di semplicità, questo è stato fatto per poi creare il nodo ROS utilizzando la client library rospy.
 Il processo di wrapping è molto semplice, si utilizzano le API messe a disposizione da PySwip per interrogare la base di conoscenza, si ottengono i risultati e si utilizzano per creare il nodo ROS.
 Qui di seguito riporto come è stato fatto il wrapping del codice per il mio progetto, il file \verb+prolog_node.py+ contiene il seguente codice:
-\begin{verbatim}
+\begin{lstlisting}[language=Python]
 from pyswip import Prolog
 prolog = Prolog()
 prolog.consult("block_world.pl")
@@ -85,7 +85,7 @@ result = list(prolog.query("get_blocks(Blocks)"))
 result = list(prolog.query(
                 "once(pillar(" + x + "," + y + "," + z + 
                 "," + h + "," + w + "," + d + ", Actions))"))
-\end{verbatim}
+\end{lstlisting}
 Il codice riportato non corrisponde riga per riga a quello completo, ho riportato soltanto dove viene utilizzato il bridge. Nella prima istruzione dalla libreria PySwip viene importata la classe Prolog, questa ci permette di interrogare la base di conoscenza. Viene istanziato quindi un oggetto della medesima classe e viene caricato il file prolog tramite il metodo \verb+consult+.
 Nelle due righe successive vengono svolte due query: una serve a recuperare la lista dei blocchi presenti nella scena, l'altra invece serve a recuperare la lista di azioni da eseguire per risolvere il problema. Il metodo \verb+query+ restituisce un generatore, per questo motivo viene utilizzato il metodo \verb+list+ per convertirlo in una lista. 
 
@@ -166,7 +166,7 @@ Un accorgimento che ho dovuto prendere è stato quello di modificare i parametri
 
 Una seconda difficoltà incontrata è sorta durante il momento di creazione della torre. I blocchi, se pur venivano posizionati nel modo corretto uno sopra l'altro, non rimanevano in equilibrio e iniziavano a "vibrare" compenetrandosi. 
 Questo perchè il contatto tra i blocchi non era modellato nel modo corretto. Per risolvere questo problema ho dovuto modificare il file \textit{.sdf} del modello del blocco aggiungendo le seguenti righe nel tag \textit{collision}:
-\begin{verbatim}
+\begin{lstlisting}[language=XML]
 <surface>
     <contact>
         <ode>
@@ -175,7 +175,7 @@ Questo perchè il contatto tra i blocchi non era modellato nel modo corretto. Pe
         </ode>
     </contact>
 </surface>
-\end{verbatim}
+\end{lstlisting}
 Il parametro \textit{min\_depth} indica la profondità minima di penetrazione del contatto. In altre parole, se due oggetti si scontrano, questo valore stabilisce la distanza minima tra le superfici prima che venga considerato un contatto valido. Il parametro \textit{max\_vel} invece indica la velocità massima di penetrazione. Se due oggetti si scontrano con una velocità maggiore di questo valore, il contatto non verrà considerato valido. 
 
 Questi fix sembrano essere sufficienti per risolvere il problema, un'altro modo per risolvere questi problemi sarebbe stato di utilizzare un altro simulatore come \textit{CoppeliaSim} che permette di simulare in modo più preciso il contatto tra gli oggetti.
