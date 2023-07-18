@@ -42,7 +42,7 @@ In questa sezione verranno presentati alcuni possibili sviluppi futuri del proge
 In questo progetto le azioni sono sequenziali e atemporali, questo significa che non è possibile eseguire più azioni contemporaneamente e che non è possibile specificare il tempo di esecuzione di un'azione.
 Oltre a queste implicazioni la scelta del piano non è ottimizzata quindi non verrà scelto il piano più veloce ma il primo che rispetta i vincoli.
 
-Un lavoro futuro potrebbe essere quindi quello di aggiungere la temporalizzazione delle azioni e i vincoli temporali tra di esse. Così facendo si potrebbe ottimizzare la scelta del piano utilizzando una strategia di minimizzazione del \textit{makespan}\footnote{Tempo che passa da inizio piano a fine piano}.
+Un lavoro futuro potrebbe essere quindi quello di aggiungere la temporalizzazione delle azioni e i vincoli temporali tra di esse. Così facendo si potrebbe ottimizzare la scelta del piano utilizzando una strategia di minimizzazione del \textit{makespan}\footnote{Tempo che trascorre da inizio a fine piano}.
 Si otterrebbe quindi una scelta del piano con criterio e quindi più efficiente e intelligente. 
 
 Un possibile modo per integrare questo aspetto è quello di usare le varie librerie di CLP\footnote{Constraint Logic Programming} presenti in SWI-Prolog. Questa permette di creare dei vincoli tra variabili e di risolverli in modo efficiente.
