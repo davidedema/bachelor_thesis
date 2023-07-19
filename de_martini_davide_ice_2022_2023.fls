@@ -390,7 +390,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT ./capitolo1.tex
 INPUT ./capitolo1.tex
 INPUT ./capitolo1.tex
@@ -409,6 +408,7 @@ INPUT capitolo2.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT ./images/prologhist.png
 INPUT ./images/prologhist.png
 INPUT images/prologhist.png
