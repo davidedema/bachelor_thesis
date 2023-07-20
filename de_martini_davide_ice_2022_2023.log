@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  19 JUL 2023 10:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  20 JUL 2023 16:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -135,7 +135,15 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
- (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks23
 \inpenc@posthook=\toks24
@@ -173,20 +181,20 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./de_martini_davide_ice_2022_2023.aux)
 \openout1 = `de_martini_davide_ice_2022_2023.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count288
@@ -244,8 +252,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-LaTeX Info: Redefining \it@ocap on input line 42.
-LaTeX Info: Redefining \it@ccap on input line 42.
+LaTeX Info: Redefining \it@ocap on input line 64.
+LaTeX Info: Redefining \it@ccap on input line 64.
 
 
 File italian.ldf warning: 
@@ -253,7 +261,7 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 42.
+italian.ldf    on input line 64.
 
 (./pagina_iniziale.tex
 Package epstopdf Info: Source file: <marchio_unitrento_colore_it_202002.eps>
@@ -354,7 +362,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 74.
  [12] [13] [14] [15]) (./capitolo4.tex
 Capitolo 4.
-[16] [17]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16] [17]
 <images/turtlesim.png, id=93, 458.46281pt x 195.73125pt>
 File: images/turtlesim.png Graphic file (type png)
 <use images/turtlesim.png>
@@ -369,35 +380,20 @@ Package pdftex.def Info: images/turtlesimes.png  used on input line 59.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-Underfull \vbox (badness 7907) has occurred while \output is active []
-
- [18 <./images/turtlesim.png>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [19 <./images/turtlesimes.png>]
+[18 <./images/turtlesim.png>] [19 <./images/turtlesimes.png>]
 <images/ArchROS.drawio.png, id=103, 783.92876pt x 593.21625pt>
 File: images/ArchROS.drawio.png Graphic file (type png)
 <use images/ArchROS.drawio.png>
 Package pdftex.def Info: images/ArchROS.drawio.png  used on input line 111.
 (pdftex.def)             Requested size: 391.96342pt x 296.60739pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [20 <./images/ArchROS.drawio.png>] [21] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-)
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 170.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 170.
-) (./capitolo5.tex
+)) (./capitolo5.tex
 Capitolo 5.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 6412) has occurred while \output is active []
 
  [22] [23]) (./de_martini_davide_ice_2022_2023.bbl [24] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 File: uni-1.def 2013/05/13 UCS: Unicode data U+0100..U+01FF
@@ -410,15 +406,15 @@ Underfull \hbox (badness 1057) in paragraph at lines 83--88
 
 ] (./de_martini_davide_ice_2022_2023.aux) ) 
 Here is how much of TeX's memory you used:
- 8077 strings out of 480163
- 118753 string characters out of 5894094
- 626250 words of memory out of 5000000
- 25907 multiletter control sequences out of 15000+600000
- 477752 words of font info for 56 fonts, out of 8000000 for 9000
+ 8242 strings out of 480163
+ 120866 string characters out of 5894094
+ 731673 words of memory out of 5000000
+ 26071 multiletter control sequences out of 15000+600000
+ 477920 words of font info for 57 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 70i,8n,76p,999b,1587s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,8n,76p,999b,1874s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on de_martini_davide_ice_2022_2023.pdf (27 pages, 686979 bytes).
+Output written on de_martini_davide_ice_2022_2023.pdf (27 pages, 687966 bytes).
 PDF statistics:
  189 PDF objects out of 1000 (max. 8388607)
  113 compressed objects within 2 object streams

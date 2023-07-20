@@ -30,10 +30,10 @@ Queste sono quindi le caratteristiche che ogni implementazione di Prolog dovrebb
 
 La \textit{Regola del pollice} per capire se un risolutore logico può essere considerato un implementazione di Prolog e quindi rispettare i pilastri elencati sopra è la seguente.
 Il test richiede che la ben nota regola \textit{append/3} possa essere scritta esattamente come segue
-\begin{verbatim}
+\begin{lstlisting}
     append([], X, X).
     append([H|X], Y, [H|Z]) :- append(X, Y, Z).
-\end{verbatim}
+\end{lstlisting}
 e questa può essere interrogata in differenti modi: fare l'append tra due liste \verb+append([1,2],[c,d], R)+, oppure decostruire una lista come \verb+append(A,B,[1,2])+ o infine istanziarla con argomenti arbitrari come \verb+append([X|T],[c],[Z,Z,Z])+.
 Se la regola funziona senza anomalie, l'implementazione utilizzata può considerarsi un implementazione di Prolog.
 
@@ -117,13 +117,13 @@ Il predicato $\backslash+$ /1 definisce la \textit{negazione come fallimento}. C
 
 Per definire degli algoritmi iterativi come quelli che siamo abituati a vedere in linguaggi imperativi, Prolog utilizza la ricorsione. Io stesso ne ho fatto largo uso per la mia base di conoscenza,
 un esempio è il seguente:
-\begin{verbatim}
+\begin{lstlisting}
     list_length([], 0).
 
     list_length([_|T], N) :-
         list_length(T, N1),
         N is N1 + 1.
-\end{verbatim}
+\end{lstlisting}
 In questo esempio il predicato è utilizzato per calcolare la lunghezza di una lista, vediamo come ci sia il caso base (lista vuota) e il caso ricorsivo.
 In ogni caso al momento l'ho usato soltato come esempio, nel capitolo \ref{cha:descrizionecasostudio} spiegherò meglio la struttura del programma e come ho risolto i problemi incontrati in Prolog.
 \subsection{Esecuzione}
@@ -147,14 +147,14 @@ regola o l'unificazione di un fatto si raggiunge un punto in cui non è più pos
 per cercare altre possibilità. Questo processo quindi permette di riprendere l'esplorazione delle alternative non ancora considerate.
 Durante il processo di backtracking Prolog annulla tutte le assegnazioni fatte precedentemente e cerca altre alternative. Le variabili unificate vengono quindi scollegate
 per permettere la ricerca di altre soluzioni. Un esempio di questo strumento:
-\begin{verbatim}
+\begin{lstlisting}
     padre(giovanni, maria).
     padre(giovanni, giuseppe).
     madre(maria, francesca).
 
     genitore(X, Y) :- padre(X, Y).
     genitore(X, Y) :- madre(X, Y).
-\end{verbatim}
+\end{lstlisting}
 Se noi dovessimo eseguire la query \textit{genitore(giovanni, X)} Prolog troverebbe due soluzioni: \textit{X = maria} e \textit{X = giuseppe}.
 Facendo così Prolog ha esplorato tutte le alternative possibili dell'albero di ricerca.
 \subsection{Debugging}

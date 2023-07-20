@@ -31,7 +31,7 @@ le informazioni necessarie per descrivere lo stato dei blocchi nello spazio trid
 I blocchi erano rappresentati con il fatto \verb+see/3+, questo identificava un blocco alla coordinata X e Y specificata.
 C'era anche un predicato aggiuntivo che specificava il contatto del blocco, questo era il predicato \verb+on/2+. Questo serviva a specificare se il blocco si trovasse sopra un altro blocco oppure sopra il tavolo.
 Un esempio di base di conoscenza utilizzante questi fatti è la seguente:
-\begin{verbatim}
+\begin{lstlisting}
     see(a,2,5).
     see(d,5,5).
     see(e,5,2).
@@ -41,14 +41,14 @@ Un esempio di base di conoscenza utilizzante questi fatti è la seguente:
     on(c,table).
     on(d,table).
     on(e,table).
-\end{verbatim}
+\end{lstlisting}
 Come si può notare da questo esempio, l'ipotetica telecamera individua solamente i blocchi \textit{a}, \textit{d}, \textit{e} siccome  \textit{b} e \textit{c} sono sotto \textit{a}.
 Essendo uno spazio tridimensionale doveva essere identificata anche la coordinata z. Questa veniva calcolata tramite un approccio ricorsivo. La ricorsione in questi paradigmi di programmazione è ampiamente usata e questo primo esempio mi è servito per capire come funzionasse.
 L'algoritmo per calcolare la coordinata z di un blocco era il seguente:
-\begin{verbatim}
+\begin{lstlisting}
     z(Block,0) :- on(Block, table).
     z(Block,Z) :- on(Block, OtherBlock), z(OtherBlock, Z1), Z is Z1 + 1.
-\end{verbatim}
+\end{lstlisting}
 Questo è un classico esempio di algoritmo ricorsivo in cui si ha un caso base e un caso ricorsivo. Il caso base indica che se il blocco si trova sul tavolo la sua coordinata sarà 0, quello ricorsivo invece itera finchè non trova il blocco che poggia sul tavolo, poi ricorsivamente incrementa di 1 la coordinata z.
 
 In seguito, verso fine marzo inizio aprile, ho provato a ampliare questo esempio cercando un modo efficiente di rappresentare la realtà. È quindi iniziato il periodo di sviluppo del codice in cui il programma ha iniziato a prendere forma. Tutte le varie versioni del programma sono documentate e reperibili nella repository GitHub del progetto \cite{gitrepo}.
@@ -106,7 +106,7 @@ Il suo scopo è di fornire un piano ad alto livello che il robot dovrà seguire 
 
 Iniziamo con la \verb+rotate_block/5+, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
 L'implementazione che ho scelto per questa azione è la seguente:
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 rotate_block(Block, X, Y, Z, NO) :-
     block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
     (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
@@ -114,10 +114,10 @@ rotate_block(Block, X, Y, Z, NO) :-
     add_action(rotate(Block, X, Y, Z, NO)),
     retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
     assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
-\end{Verbatim}
+\end{lstlisting}
 Come si può vedere, la testa della nostra clausola di Horn prende in input 5 parametri: il blocco da ruotare, le sue coordinate e il nuovo orientamento. I primi 4 parametri vengono utilizzati nella riga successiva per cercare di unificare con il predicato \verb+block/13+ e ottenere così le informazioni del blocco.
 Avendo il blocco ora ne conosciamo tutte le sue proprietà tra cui l'orientamento attuale e se è un blocco composto. Quest'ultimo viene usato nell'istruzione successiva, se stiamo operando un blocco composto da più blocchi allora dobbiamo ruotare anche questi ultimi. Per farlo utilizzo il predicato \verb+rotate_list/2+ che prende in input la lista dei blocchi che compongono il blocco composto e il nuovo orientamento. Questo predicato si occupa di ruotare tutti i blocchi della lista.
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 rotate_list([], NO).
 
 rotate_list([H|T], NO) :-
@@ -129,14 +129,14 @@ rotate_compose(Block, X, Y, Z, NO) :-
     (list_length(MB, N), N > 1 -> rotate_list(MB, NO); NO = NO),
     retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
     assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
-\end{Verbatim}
+\end{lstlisting}
 Con questa serie di predicati riusciamo appunto a ruotare tutti i blocchi che lo compongono. Iteriamo inizialmente tutti gli elementi nella lista e poi li passiamo uno ad uno al predicato \verb+rotate_compose/5+. Questo è identico al predicato principale, l'unica differenza è che non controlla se un blocco fa parte di un blocco composto oppure no (L=1).
 
 Tornando al predicato principale, successivamente verrà svolto il controllo per verificare che il blocco non faccia parte di un blocco composto. Svolto quest'utlimo controllo possiamo aggiungere l'azione eseguita al piano (verrà spiegata meglio nella sezione \ref{subsec:generatorepiano}) e infine aggiornare il predicato \verb+block/13+ con il nuovo orientamento.
 Per svolgere quest'ultima azione utilizzeremo i predicati built-in \verb+retract/1+ e \verb+assertz/1+ che ci permettono di rimuovere un predicato e aggiungerne uno nuovo.
 
 La seconda azione presa in considerazione è la \verb+move_block/7+, questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 move_block(Block, X, Y, Z, NX, NY, NZ) :-
     block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
     (list_length(MB, N), N > 1 -> move_list(MB, NX, NY, NZ); NX = NX, NY = NY, NZ = NZ),
@@ -144,11 +144,11 @@ move_block(Block, X, Y, Z, NX, NY, NZ) :-
     add_action(move(Block, X, Y, Z, NX, NY, NZ)),
     retract(block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L)),
     assertz(block(Block, NX, NY, NZ, W, H, D, O, TL, TH, S, MB, L)).
-\end{Verbatim}
+\end{lstlisting}
 Questo predicato è molto simile se non uguale al precedente, cambia solo il fatto che non si deve ruotare il blocco e che si devono aggiornare le coordinate del blocco. La logica quindi è uguale come la sua implementazione, le uniche differenze sono che nel piano verrà aggiunta l'azione \verb+move/7+ e che il predicato \verb+block/13+ verrà aggiornato con le nuove coordinate. Anche in questo caso c'è il controllo sul blocco composto, quindi ci sarà anche l'implementazione di \verb+move_list/4+ che è molto simile a \verb+rotate_list/2+.
 
 L'ultima azione presa in considerazione per il nostro caso di studio è la \verb+link/3+. Questa, essenzialmente, serve a verificare se i blocchi sono impilati, se si gli "incolla" creando il blocco composto. La sua implementazione è la seguente:
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 link(B1, B2, R) :-
     block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1),
     block(B2, X2, Y2, Z2, W2, H2, D2, O2, TL2, TH2, S2, MB2, L2),
@@ -174,7 +174,7 @@ link(B1, B2, R) :-
     atom_string(STACK,PIL),
     R = STACK,
     assertz(block(STACK, X2, Y2, Z2, W1, HighP, D1, 1, TL2, TH1, block, [B1,B2],0)).
-\end{Verbatim}
+\end{lstlisting}
 Iniziamo definendo in input i due blocchi che vogliamo "incollare", R è un parametro in cui verrà salvato l'ID del blocco composto creato.
 Le due istruzioni seguenti servono a recuperare le informazioni dei due blocchi che vogliamo utilizzare cercando di unificarli con i predicati \verb+block/13+.
 L'istruzione a linea 5 serve a controllare che i due blocchi non siano uguali, questo perchè non ha senso creare un blocco composto con un solo blocco. Verifichiamo poi un insieme di precondizioni tra cui la verifica che i due blocchi non siano già parte di un blocco composto, che siano allineati e che siano della stessa dimensione.
@@ -185,7 +185,7 @@ Queste sono le tre azioni base che il planner deve eseguire per poter risolvere 
 \label{subsec:generatorepiano}
 La generazione del piano è il cuore del planner, è qui che vengono utilizzate le azioni base per generare il piano che verrà eseguito dal nodo di motion planning. Il task planner è composto, per il nostro scopo, principalmente da un predicato: \verb+pillar/7+.
 Questo è strutturato nel seguente modo:
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 pillar(X, Y, Z, High, Width, Depth, Actions) :-
     find_blocks(Blocks),
     valid_blocks(Blocks, High, ValidBlocks, Width, Depth),
@@ -196,11 +196,11 @@ pillar(X, Y, Z, High, Width, Depth, Actions) :-
     select(BL2, ValidBlocks1, ValidBlocks2),
     stackRec(ValidBlocks2, R, X, Y, Z),
     plan(Actions).
-\end{Verbatim}
+\end{lstlisting}
 I primi 3 argomenti sono le coordinate dove verrà costruito il pilastro, i tre seguenti sono le dimensioni del pilastro. L'ultimo argomento è l'output del planner cioè una lista di azioni che verranno eseguite dal nodo di motion planning.
 Il predicato inizia quindi salvando nella lista \textit{Blocks} tutti i blocchi utilizzabili, quindi con L=0, presenti nella base di conoscenza.
 Successivamente, tramite un algoritmo di esplorazione ricorsiva, trova la combinazione di blocchi adatta per soddisfare l'altezza richiesta dall'utente. Il codice prolog è il seguente:
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}[numbers=left]
 valid_blocks(Blocks, DesiredHeight, ResultBlocks, DesiredWidth, DesiredDepth) :-
     length(Blocks, N),               
     between(1, N, NumBlocks),        
@@ -220,7 +220,7 @@ select_blocks(Blocks, [Block|Remaining], DesiredHeight, DesiredWidth, DesiredDep
 seleziona(X, [X|Resto], Resto).
 seleziona(X, [Y|Resto], [Y|Resto1]) :-
     seleziona(X, Resto, Resto1).
-\end{Verbatim}
+\end{lstlisting}
 A prima vista può sembrare complesso ma cercherò di spiegarlo in maniera semplice ed efficace. L'entrypoint di questa "procedura" è \verb+valid_blocks/5+, il compito di questo predicato è di istanziare una lista di lunghezza compresa tra 1 e n, dove n è il numero di blocchi disponibili. Inizialmente la lista verrà istanziata a 1, nel caso l'iterazione fallisca questa verrà incrementata di 1 fino ad arrivare alla capienza massima cioè n.
 Successivamente viene chiamato il predicato \verb+select_blocks/5+, questo restituirà la lista contenente i blocchi che soddisfano i requisiti di altezza, larghezza e profondità richiesti dall'utente. Inizialmente, quindi, il programma prolog cercherà di trovare una soluzione con un solo blocco, se non la trova passerà a due blocchi e così via fino ad arrivare ad una soluzione oppure al fallimento del predicato.
 
