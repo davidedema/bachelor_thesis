@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {2.1.3}Debugging}{7}{}%
 \contentsline {section}{\numberline {2.2}Evoluzione di prolog}{7}{}%
 \contentsline {subsection}{\numberline {2.2.1}Tappe fondamentali dell'evoluzione di Prolog}{8}{}%
-\contentsline {section}{\numberline {2.3}Lavori notabili}{9}{}%
+\contentsline {section}{\numberline {2.3}Applicazioni rilevanti}{9}{}%
 \contentsline {chapter}{\numberline {3}Descrizione del caso di studio}{11}{}%
 \contentsline {section}{\numberline {3.1}Prima milestone: Studio di Prolog}{11}{}%
 \contentsline {section}{\numberline {3.2}Seconda milestone: Sviluppo del planner}{12}{}%

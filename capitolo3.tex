@@ -1,7 +1,7 @@
 \chapter{Descrizione del caso di studio}
 \label{cha:descrizionecasostudio}
 In questo capitolo verrà presentato più in dettaglio il caso di studio. Verrà definito inizialmente il workflow adottato durante il periodo di tirocinio, spiegando le milestone principali raggiunte.
-Successivamente verranno illustrate le parti principali del programma Prolog, approfondendo il funzionamento e le sfide incontrate durante lo sviluppo.
+Successivamente verranno illustrate le parti principali del programma Prolog, approfondendo il funzionamento e le sfide incontrate durante la sua creazione.
 
 Lo sviluppo del task planner è stato oggetto del mio periodo di tirocinio, il lavoro è durato complessivamente circa 4 mesi. Durante questo periodo ho dovuto inizialmente studiare il linguaggio partendo dalle sue basi, sviluppare un idea e successivamente implementarla.
 In robotica un task planner è un componente software che si occupa di pianificare e coordinare le attività del robot al fine di raggiungere determinati obiettivi.
@@ -96,13 +96,13 @@ Il blocco b1 si trova in coordinate 1, 0, 0, ha dimensioni 1, 2, 1 e sopra di lu
 Il blocco b2 si trova in coordinate 1, 0, 2, ha dimensioni 1, 2, 1 e sopra di lui si trova l'aria e sotto b1, è composto da se stesso e fa parte di un blocco composto.
 Infine, il blocco composto s1 si trova in coordinate 1, 0, 0, ha dimensioni 1, 4, 1 e sopra di lui si trova l'aria e sotto il tavolo, è composto da b1 e b2 e non fa parte di un blocco composto.
 
-Questa è la rappresentazione che, ad oggi, ritengo più efficace per rappresentare questa astrazione. Avendo il progetto dei possibili scenari futuri che potrebbero richiedere una rappresentazione diversa, questa potrebbe cambiare in futuro.
+Questa è la rappresentazione che, ad oggi, ritengo più efficace per rappresentare questa astrazione. Essendoci dei possibili scenari futuri che potrebbero richiedere una rappresentazione diversa, questa potrebbe cambiare in futuro.
 \subsection{Azioni del planner}
 \label{subsec:azioniplanner}
 Ora andremo a vedere il set di azioni che il planner può eseguire e come queste sono state implementate in Prolog. Ho individuato 3 tipi diversi di azioni:
 \textit{move\_block}, \textit{rotate\_block} e \textit{link}. Verra riportata la loro implementazione e di seguito una spiegazione del loro funzionamento.
 Queste azioni vanno intese come astrazioni ad alto livello di azioni che il robot può compiere. Il compito del task planner, quindi, non è quello di descrivere nei minimi dettagli il movimento che dovrà compiere il braccio, quello è compito del motion planner.
-Il suo scopo è di fornire un piano ad alto livello che il robot dovrà seguire per raggiungere lo stato finale desiderato.
+Il suo scopo è di fornire un piano ad alto livello che il robot deve seguire per raggiungere lo stato finale desiderato.
 
 Iniziamo con la \verb+rotate_block/5+, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
 L'implementazione che ho scelto per questa azione è la seguente:

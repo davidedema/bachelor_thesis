@@ -6,7 +6,7 @@ In particolare verrà data una breve descrizione di cosa è ROS e come funziona,
 \section{Introduzione a ROS}
 \label{sec:introduzione_ros}
 ROS (Robot Operating Systems) è un framework opensource per lo sviluppo e la programmazione di robot. ROS implementa drivers e algoritmi che sono lo stato dell'arte in robotica grazie anche alla community che negli anni si è formata e ingrandita.
-Essendo infatti un progetto opensource, ROS è sviluppato e mantenuto dalla community stessa. Questo è un grosso vantaggio infatti così facendo il supporto verso nuovi hardware sarà sempre al passo con i tempi. Oltre a questo la community è molto attiva per consigli e aiuti sia per i meno esperti che non e questo sicuramente è un suo punto a favore.
+Essendo infatti un progetto opensource, ROS è sviluppato e mantenuto in parte dalla community stessa. Questo è un grosso vantaggio infatti così facendo il supporto verso nuovi hardware sarà sempre al passo con i tempi. Oltre a questo la community è molto attiva per consigli e aiuti sia per i meno esperti che non e questo sicuramente è un suo punto a favore.
 Per realizzare questo capitolo mi sono documentato dalla wiki del progetto \cite{rossite} e dall'articolo \textit{ROS: an open-source Robot Operating System} \cite{quingley2009ros}.
 
 Iniziamo quindi introducendo i concetti principali di un architettura ROS.
@@ -45,7 +45,7 @@ Questi parametri possono essere usati per configurare il comportamento dei nodi,
 
 \subsection{Esempio rete ROS}
 \label{subsec:esempio_rete_ros}
-Per capire meglio come sono strutturati questi componenti utilizziamo il famoso simulatore \textit{turtlesim} e generiamo il grafo della rete tramite il comando \verb+rosrun rqt_graph rqt_graph+. Il grafo generato è il seguente
+Per capire meglio come sono strutturati questi componenti utilizziamo il famoso simulatore \textit{turtlesim} e generiamo il grafo della rete tramite il comando \verb+rosrun rqt_graph rqt_graph+. Il grafo generato è il seguente (figura \ref{fig:turtlesim}).
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{images/turtlesim.png}
@@ -64,8 +64,8 @@ Il risultato è visibile in figura \ref{fig:turtlesimes}.
 Passiamo ora a vedere come è strutturata la rete per il mio caso di studio
 \section{Architettura utilizzata}
 \label{sec:architettura_utilizzata}
-In questa sezione mi concentrerò a illustrare l'architettura utilizzata per il mio caso di studio andando anche a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
-Utilizzerò appunto queste per dare la struttura a questo capitolo, erano rimaste da spiegare quindi il wrapping del codice Prolog e la creazione della simulazione.
+In questa sezione mi concentrerò a illustrare l'architettura utilizzata per il mio caso di studio andando a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
+Utilizzerò appunto queste per dare la struttura a questo capitolo, erano quindi rimaste da spiegare la terza e la quarta milestone.
 
 \subsection{Terza milestone: Wrapping codice Prolog}
 \label{subsec:wrappping}
