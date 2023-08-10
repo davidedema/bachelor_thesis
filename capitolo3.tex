@@ -116,7 +116,7 @@ rotate_block(Block, X, Y, Z, NO) :-
     assertz(block(Block, X, Y, Z, W, H, D, NO, TL, TH, S, MB, L)).
 \end{lstlisting}
 Come si può vedere, la testa della nostra clausola di Horn prende in input 5 parametri: il blocco da ruotare, le sue coordinate e il nuovo orientamento. I primi 4 parametri vengono utilizzati nella riga successiva per cercare di unificare con il predicato \verb+block/13+ e ottenere così le informazioni del blocco.
-Avendo il blocco ora ne conosciamo tutte le sue proprietà tra cui l'orientamento attuale e se è un blocco composto. Quest'ultimo viene usato nell'istruzione successiva, se stiamo operando un blocco composto da più blocchi allora dobbiamo ruotare anche questi ultimi. Per farlo utilizzo il predicato \verb+rotate_list/2+ che prende in input la lista dei blocchi che compongono il blocco composto e il nuovo orientamento. Questo predicato si occupa di ruotare tutti i blocchi della lista.
+Avendo unificato il blocco possiamo quindi accedere a tutte le sue proprietà tra cui l'orientamento attuale e se è un blocco composto. Quest'ultimo ad esempio viene usato nell'istruzione successiva. Se stiamo operando un blocco composto da più blocchi allora dobbiamo ruotare anche questi ultimi. Per farlo utilizzo il predicato \verb+rotate_list/2+ che prende in input la lista dei blocchi che compongono il blocco composto e il nuovo orientamento. Questo predicato si occupa di ruotare tutti i blocchi della lista.
 \begin{lstlisting}[numbers=left]
 rotate_list([], NO).
 

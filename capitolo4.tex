@@ -36,7 +36,7 @@ Con il comando \verb+rostopic info <nometopic>+ possiamo avere una panoramica de
 In conclusione i messaggi sono i dati che vengono scambiati dai nodi attraverso i topic. Questi sono definiti in un file \verb+.msg+ e possono essere di vari tipi per adattarsi alle esigenze dell'utente.
 \subsection{ROS services e parameter server}
 \label{subsec:servandparam}
-L'ultima nozione fondamentale da sapere sull'architettura ROS è il concetto di \textit{ROS service} e \textit{parameter server}. I ROS service sono un modo alternativo per comunicare in ROS, questi a differenza dei topic sono sincroni. Questo significa che il nodo che richiede un servizio deve aspettare che il nodo che lo fornisce risponda. 
+L'ultima nozione fondamentale da sapere sull'architettura ROS è il concetto di \textit{ROS service} e \textit{parameter server}. I ROS service sono un modo alternativo per comunicare in ROS; questi a differenza dei topic sono sincroni. Questo significa che il nodo che richiede un servizio deve aspettare che il nodo che lo fornisce risponda. 
 Anche i ROS services sono identificati da un nome univoco e vengono chiamati/richiesti appunto da esso. Una volta che un nodo richiede un servizio questo bloccherà la sua esecuzione, riprendendola solamente quando il servizio sarà stato fornito.
 I servizi in ROS vengono usati principalmente se è necessario ottenere una risposta immediata, ad esempio la richiesta di dati di configurazione, l'esecuzione di operazioni complesse oppure la richiesta di operazioni specifiche.
 
@@ -65,7 +65,7 @@ Passiamo ora a vedere come è strutturata la rete per il mio caso di studio
 \section{Architettura utilizzata}
 \label{sec:architettura_utilizzata}
 In questa sezione mi concentrerò nell'illustrazione dell'architettura utilizzata per il mio caso di studio andando a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
-Analizziamo ora quindi la terza e la quarta milestone.
+Analizziamo quindi la terza e la quarta milestone.
 
 \subsection{Terza milestone: Wrapping codice Prolog}
 \label{subsec:wrappping}
@@ -119,7 +119,7 @@ In particolare, quelli sviluppati da me sono appunto il nodo in Prolog e quello 
 Il nodo di motion planning ha come obiettivo quello di pianificare ed eseguire i movimenti che il robot deve compiere per effettuare le azioni ottenute dal task planner.
 Ci sono varie strategie per realizzarlo, io ho scelto di utilizzare una strategia relativamente semplice da eseguire ma allo stesso tempo completa per tutti i movimenti che il robot deve compiere. Essa è composta principalmente dagli algoritmi di cinematica e  dalla interpolazione cubica di punti nello spazio.
 Partiamo descrivendo i primi due concetti, cinematica diretta e inversa, per poi passare alla generazione della traiettoria.
-La \textit{cinematica diretta} consente di trovare la posizione e l'orientamento dell'end effector\footnote{End effector: parte finale di un manipolatore robotico, nel mio caso un gripper a due dita.} di un robot in funzione delle posizioni dei suoi giunti. 
+La \textit{cinematica diretta} consente di trovare la posizione e l'orientamento attuale dell'end effector\footnote{End effector: parte finale di un manipolatore robotico, nel mio caso un gripper a due dita.} di un robot in funzione delle posizioni dei suoi giunti. 
 Questa solitamente viene utilizzata per localizzare l'end effector nello spazio, io, però, non l'ho mai utilizzata siccome conoscevo a priori la sua configurazione di partenza dato che è definita dall'utente. Ho introdotto questo concetto solamente per completezza e per capire meglio la cinematica inversa.
 Questa, come suggerisce il nome, svolge il compito opposto, ovvero trovare le posizioni dei giunti in funzione della posizione e dell'orientamento del end effector del robot.
 Di questa ne ho fatto ampio uso nel mio nodo siccome mi permetteva di trovare la configurazione dei giunti in funzione della posizione del blocco da afferrare.
