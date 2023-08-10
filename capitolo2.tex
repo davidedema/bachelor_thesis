@@ -2,40 +2,40 @@
 \label{cha:statoarte}
 In questo capitolo verranno presentati i principali lavori che compongono lo stato
 dell'arte di Prolog. In particolare verrà inizialmente introdotto il linguaggio, poi sarà presentata la storia di Prolog, partendo dalla creazione
-fino a come lo conosciamo ora. Infine verrà introdotta la sua applicazione nel mondo portando i lavori che ne compongono lo stato dell'arte, sviluppando il focus nel ambito dell'automazione e della robotica.
+fino a come lo conosciamo ora. Infine verrà introdotta la sua applicazione nel mondo portando i lavori che ne compongono lo stato dell'arte, sviluppando il focus nell'ambito dell'automazione e della robotica.
 Per la scrittura di questo capitolo ho utilizzato varie fonti. Esse saranno riportate a inizio di ogni sezione e in ogni parte in cui sono state utilizzate.
 \section{Prolog}
 \label{sec:prolog}
 In questa sezione verrà introdotto il linguaggio, dandogli una definizione e una descrizione della sua attuale implementazione. Per la sua scrittura ho utilizzato principalmente il libro \textit{The art of Prolog} \cite{krause_1995} e il lavoro \textit{50 years of Prolog and beyond} \cite{korner2022fifty}.
 
 Ad oggi Prolog è considerato il linguaggio di programmazione logica più utilizzato e più importante. La sua evoluzione, però, non è stata lineare.
-Negli anni ha subito diverse modifiche, la cosa curiosa è che, a differenza di altri linguaggi, queste venivano integrate nel progetto principale invece che creare dei linguaggi paralleli.
+Negli anni ha subito diverse modifiche; la cosa curiosa è che, a differenza di altri linguaggi, queste venivano integrate nel progetto principale invece che creare dei linguaggi paralleli.
 Qui di seguito elenco i principi fondamentali che ogni implementazione di Prolog deve rispettare secondo lo studio di K\"orner et al. \cite{korner2022fifty}:
 \begin{enumerate}
     \item Il linguaggio deve essere basato sulla logica dei predicati di primo ordine utilizzando le clausole di Horn. Sia per la creazione delle basi di conoscenza che per le interrogazioni delle basi di conoscenza (query).
     \item Avere l'abilità di manipolare predicati e clausole come termini, così che i meta-predicati possano essere scritti come normali predicati.
-    \item Risoluzione SLD \cite{kowalski1974predicate} basata al principio di risoluzione di Robinson.
+    \item Risoluzione SLD \cite{kowalski1974predicate} basata sul principio di risoluzione di Robinson.
     \item Unificazione di termini arbitrari che includono variabili.
     \item Esplorazione depth-first dell'albero di ricerca.
 \end{enumerate}
 I punti fondamentali per un implementazione di Prolog sono quindi: l'uso delle clausole
-di Horn, la risoluzione SLD e l'unificazione di termini arbitrari. Ci sono altre importati funzioni che un implementazione dovrebbe supportare:
+di Horn, la risoluzione SLD e l'unificazione di termini arbitrari. Ci sono altre importanti funzioni che un'implementazione dovrebbe supportare:
 \begin{enumerate}
     \setcounter{enumi}{5}
     \item Negazione come fallimento e altri aspetti logici come la disgiunzione e l'implicazione.
     \item Possibilità di alterare il contesto dell'esecuzione durante la risoluzione.
     \item Possibilità di utilizzare la programmazione con \textit{constraints}.
 \end{enumerate} 
-Queste sono quindi le caratteristiche che ogni implementazione di Prolog dovrebbe avere, se anche una dovesse mancare allora non si potrebbe considerare una versione di Prolog. 
+Queste sono quindi le caratteristiche che ogni implementazione di Prolog dovrebbe avere; se anche una dovesse mancare allora non si potrebbe considerare una versione di Prolog. 
 
-La \textit{Regola del pollice} per capire se un risolutore logico può essere considerato un implementazione di Prolog e quindi rispettare le linee guida elencate sopra è la seguente.
-Il test richiede che la ben nota regola \textit{append/3} possa essere scritta esattamente come segue
+La \textit{Regola del pollice} per capire se un risolutore logico può essere considerato un implementazione di Prolog e quindi rispettare le linee guida elencate sopra è la seguente:
+il test richiede che la ben nota regola \textit{append/3} possa essere scritta esattamente come segue
 \begin{lstlisting}
     append([], X, X).
     append([H|X], Y, [H|Z]) :- append(X, Y, Z).
 \end{lstlisting}
 e questa può essere interrogata in differenti modi: fare l'append tra due liste \verb+append([1,2],[c,d], R)+, oppure decostruire una lista come \verb+append(A,B,[1,2])+ o infine istanziarla con argomenti arbitrari come \verb+append([X|T],[c],[Z,Z,Z])+.
-Se la regola funziona senza anomalie, l'implementazione utilizzata può considerarsi un implementazione di Prolog.
+Se la regola funziona senza anomalie l'implementazione utilizzata può considerarsi un implementazione di Prolog.
 
 Descriviamo ora più in dettaglio la struttura di Prolog e la sua sintassi.
 %% METTERE PARTE PER I TIPI DI DATO SUPPORTATI %%
@@ -54,8 +54,8 @@ Il dato in Prolog viene chiamato termine, esso può essere un atomo, un numero, 
           Casi speciali di termini composti sono le liste  e le stringhe.
 \end{itemize} 
 L'utilizzo di questi dati ci permette di definire le \textit{clausole di Horn} \cite{horn1951sentences} che sono alla base del linguaggio.
-La sintassi del prolog è basata appunto sulla logica dei predicati di primo ordine, limitata però alle clausole di Horn.
-Queste sono delle disguinzioni di letterali in cui al massimo uno dei letterali è positivo. Un esempio è il seguente:
+La sintassi del Prolog è basata appunto sulla logica dei predicati di primo ordine, limitata però alle clausole di Horn.
+Queste sono delle disgiuinzioni di letterali in cui al massimo uno dei letterali è positivo. Un esempio è il seguente:
 \begin{equation}
     \label{eq:clausolaHorn1}
     \neg umano(X) \lor mortale(X)
@@ -105,11 +105,11 @@ Un esempio di regola è quello visto prima:
     mortale(X) :- umano(X).
 \end{verbatim}
 
-Il corpo di una regola è un insieme di predicati, questi possono essere congiunti o disgiunti. L'operatore di congiunzione è la
+Il corpo di una regola è un insieme di predicati; questi possono essere congiunti o disgiunti. L'operatore di congiunzione è la
 virgola (\verb+,+) mentre quello di disgiunzione è il punto e virgola (\verb+;+). Prolog viene fornito di predicati predefiniti, spesso
 utilizzati per la manipolazione di liste, aritmetica, input/output. Esempi di questi sono \textit{append}, \textit{is}, \textit{write}, \textit{read}, ecc.
 
-L'insieme di questi 'costrutti' compone l'interità della sintassi base in prolog. Ci sono anche altri operatori, uno dei più importanti è il seguente:
+L'insieme di questi 'costrutti' compone l'interezza della sintassi base in Prolog. Ci sono anche altri operatori, uno dei più importanti è il seguente:
 Il predicato $\backslash+$ /1 definisce la \textit{negazione come fallimento}. Ciò permette a Prolog di essere un sistema di ragionamento non monolitico.
 \begin{verbatim}
     legale(X) :- \+ illegale(X).
@@ -124,8 +124,8 @@ un esempio è il seguente:
         list_length(T, N1),
         N is N1 + 1.
 \end{lstlisting}
-In questo esempio il predicato è utilizzato per calcolare la lunghezza di una lista, vediamo come ci sia il caso base (lista vuota) e il caso ricorsivo.
-In ogni caso al momento l'ho usato soltato come esempio, nel capitolo \ref{cha:descrizionecasostudio} spiegherò meglio la struttura del programma e come ho risolto i problemi incontrati in Prolog.
+In questo esempio il predicato è utilizzato per calcolare la lunghezza di una lista; vediamo come ci sia il caso base (lista vuota) e il caso ricorsivo.
+Al momento l'ho usato soltanto come esempio; nel capitolo \ref{cha:descrizionecasostudio} spiegherò meglio la struttura del programma e come ho risolto i problemi incontrati in Prolog.
 \subsection{Esecuzione}
 \label{subsec:esecuzione}
 L'esecuzione di un programma Prolog è basata sulla ricerca di un insieme di predicati che soddisfano una data query. Il metodo di risoluzione utilizzato è la risoluzione SLD \cite{kowalski1974predicate} (Selection, Linearization, and Driving).
@@ -163,10 +163,10 @@ Prolog fornisce un insieme di strumenti per il debugging, uno di questi è il \t
 In questo modo è possibile vedere come Prolog risolve le query e quali clausole vengono selezionate. Nella console di SWI-Prolog è possibile attivare il trace con il comando \textit{trace.} e disattivarlo con \textit{notrace.}.
 Avviandolo ad ogni chiamata di un predicato verrà mostrato il suo nome e i suoi argomenti. Inoltre verrà mostrato il risultato della sua risoluzione. Questo renderà il debugging di un programma più semplice, e permetterà di capire meglio il funzionamento di Prolog.
 
-\section{Evoluzione di prolog}
+\section{Evoluzione di Prolog}
 \label{sec:evoluzione}
 La sezione seguente si concentra sull'evoluzione del linguaggio Prolog nel corso degli anni. Sin dalla sua ideazione negli anni 70', Prolog ha subito notevoli sviluppi, adattamenti e miglioramenti per adeguarsi
-alle esigenze deglla comunità. Per la scrittura di questa sezione mi sono affidato all'articolo di K\"orner et al. \cite{korner2022fifty}, il lavoro \textit{Logic programming for deliberative robotic task planning} \cite{meli2023logic} e altre fonti e articoli.
+alle esigenze della comunità. Per la scrittura di questa sezione mi sono affidato all'articolo di K\"orner et al. \cite{korner2022fifty}, il lavoro \textit{Logic programming for deliberative robotic task planning} \cite{meli2023logic} e altre fonti e articoli.
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{images/prologhist.png}
@@ -175,11 +175,11 @@ alle esigenze deglla comunità. Per la scrittura di questa sezione mi sono affid
 \end{figure}
 
 Di seguito vedremo una panoramica delle principali tappe che hanno contrassegnato l'evoluzione di Prolog (vedi figura \ref{fig:prologhist}). Esploreremo le innovazioni chiave e i contributi accademici
-che hanno, negli anni, arricchito il linguaggio. Vedremo poi le due principali varianti di Prolog che sono state sviluppate nel corso degli anni, e come esse abbiano influenzato il linguaggio principale.
+che hanno negli anni arricchito il linguaggio. Vedremo poi le due principali varianti di Prolog che sono state sviluppate nel corso degli anni, e come esse abbiano influenzato il linguaggio principale.
 
 Prolog fa parte principalmente di tre rami della ricerca: intelligenza artificiale, risoluzione automatica dei teoremi e processamento del linguaggio naturale.
 
-Il campo dell'intelligenza artificiale naque all'incirca nel 1956 e diede velocemente vita al linguaggio di programmazione funzionale LISP. Da li in poi 
+Il campo dell'intelligenza artificiale nacque all'incirca nel 1956 e diede velocemente vita al linguaggio di programmazione funzionale LISP. Da lì in poi 
 l'interesse aumentò e diede vita ad altri linguaggi più o meno ad alto livello.
 
 La soluzione automatica di teoremi è un campo della matematica che si occupa di trovare dimostrazioni automatiche di teoremi matematici. Questa materia fece un grande passo avanti quando Alan Robinson introdusse la regola di risoluzione per inferenza nel 1965. La risoluzione può essere utilizzata per ottenere una procedura semi-decisionale per la logica predicativa ed è al centro della maggior parte delle procedure di inferenza nella programmazione logica.
@@ -199,7 +199,7 @@ Se siete interessati a una panoramica più completa seguendo una linea temporale
 \label{subsec:tappe}
 Nella sua prima decade di vita Prolog subì molte variazioni, la sua prima versione fu Prolog 0, seguita da Prolog 1. In queste versioni il linguaggio
 prevedeva già qualche predicato built in che poi fu incluso nello standard ISO. Queste versioni includevano già il predicato \verb+dif/2+, con questo iniziò a prendere piede il concetto di unificazione. Successivamente seguì l'aggiunta
-della negazione come fallimento, questa fu una delle aggiunte più importanti, in quanto permise di risolvere problemi che non erano risolvibili con la sola unificazione.
+della negazione come fallimento; questa fu una delle aggiunte più importanti, in quanto permise di risolvere problemi che non erano risolvibili con la sola unificazione.
 
 Nel 1974 David H.D. Warren sviluppò Warplan, un sistema di pianificazione automatica basato su Prolog. Lo sviluppo di questo progetto, che poi divento la sua tesi di dottorato, lo portò a voler ottimizzare l'interprete Prolog, siccome ritenuto lento rispetto ad altri linguaggi di più alto livello come LISP.
 Sviluppò quindi un nuovo interprete, chiamato WAM (Warren Abstract Machine).
@@ -214,10 +214,10 @@ Sviluppò quindi un nuovo interprete, chiamato WAM (Warren Abstract Machine).
 WAM era, ed è tutt'ora, lo standard per i compilatori Prolog. Due delle implemenatazioni più di successo 
 sono \textit{GNU Prolog} e quella utilizzata per il mio progetto \textit{SWI-Prolog}. Entrambe queste implementazioni sono open source e disponibili online.
 
-GNU Prolog è un compilatore Prolog gratuito e open source, è stato sviluppato da Daniel Diaz. È stato sviluppato per essere un compilatore Prolog standard, e quindi non include estensioni proprietarie. La sua implementazione utilizza WAM come base per produrre codice in C che verrà poi compilato da GCC. C fu poi rimpiazzato da un linguaggio miniassembly specializzato
+GNU Prolog è un compilatore Prolog gratuito ed open source, è stato sviluppato da Daniel Diaz. È stato sviluppato per essere un compilatore Prolog standard, e quindi non include estensioni proprietarie. La sua implementazione utilizza WAM come base per produrre codice in C che verrà poi compilato da GCC. C fu poi rimpiazzato da un linguaggio miniassembly specializzato
 perchè ritenuto più efficiente. 
 
-SWI-Prolog naque dalla mancanza di Quintus (un implementazione di Prolog) di chiamate ricorsive tra Prolog e C. La potenza di questa implementazione è la community che la supporta, infatti è una delle implementazioni più utilizzate al mondo sia per la ricerca che non. Oltre che la forte community
+SWI-Prolog naque dalla mancanza di Quintus (un implementazione di Prolog) di chiamate ricorsive tra Prolog e C. La potenza di questa implementazione è la community che la supporta, infatti è una delle implementazioni più utilizzate al mondo sia per la ricerca che non. Oltre che la forte community,
 SWI-Prolog, al contrario di GNU Prolog, è interpretato, e non compilato. Questo permette di avere un ambiente di sviluppo molto più flessibile e adatto alla ricerca.
 
 Questo, come detto in introduzione, è solo un breve riassunto delle tappe fondamentali dell'evoluzione di Prolog. Se siete interessati a una panoramica più completa vi consiglio caldamente di leggere l'articolo di K{\"o}rner \cite{korner2022fifty}. 
@@ -243,7 +243,7 @@ Continua poi spiegando i requisiti per un sistema robotico deliberativo, quelli 
     \caption{Funzioni di un robot deliberativo \cite{meli2023logic}}
     \label{fig:delrob}
 \end{figure}
-Un sistema robotico è quindi un gruppo di robot con un obiettivo comune, questo può essere portato a termine attraverso un insieme di azioni che devono essere compiute dal robot nel mondo.
+Un sistema robotico è quindi un gruppo di robot con un obiettivo comune, che può essere portato a termine attraverso un insieme di azioni che devono essere compiute dal robot nel mondo.
 Il paper poi continua introducedo la tassonomia dei task planner identificando tre macrotipologie di logica: \textit{logica standard}, \textit{logica temporale} e \textit{logica probabilistica}.
 Da qui il paper introduce la task usata come esempio: \textit{Peg transfer task}, in italiano compito di trasferimento perni.
 Il compito consiste nel posizionare gli elastici di un determinato colore nel perno del colore corrispondente.

@@ -6,7 +6,7 @@ In particolare verrà data una breve descrizione di cosa è ROS e come funziona,
 \section{Introduzione a ROS}
 \label{sec:introduzione_ros}
 ROS (Robot Operating Systems) è un framework opensource per lo sviluppo e la programmazione di robot. ROS implementa drivers e algoritmi che sono lo stato dell'arte in robotica grazie anche alla community che negli anni si è formata e ingrandita.
-Essendo infatti un progetto opensource, ROS è sviluppato e mantenuto in parte dalla community stessa. Questo è un grosso vantaggio infatti così facendo il supporto verso nuovi hardware sarà sempre al passo con i tempi. Oltre a questo la community è molto attiva per consigli e aiuti sia per i meno esperti che non e questo sicuramente è un suo punto a favore.
+Essendo infatti un progetto opensource, ROS è sviluppato e mantenuto in parte dalla community stessa. Questo è un grosso vantaggio; infatti così facendo il supporto verso nuovi hardware sarà sempre al passo con i tempi. Inoltre la community è molto attiva per consigli e aiuti sia per i meno esperti che non, e questo sicuramente è un punto a suo favore.
 Per realizzare questo capitolo mi sono documentato dalla wiki del progetto \cite{rossite} e dall'articolo \textit{ROS: an open-source Robot Operating System} \cite{quingley2009ros}.
 
 Iniziamo quindi introducendo i concetti principali di un architettura ROS.
@@ -52,7 +52,7 @@ Per capire meglio come sono strutturati questi componenti utilizziamo il famoso 
     \caption{Grafo della rete turtlesim}
     \label{fig:turtlesim}
 \end{figure}
-I nodi sono identificati dagli ovali mentre i topic sono identificati dai rettangoli. Vediamo come i due nodi: turtlesim e draw\_square comunicano tra loro tramite i topic \verb+/turtle1/pose+ e \verb+/turtle1/cmd_vel+. Il nodo /draw\_square pubblica sul topic /cmd\_vel la traiettoria per la "tartaruga", questa sarà poi inviata al nodo del simulatore per poi essere eseguita. Quest'ultimo a sua volta pubblicherà la posa del robot al topic /pose che sarà poi letto dal nodo /draw\_square per recuperare la posizione del robot e disegnare la traiettoria.
+I nodi sono identificati dagli ovali mentre i topic sono identificati dai rettangoli. Vediamo come i due nodi turtlesim e draw\_square comunicano tra loro tramite i topic \verb+/turtle1/pose+ e \verb+/turtle1/cmd_vel+. Il nodo /draw\_square pubblica sul topic /cmd\_vel la traiettoria per la "tartaruga", questa sarà poi inviata al nodo del simulatore per poi essere eseguita. Quest'ultimo a sua volta pubblicherà la posa del robot al topic /pose che sarà poi letto dal nodo /draw\_square per recuperare la posizione del robot e disegnare la traiettoria.
 Il risultato è visibile in figura \ref{fig:turtlesimes}.
 \begin{figure}[h!]
     \centering
@@ -64,16 +64,16 @@ Il risultato è visibile in figura \ref{fig:turtlesimes}.
 Passiamo ora a vedere come è strutturata la rete per il mio caso di studio
 \section{Architettura utilizzata}
 \label{sec:architettura_utilizzata}
-In questa sezione mi concentrerò a illustrare l'architettura utilizzata per il mio caso di studio andando a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
-Utilizzerò appunto queste per dare la struttura a questo capitolo, erano quindi rimaste da spiegare la terza e la quarta milestone.
+In questa sezione mi concentrerò nell'illustrazione dell'architettura utilizzata per il mio caso di studio andando a definire le milestone indicate nel capitolo \ref{cha:descrizionecasostudio}.
+Analizziamo ora quindi la terza e la quarta milestone.
 
 \subsection{Terza milestone: Wrapping codice Prolog}
 \label{subsec:wrappping}
 In informatica, il termine wrapping si riferisce a una tecnica o un processo in cui un elemento o un oggetto viene incapsulato da un altro strato o struttura.
 Questo viene fatto per rendere l'interfaccia del programma più semplice oppure per astrarre maggiormente la stessa. 
 
-Nel mio caso il codice prolog è stato incapsulato grazie alla libreria PySwip \cite{pyswip}, questa fornisce un interfaccia per comunicare con il motore di inferenza SWI-Prolog tramite il linguaggio Python.
-In questo modo ho potuto utilizzare il codice prolog come se fosse una libreria Python, rendendo l'interfaccia più semplice e più comprensibile. 
+Nel mio caso il codice Prolog è stato incapsulato grazie alla libreria PySwip \cite{pyswip}; questa fornisce un interfaccia per comunicare con il motore di inferenza SWI-Prolog tramite il linguaggio Python.
+In questo modo ho potuto utilizzare il codice Prolog come se fosse una libreria Python, rendendo l'interfaccia più semplice e più comprensibile. 
 Oltre al fattore di semplicità, questo è stato fatto per poi creare il nodo ROS utilizzando la client library rospy.
 Il processo di wrapping è molto semplice, si utilizzano le API messe a disposizione da PySwip per interrogare la base di conoscenza, si ottengono i risultati e si utilizzano per creare il nodo ROS.
 Qui di seguito riporto come è stato fatto il wrapping del codice per il mio progetto, il file \verb+prolog_node.py+ contiene il seguente codice:
@@ -86,12 +86,12 @@ result = list(prolog.query(
                 "once(pillar(" + x + "," + y + "," + z + 
                 "," + h + "," + w + "," + d + ", Actions))"))
 \end{lstlisting}
-Il codice riportato non corrisponde riga per riga a quello completo, ho riportato soltanto dove viene utilizzato il bridge. Nella prima istruzione dalla libreria PySwip viene importata la classe Prolog, questa ci permette di interrogare la base di conoscenza. Viene istanziato quindi un oggetto della medesima classe e viene caricato il file prolog tramite il metodo \verb+consult+.
+Il codice riportato non corrisponde riga per riga a quello completo, ho riportato soltanto dove viene utilizzato il bridge. Nella prima istruzione dalla libreria PySwip viene importata la classe Prolog, questa ci permette di interrogare la base di conoscenza. Viene istanziato quindi un oggetto della medesima classe e viene caricato il file Prolog tramite il metodo \verb+consult+.
 Nelle due righe successive vengono svolte due query: una serve a recuperare la lista dei blocchi presenti nella scena, l'altra invece serve a recuperare la lista di azioni da eseguire per risolvere il problema. Il metodo \verb+query+ restituisce un generatore, per questo motivo viene utilizzato il metodo \verb+list+ per convertirlo in una lista. 
 
-Come detto prima, il processo di wrapping non è complesso e, come si può ben vedere, è intuitivo e compatto. 
-Per la realizzazione di questa milestone ho impiegato poco meno di una settimana, in questo caso i primi giorni sono serviti per ricercare una libreria che mi permettesse di fare il wrapping del codice prolog, mentre i restanti giorni sono serviti per capire come utilizzare la libreria e per scrivere il codice.
-Siccome al momento di realizzazione di questa milestone, circa il 18 giugno, l'architettura ROS non era stata ancora creata, ho dovuto creare un nodo di prova per testare il wrapping del codice prolog. 
+Come detto prima, il processo di wrapping non è complesso e come si può ben vedere, è intuitivo e compatto. 
+Per la realizzazione di questa milestone ho impiegato poco meno di una settimana, in questo caso i primi giorni sono serviti per ricercare una libreria che mi permettesse di fare il wrapping del codice Prolog, mentre i restanti giorni sono serviti per capire come utilizzare la libreria e per scrivere il codice.
+Siccome al momento di realizzazione di questa milestone, circa il 18 giugno, l'architettura ROS non era stata ancora creata, ho dovuto creare un nodo di prova per testare il wrapping del codice Prolog. 
 Questo è consultabile nella mia repository ed è il file \verb+python_node_poc.py+. Questo file conteneva una \textit{proof of concept} di ciò che volevo realizzare, ovvero un nodo che interrogasse la base di conoscenza e che mostrasse i risultati ottenuti. 
 Ho quindi realizzato il programma, questo chiedeva all'utente i dati in input per il predicato \verb+pillar/7+ e poi interrogava la base di conoscenza. I risultati poi venivano mostrati tramite un interfaccia grafica minimale realizzata con la libreria Tkinter.
 
@@ -100,9 +100,9 @@ Sviluppata questa milestone, mancava soltanto la creazione della rete ROS e la s
 
 \subsection{Quarta milestone: Simulazione}
 \label{subsec:simulation}
-Questa è l'ultima milestone, la realizzazione della simulazione in ROS e gazebo. Questa, pur essendo secondaria al mio progetto di tesi, è stata molto importante perchè offre un esempio pratico del caso di studio.
+Questa è l'ultima milestone, la realizzazione della simulazione in ROS e Gazebo. Questa, pur essendo secondaria al mio progetto di tesi, è stata molto importante perchè offre un esempio pratico del caso di studio.
 Per la realizzazione della simulazione ho utilizzato ROS Noetic e Gazebo, quest'ultimo è un simulatore fisico 3D open source che permette di simulare robot, oggetti e ambienti.
-La simulazione del UR5 è stata realizzata utilizzando il framework \textit{locosim} \cite{focchi2023locosim}, questo rende disponibile out-of-the-box il modello del robot con annessi controller per la simulazione in gazebo.
+La simulazione del UR5 è stata realizzata utilizzando il framework \textit{locosim} \cite{focchi2023locosim}, questo rende disponibile out-of-the-box il modello del robot con annessi controller per la simulazione in Gazebo.
 Per questa milestone quindi ho dovuto sviluppare i due nodi ROS che si occupano di interrogare la base di conoscenza e di eseguire le azioni ottenute.
 
 L'architettura ROS ideata per il mio caso di studio è illustrata in figura \ref{fig:archros}. Come si vede dalla figura i nodi sono 3: il task planner, il motion planner e il nodo per la simulazione del UR5. 
@@ -112,14 +112,14 @@ L'architettura ROS ideata per il mio caso di studio è illustrata in figura \ref
     \caption{Architettura ROS. In verde ci sono i nodi mentre in grigio chiaro i topic con i relativi messaggi.}
     \label{fig:archros}
 \end{figure}
-In particolare, quelli sviluppati da me sono appunto il nodo in prolog e quello di motion planning. Iniziamo descrivendo appunto quest'ultimo.
+In particolare, quelli sviluppati da me sono appunto il nodo in Prolog e quello di motion planning. Iniziamo descrivendo appunto quest'ultimo.
 
 \subsubsection{Motion planner}
 \label{subsubsec:motionplanner}
 Il nodo di motion planning ha come obiettivo quello di pianificare ed eseguire i movimenti che il robot deve compiere per effettuare le azioni ottenute dal task planner.
 Ci sono varie strategie per realizzarlo, io ho scelto di utilizzare una strategia relativamente semplice da eseguire ma allo stesso tempo completa per tutti i movimenti che il robot deve compiere. Essa è composta principalmente dagli algoritmi di cinematica e  dalla interpolazione cubica di punti nello spazio.
 Partiamo descrivendo i primi due concetti, cinematica diretta e inversa, per poi passare alla generazione della traiettoria.
-La \textit{cinematica diretta} è un problema che consiste nel trovare la posizione e l'orientamento dell'end effector\footnote{End effector: parte finale di un manipolatore robotico, nel mio caso un gripper a due dita.} di un robot in funzione delle posizioni dei suoi giunti. 
+La \textit{cinematica diretta} consente di trovare la posizione e l'orientamento dell'end effector\footnote{End effector: parte finale di un manipolatore robotico, nel mio caso un gripper a due dita.} di un robot in funzione delle posizioni dei suoi giunti. 
 Questa solitamente viene utilizzata per localizzare l'end effector nello spazio, io, però, non l'ho mai utilizzata siccome conoscevo a priori la sua configurazione di partenza dato che è definita dall'utente. Ho introdotto questo concetto solamente per completezza e per capire meglio la cinematica inversa.
 Questa, come suggerisce il nome, svolge il compito opposto, ovvero trovare le posizioni dei giunti in funzione della posizione e dell'orientamento del end effector del robot.
 Di questa ne ho fatto ampio uso nel mio nodo siccome mi permetteva di trovare la configurazione dei giunti in funzione della posizione del blocco da afferrare.
@@ -146,10 +146,10 @@ Ogni orientamento avrà la sua strategia per ruotare in posizione corretta, cio�
 Calcolate le posizioni dei giunti e la traiettoria, il nodo di motion planning invia i comandi al robot per eseguire il movimento.
 Eseguito quest'ultimo, il nodo di motion planning invia un messaggio al task planner per notificare l'esecuzione dell'azione e per permettere al task planner di proseguire con la prossima istruzione (punto 3 in figura \ref{fig:archros}).
 
-La parte di motion planning dipende dalle istruzioni generate dal task planner, vediamo quindi ora come queste sono estrapolate dal programma prolog e come sono inviate al nodo di motion planning
+La parte di motion planning dipende dalle istruzioni generate dal task planner. Vediamo quindi come queste sono estrapolate dal programma Prolog e come sono inviate al nodo di motion planning
 \subsubsection{Task planner}
 \label{subsubsec:taskplanner}
-Il nodo di task planning ha come obiettivo quello di interrogare la base di conoscenza e di estrapolare le azioni da eseguire per portare a termine il programma prolog.
+Il nodo di task planning ha come obiettivo quello di interrogare la base di conoscenza e di estrapolare le azioni da eseguire per portare a termine il programma Prolog.
 Come visto prima, questo nodo è scritto in python e utilizza la libreria \textit{pySwip} per interrogare la base di conoscenza. 
 Ricevuto il risultato questo viene processato tramite la libreria di espressioni regolari \textit{re} per estrapolare le azioni da eseguire. 
 Estrapolate le azioni, queste vengono inviate con il messaggio appositamente creato al nodo di motion planning. Il messaggio in questione si chiama \textit{action} e contiene il nome dell'azione da eseguire e i parametri necessari per eseguirla cioè le posizioni iniziali e finali e l'orienatamento iniziale.
@@ -157,7 +157,7 @@ Inviato il messaggio, il nodo di task planning si mette in attesa di una rispost
 
 \section{Difficoltà incontrate}
 \label{sec:difficoltaros}
-Durante lo sviluppo della simulazione ho incontrato diverse difficoltà, molte se non la totalità di queste legate al simulatore gazebo. In questa sezione descriverò le principali difficoltà incontrate e come le ho risolte.
+Durante lo sviluppo della simulazione ho incontrato diverse difficoltà; molte, se non la totalità di queste, legate al simulatore Gazebo. In questa sezione descriverò le principali difficoltà incontrate e come le ho risolte.
 
 Durante lo sviluppo mi sono scontrato con due grandi imprevisti, tutti e due legati al motore di simulazione Gazebo.
 Il primo era legato alla simulazione del \textit{grasping}, ovvero l'azione di afferrare un oggetto con il robot. Questo è un problema ben noto alla comunità di ricerca e sono stati sviluppati diversi metodi per risolverlo.
@@ -178,7 +178,7 @@ Questo perchè il contatto tra i blocchi non era modellato nel modo corretto. Pe
 \end{lstlisting}
 Il parametro \textit{min\_depth} indica la profondità minima di penetrazione del contatto. In altre parole, se due oggetti si scontrano, questo valore stabilisce la distanza minima tra le superfici prima che venga considerato un contatto valido. Il parametro \textit{max\_vel} invece indica la velocità massima di penetrazione. Se due oggetti si scontrano con una velocità maggiore di questo valore, il contatto non verrà considerato valido. 
 
-Questi fix sembrano essere sufficienti per risolvere il problema, un'altro modo per risolvere questi problemi sarebbe stato di utilizzare un altro simulatore come \textit{CoppeliaSim} che permette di simulare in modo più preciso il contatto tra gli oggetti.
+Questi fix sembrano essere sufficienti per risolvere il problema; un altro modo per risolvere questi problemi sarebbe stato di utilizzare un altro simulatore come \textit{CoppeliaSim} che permette di simulare in modo più preciso il contatto tra gli oggetti.
 
 In questo capitolo abbiamo visto come ho strutturato la simulazione e come ho risolto i problemi che ho incontrato durante lo sviluppo. In questo momento il caso di studio è stato illustrato nella sua interezza, per maggiori approfondimenti e per vedere il codice sorgente si rimanda al repository \cite{gitrepo}. 
 Il prossimo capitolo trarrà le conclusioni rispetto a questo progetto proponendo anche dei possibili scenari di sviluppo futuri.

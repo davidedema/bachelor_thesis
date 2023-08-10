@@ -8,29 +8,29 @@ In robotica un task planner è un componente software che si occupa di pianifica
 Il task planner prende in input il goal, analizza il constesto in cui il robot opera e restituisce in output un piano che indica l'ordine delle azioni da eseguire per completare con successo il compito assegnato.
 Una volta generato, questo viene eseguito dal sistema di controllo del robot, nel mio caso il \textit{motion planner}. In sostanza, il task planner è responsabile della pianificazione delle attività del robot in modo efficiente e intelligente. È uno dei componenti fondamentali per il controllo e automazione delle applicazioni robotiche complesse.
 
-Descriviamo ora le milestone individiate per lo sviluppo del progetto:
+Descriviamo ora le milestone individuate per lo sviluppo del progetto:
 \begin{itemize}
-    \item Prendere domestichezza con Prolog: fase preliminare di studio del linguaggio
+    \item Prendere dimestichezza con Prolog: fase preliminare di studio del linguaggio
     \item Sviluppare il codice in Prolog: fase di sviluppo del codice
     \item Wrappare il codice Prolog con un linguaggio ad alto livello: fase di ricerca e studio della libreria adatta per il wrapping
     \item Creare la simulazione in Gazebo e ROS: fase di sviluppo della simulazione
 \end{itemize}
 In questo capitolo voglio entrare nel merito delle prime due milestones, la terza e la quarta verranno approfondite nel capitolo \ref{cha:descrizionearchros}.
-Queste milestone verranno contestualizzate con una data indicativa sia per l'inizio che per la fine. Per ogniuna verrà indicato il lavoro svolto e il suo contributo per la realizzazione del caso di studio.
+Queste milestone verranno contestualizzate con una data indicativa sia per l'inizio che per la fine. Per ognuna verrà indicato il lavoro svolto e il suo contributo per la realizzazione del caso di studio.
 
 \section{Prima milestone: Studio di Prolog}
 \label{sec:studioprolog}
-In questa sezione andreamo a vedere in dettaglio la prima milestone, ovvero lo studio del linguaggio Prolog. Questa è stata fondamentale per lo sviluppo del task planner, in quanto mi ha permesso di capire le potenzialità del linguaggio e come sviluppare il progetto.
+In questa sezione andremo a vedere in dettaglio la prima milestone, ovvero lo studio del linguaggio Prolog. Questa è stata fondamentale per lo sviluppo del task planner, in quanto mi ha permesso di capire le potenzialità del linguaggio e come sviluppare il progetto.
 Prolog ha una curva di apprendimento molto ripida, infatti il tempo che ho dedicato a questa fase è stato all'incirca di un mese e mezzo, da marzo fino a metà aprile.
-Durante questo periodo mi sono studiato lo stato dell'arte del linguaggio, sia in ambito robotica e task planner che non (vedere capitolo \ref{cha:statoarte}) e mi sono esercitato con esso.
+Durante questo periodo ho studiato lo stato dell'arte del linguaggio, sia in ambito robotica e task planner che non (vedere capitolo \ref{cha:statoarte}) e mi sono esercitato con esso.
 
-Inizialmente sono stato introdotto al linguaggio tramite video su YouTube e articoli online. Una cosa che è stata fondamentale per
-lo studio del linguaggio è stato il libro \textit{Prolog Programming for Artificial Intelligence} \cite{bratko2001prolog} e il materiale fornito con esso.
+Inizialmente sono stato introdotto al linguaggio tramite video su YouTube e articoli online. Elemento fondamentale per
+lo studio del linguaggio è stato il libro \textit{Prolog Programming for Artificial Intelligence} \cite{bratko2001prolog} e il materiale fornito da esso.
 Questo conteneva delle esercitazioni che modellavano il noto problema del \textit{Blockworld}. In queste lezioni infatti veniva spiegato come costruire una base di conoscenza che contenesse al suo interno
 le informazioni necessarie per descrivere lo stato dei blocchi nello spazio tridimensionale. L'esercizio supponeva che ci fosse una telecamera posta sopra il nostro 'mondo' e che fosse ortogonale ad esso, quindi la coordinata z non poteva essere calcolata con la sola osservazione.
 I blocchi erano rappresentati con il fatto \verb+see/3+, questo identificava un blocco alla coordinata X e Y specificata.
 C'era anche un predicato aggiuntivo che specificava il contatto del blocco, questo era il predicato \verb+on/2+. Questo serviva a specificare se il blocco si trovasse sopra un altro blocco oppure sopra il tavolo.
-Un esempio di base di conoscenza utilizzante questi fatti è la seguente:
+Un esempio di base di conoscenza utilizzante questi fatti è il seguente:
 \begin{lstlisting}
     see(a,2,5).
     see(d,5,5).
@@ -51,13 +51,13 @@ L'algoritmo per calcolare la coordinata z di un blocco era il seguente:
 \end{lstlisting}
 Questo è un classico esempio di algoritmo ricorsivo in cui si ha un caso base e un caso ricorsivo. Il caso base indica che se il blocco si trova sul tavolo la sua coordinata sarà 0, quello ricorsivo invece itera finchè non trova il blocco che poggia sul tavolo, poi ricorsivamente incrementa di 1 la coordinata z.
 
-In seguito, verso fine marzo inizio aprile, ho provato a ampliare questo esempio cercando un modo efficiente di rappresentare la realtà. È quindi iniziato il periodo di sviluppo del codice in cui il programma ha iniziato a prendere forma. Tutte le varie versioni del programma sono documentate e reperibili nella repository GitHub del progetto \cite{gitrepo}.
+In seguito, verso fine marzo inizio aprile, ho provato ad ampliare questo esempio cercando un modo efficiente di rappresentare la realtà. È quindi iniziato il periodo di sviluppo del codice in cui il programma ha iniziato a prendere forma. Tutte le varie versioni del programma sono documentate e reperibili nella repository GitHub del progetto \cite{gitrepo}.
 Vediamo ora come è stato sviluppato il codice del planner e le sfide incontrate.
 \section{Seconda milestone: Sviluppo del planner}
 \label{sec:sviluppoplanner}
 In questa sezione approfondiremo le fasi di creazione del planner, il codice del planner e le sfide incontrate durante lo sviluppo.
 Il periodo effettivo di creazione del codice del planner è iniziato verso metà aprile ed è finito all'incirca a metà giugno. Ritengo che questo sia stato il compito più impegnativo e allo stesso tempo più interessante del progetto.
-Impegnativo perchè come detto prima Prolog non è un linguaggio semplice da imparare e creare qualcosa da 0 può risultare ostico, interessante perchè mi ha permesso di capire come funzionano i task planner e delle potenzialità di Prolog.
+Impegnativo perchè, come detto prima, Prolog non è un linguaggio semplice da imparare e creare qualcosa da 0 può risultare ostico; interessante perchè mi ha permesso di capire come funzionano i task planner e quali sono le potenzialità di Prolog.
 Andiamo quindi a dividere questa sezione in tre parti, cioè le tre parti che compongono il programma: la rappresentazione dei blocchi, le azioni e il generatore del piano.
 
 \subsection{Rappresentazione dei blocchi}
@@ -82,7 +82,7 @@ Sono stati aggiunti gli attributi CH e CL. Questi servono a specificare il "cont
 Era necessario infatti che venisse in qualche modo rappresentato il concetto di blocco composto da due blocchi. Bisognava quindi trovare un modo di creare e modificare i fatti \textit{on the fly} e di rappresentare la nozione di blocco composto.
 Il primo problema è stato risolto con l'aggiunta della proprietà \textit{dynamic} al predicato block. Questo permette di modificare i fatti in runtime, quindi di aggiungere e rimuovere fatti. La rimozione e l'aggiunta di nuovi fatti è possibile tramite i predicati built-in \verb+retract/1+ e \verb+assertz/1+. Il primo serve a rimuovere un fatto dalla base di conoscenza, il secondo invece serve ad aggiungerlo.
 Per rendere un predicato dinamico serve specificarlo a inizio file con la seguente direttiva: \verb+:- dynamic block/13+ nel caso del blocco.
-Per rappresentare invece il blocco composto mi sono servito di due ulteriori attributi, il predicato \verb+block/13+ è quindi così composto:
+Per rappresentare invece il blocco composto mi sono servito di due ulteriori attributi; il predicato \verb+block/13+ è quindi così composto:
 \begin{verbatim}
     block(ID, X, Y, Z, W, H, D, O, CH, CL, S, MB, L).
 \end{verbatim}
@@ -101,10 +101,10 @@ Questa è la rappresentazione che, ad oggi, ritengo più efficace per rappresent
 \label{subsec:azioniplanner}
 Ora andremo a vedere il set di azioni che il planner può eseguire e come queste sono state implementate in Prolog. Ho individuato 3 tipi diversi di azioni:
 \textit{move\_block}, \textit{rotate\_block} e \textit{link}. Verra riportata la loro implementazione e di seguito una spiegazione del loro funzionamento.
-Queste azioni vanno intese come astrazioni ad alto livello di azioni che il robot può compiere. Il compito del task planner, quindi, non è quello di descrivere nei minimi dettagli il movimento che dovrà compiere il braccio, quello è compito del motion planner.
+Queste azioni vanno intese come astrazioni ad alto livello di azioni che il robot può compiere. Il compito del task planner quindi non è quello di descrivere nei minimi dettagli il movimento che dovrà compiere il braccio, compito questo del motion planner.
 Il suo scopo è di fornire un piano ad alto livello che il robot deve seguire per raggiungere lo stato finale desiderato.
 
-Iniziamo con la \verb+rotate_block/5+, questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
+Iniziamo con la \verb+rotate_block/5+; questa azione serve a portare un blocco dal suo orientamento attuale a quello desiderato, ovviamente per i nostri scopi l'orientamento desiderato sarà sempre 1.
 L'implementazione che ho scelto per questa azione è la seguente:
 \begin{lstlisting}[numbers=left]
 rotate_block(Block, X, Y, Z, NO) :-
@@ -132,10 +132,10 @@ rotate_compose(Block, X, Y, Z, NO) :-
 \end{lstlisting}
 Con questa serie di predicati riusciamo appunto a ruotare tutti i blocchi che lo compongono. Iteriamo inizialmente tutti gli elementi nella lista e poi li passiamo uno ad uno al predicato \verb+rotate_compose/5+. Questo è identico al predicato principale, l'unica differenza è che non controlla se un blocco fa parte di un blocco composto oppure no (L=1).
 
-Tornando al predicato principale, successivamente verrà svolto il controllo per verificare che il blocco non faccia parte di un blocco composto. Svolto quest'utlimo controllo possiamo aggiungere l'azione eseguita al piano (verrà spiegata meglio nella sezione \ref{subsec:generatorepiano}) e infine aggiornare il predicato \verb+block/13+ con il nuovo orientamento.
+Tornando al predicato principale, successivamente verrà svolto il controllo per verificare che il blocco non faccia parte di un blocco composto. Svolto quest'ultimo controllo possiamo aggiungere l'azione eseguita al piano (verrà spiegata meglio nella sezione \ref{subsec:generatorepiano}) e infine aggiornare il predicato \verb+block/13+ con il nuovo orientamento.
 Per svolgere quest'ultima azione utilizzeremo i predicati built-in \verb+retract/1+ e \verb+assertz/1+ che ci permettono di rimuovere un predicato e aggiungerne uno nuovo.
 
-La seconda azione presa in considerazione è la \verb+move_block/7+, questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
+La seconda azione presa in considerazione è la \verb+move_block/7+; questa azione serve a spostare un blocco da una posizione ad un'altra. L'implementazione che ho scelto per questa azione è la seguente:
 \begin{lstlisting}[numbers=left]
 move_block(Block, X, Y, Z, NX, NY, NZ) :-
     block(Block, X, Y, Z, W, H, D, O, TL, TH, S, MB, L),
@@ -147,7 +147,7 @@ move_block(Block, X, Y, Z, NX, NY, NZ) :-
 \end{lstlisting}
 Questo predicato è molto simile se non uguale al precedente, cambia solo il fatto che non si deve ruotare il blocco e che si devono aggiornare le coordinate del blocco. La logica quindi è uguale come la sua implementazione, le uniche differenze sono che nel piano verrà aggiunta l'azione \verb+move/7+ e che il predicato \verb+block/13+ verrà aggiornato con le nuove coordinate. Anche in questo caso c'è il controllo sul blocco composto, quindi ci sarà anche l'implementazione di \verb+move_list/4+ che è molto simile a \verb+rotate_list/2+.
 
-L'ultima azione presa in considerazione per il nostro caso di studio è la \verb+link/3+. Questa, essenzialmente, serve a verificare se i blocchi sono impilati, se si gli "incolla" creando il blocco composto. La sua implementazione è la seguente:
+L'ultima azione presa in considerazione per il nostro caso di studio è la \verb+link/3+. Questa essenzialmente serve a verificare se i blocchi sono impilati, se li si "incolla" creando il blocco composto. La sua implementazione è la seguente:
 \begin{lstlisting}[numbers=left]
 link(B1, B2, R) :-
     block(B1, X1, Y1, Z1, W1, H1, D1, O1, TL1, TH1, S1, MB1, L1),
@@ -175,12 +175,12 @@ link(B1, B2, R) :-
     R = STACK,
     assertz(block(STACK, X2, Y2, Z2, W1, HighP, D1, 1, TL2, TH1, block, [B1,B2],0)).
 \end{lstlisting}
-Iniziamo definendo in input i due blocchi che vogliamo "incollare", R è un parametro in cui verrà salvato l'ID del blocco composto creato.
+Iniziamo definendo in input i due blocchi che vogliamo "incollare"; R è un parametro in cui verrà salvato l'ID del blocco composto creato.
 Le due istruzioni seguenti servono a recuperare le informazioni dei due blocchi che vogliamo utilizzare cercando di unificarli con i predicati \verb+block/13+.
 L'istruzione a linea 5 serve a controllare che i due blocchi non siano uguali, questo perchè non ha senso creare un blocco composto con un solo blocco. Verifichiamo poi un insieme di precondizioni tra cui la verifica che i due blocchi non siano già parte di un blocco composto, che siano allineati e che siano della stessa dimensione.
-Successivamente ci calcoliamo l'altezza del blocco composto come somma delle altezze dei due blocchi. Aggiorniamo la base di conoscenza e creiamo aggiungiamo anche il blocco composto che avrà come ID la stringa "s" seguita da un numero che viene incrementato ad ogni blocco composto creato.
+Successivamente calcoliamo l'altezza del blocco composto come somma delle altezze dei due blocchi. Aggiorniamo la base di conoscenza e creiamo aggiungiamo anche il blocco composto che avrà come ID la stringa "s" seguita da un numero che viene incrementato ad ogni blocco composto creato.
 
-Queste sono le tre azioni base che il planner deve eseguire per poter risolvere il problema, ora vediamo come vengono utilizzate per generare il piano che poi verrà eseguito dal nodo di motion planning.
+Queste sono le tre azioni base che il planner deve eseguire per poter risolvere il problema. Ora vediamo come vengono utilizzate per generare il piano che poi verrà eseguito dal nodo di motion planning.
 \subsection{Generatore del piano}
 \label{subsec:generatorepiano}
 La generazione del piano è il cuore del planner, è qui che vengono utilizzate le azioni base per generare il piano che verrà eseguito dal nodo di motion planning. Il task planner è composto, per il nostro scopo, principalmente da un predicato: \verb+pillar/7+.
@@ -199,7 +199,7 @@ pillar(X, Y, Z, High, Width, Depth, Actions) :-
 \end{lstlisting}
 I primi 3 argomenti sono le coordinate dove verrà costruito il pilastro, i tre seguenti sono le dimensioni del pilastro. L'ultimo argomento è l'output del planner cioè una lista di azioni che verranno eseguite dal nodo di motion planning.
 Il predicato inizia quindi salvando nella lista \textit{Blocks} tutti i blocchi utilizzabili, quindi con L=0, presenti nella base di conoscenza.
-Successivamente, tramite un algoritmo di esplorazione ricorsiva, trova la combinazione di blocchi adatta per soddisfare l'altezza richiesta dall'utente. Il codice prolog è il seguente:
+Successivamente, tramite un algoritmo di esplorazione ricorsiva, trova la combinazione di blocchi adatta per soddisfare l'altezza richiesta dall'utente. Il codice Prolog è il seguente:
 \begin{lstlisting}[numbers=left]
 valid_blocks(Blocks, DesiredHeight, ResultBlocks, DesiredWidth, DesiredDepth) :-
     length(Blocks, N),               
@@ -222,7 +222,7 @@ seleziona(X, [Y|Resto], [Y|Resto1]) :-
     seleziona(X, Resto, Resto1).
 \end{lstlisting}
 A prima vista può sembrare complesso ma cercherò di spiegarlo in maniera semplice ed efficace. L'entrypoint di questa "procedura" è \verb+valid_blocks/5+, il compito di questo predicato è di istanziare una lista di lunghezza compresa tra 1 e n, dove n è il numero di blocchi disponibili. Inizialmente la lista verrà istanziata a 1, nel caso l'iterazione fallisca questa verrà incrementata di 1 fino ad arrivare alla capienza massima cioè n.
-Successivamente viene chiamato il predicato \verb+select_blocks/5+, questo restituirà la lista contenente i blocchi che soddisfano i requisiti di altezza, larghezza e profondità richiesti dall'utente. Inizialmente, quindi, il programma prolog cercherà di trovare una soluzione con un solo blocco, se non la trova passerà a due blocchi e così via fino ad arrivare ad una soluzione oppure al fallimento del predicato.
+Successivamente viene chiamato il predicato \verb+select_blocks/5+; questo restituirà la lista contenente i blocchi che soddisfano i requisiti di altezza, larghezza e profondità richiesti dall'utente. Inizialmente quindi il programma Prolog cercherà di trovare una soluzione con un solo blocco, se non la troverà passerà a due blocchi e così via fino ad arrivare ad una soluzione oppure al fallimento del predicato.
 
 Trovata la lista di blocchi che soddisfa i requisiti, il programma prosegue con la creazione del pilastro. Questo viene creato tramite i predicati \verb+stack/6+ e \verb+stackRec/5+, l'ultimo è la versione ricorsiva in cui si passa la lista dei blocchi da utilizzare e l'ID del blocco composto di "base". Questi due predicati utilizzano le azioni spiegate prima per creare il pilastro. L'ultima istruzione, \verb+plan/1+, copierà le azioni create durante la generazione del pilastro nella lista Actions che verrà restituita in output dal predicato \verb+pillar/7+.
 

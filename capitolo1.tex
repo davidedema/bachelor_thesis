@@ -16,18 +16,18 @@ Questo deve essere in grado di coordinare un manipolatore robotico, nel nostro c
 Il planner tramite delle primitive come \textit{ruota} e \textit{muovi} deve essere in grado di pilotare il braccio robotico per la
 creazione di un pilastro. Esso è stato concepito ad alto livello per permettere la compatibilità con più tipologie di robot e la flessibilità
 delle applicazioni. Nel caso studiato verrà utilizzato per la creazione, appunto, di un pilastro, ma questa astrazione ad
-"alto livello" permette di essere usato per più compiti: ad esempio per la creazione di una costruzione come una casa o qualsiasi struttura
+"alto livello" permette di utilizzarlo per più compiti: ad esempio per la creazione di una costruzione come una casa o qualsiasi struttura
 che si può immaginare con dei blocchi di Lego. Queste primitive verranno inviate al nodo controllore del movimento che, tramite algoritmi di cinematica e
 interpolazione dei punti, troverà le configurazioni dei giunti adatte al movimento richiesto. 
 
 Successivamente si è voluto implementare il tutto in un
 ambiente simulato, così da avere un riscontro anche visivo del lavoro svolto e capire le possibili applicazioni in un contesto reale.
-La simulazione è stata svolta con ROS e Gazebo, due strumenti open source ampiamente utilizzati nel mondo della robotica. Il primo ci permette di
-comunicare al robot tramite una serie di topic e servizi, mentre il secondo ci permette di simulare l'ambiente in cui il robot opera.
+La simulazione è stata svolta con ROS e Gazebo, due strumenti open source ampiamente utilizzati nel mondo della robotica. Il primo permette di
+comunicare con il robot robot tramite una serie di topic e servizi, mentre il secondo permette di simulare l'ambiente in cui il robot opera.
 
 % MOTIVI DEL CASO DI STUDIO
 La scelta di questo caso di studio è nata principalmente dal mio interesse verso la robotica e le applicazioni dell'intelligenza artificiale in vari contesti.
-L'utilizzo di un linguaggio logico per la creazione di un task planner è stato un approccio nuovo che non avevo mai considerato e fin da subito mi è interessato. 
+L'utilizzo di un linguaggio logico per la creazione di un task planner è stato un approccio nuovo che non avevo mai considerato e fin da subito ha suscitato il mio interesse. 
 La rappresentazione della conoscienza in un robot tramite Prolog è un approccio vantaggioso che può essere applicato in molti altri contesti.
 Un altro motivo che mi ha portato a scegliere questo caso di studio è la sua possibilità di espansione. Due possibili miglioramenti potrebbero essere
 la temporizzazione delle azioni e la successiva ottimizzazione del tempo
@@ -36,8 +36,8 @@ Sapere che questo lavoro possa essere ampliato e migliorato è sicuramente un al
 Mi sono quindi rivolto al prof. Palopoli e lui mi ha proposto di sviluppare questo progetto.
 La scelta di utilizzare Prolog è nata dal fatto che è un ottimo strumento per modellare la conoscenza in un agente.
 Esso permette di creare delle "basi di conoscenza", contenenti sia fatti che regole, su cui successivamente fare inferenza.
-L'esecuzione di un programma prolog è comparabile alla dimostrazione di un teorema mediante la regola di inferenza della soluzione.
-Tutte queste premesse, e l'apmpio utilizzo di prolog nel mondo dell'intelligenza artificiale, ci hanno incuriosito e portato allo sviluppo del progetto.
+L'esecuzione di un programma Prolog è comparabile alla dimostrazione di un teorema mediante la regola di inferenza della soluzione.
+Tutte queste premesse, e l'ampio utilizzo di Prolog nel mondo dell'intelligenza artificiale, ci hanno incuriosito e portato allo sviluppo del progetto.
 
 \section{Definizione del problema}
 \label{sec:defprob}
@@ -45,12 +45,12 @@ Il caso di studio presentato non è nuovo nel mondo dell'intelligenza artificial
 degli approcci preferiti dalla comunità per risolvere problemi in questo dominio. È difficile trovare delle applicazioni nella vita reale che utilizzano solamente Prolog, questo il 
 più delle volte viene usato insieme ad altri strumenti o linguaggi di programmazione tipo Java. 
 
-Inizialmente la sfida è stata di prendere domestichezza con il linguaggio di programmazione.
-Essendo un paradigma che non avevo mai utilizzato e, abituato ai linguaggi imperativi come Python, Java, ho provato a usare un approcio simile
+Inizialmente la sfida è stata di prendere dimestichezza con il linguaggio di programmazione.
+Essendo un paradigma che non avevo mai utilizzato e, abituato ai linguaggi imperativi come Python e Java, ho provato a usare un approcio simile
 in Prolog, fallendo. Questo perchè, al contrario di come siamo abituati, in Prolog non si definiscono le azioni da eseguire step-by-step, ma si indicano le condizioni che devono essere soddisfatte per portare a termine un compito.
-Presa domestichezza la sfida diventò quella di definire un modo efficace per rappresentare l'ambiente studiato.
+Presa dimestichezza la sfida diventò quella di definire un modo efficace per rappresentare l'ambiente studiato.
 Dovevo riuscire a trovare un astrazione della realtà tale che, utilizzando una stringa, riuscisse a rappresentare tutte le informazioni necessarie sulle proprietà
-attuali del blocco di lego. Successivamente questa si è trasformata nel identificare le azioni base che il nostro planner doveva inviare al robot.
+attuali del blocco di lego. Successivamente questa si è trasformata nell'identificare le azioni base che il nostro planner doveva inviare al robot.
 Tutto ciò doveva essere svolto mantenendo consistenza tra il mondo modellato e la base di conoscenza, quindi evitare che un blocco che si è spostato
 nel mondo reale rimanga nella sua posizione precedente nella base di conoscenza. 
 
@@ -68,8 +68,8 @@ livello e convertirà queste in movimenti veri e propri del braccio tramite il n
 \label{sec:struttura}
 Questa tesi inizierà presentando lo stato dell'arte delle applicazioni in Prolog, dando inizialmente una visone generale del linguaggio e la sua sintassi. Vedremo l'evoluzione del linguaggio negli anni e la sua applicazione in ambiti sia di ricerca che di industria.
 In seguito ci sarà un capitolo dedicato più dettagliatamente al caso di studio, in cui il programma Prolog sarà spiegato più dettagliatamente. 
-Successivamente verrnno descritti ROS e gli strumenti che ho utilizzato per simulare il robot. In questa sezione illustrerò l'architettura e i nodi creati per il progetto, soffermandomi anche su concetti di cinematica e di motion planning.
+Successivamente verranno descritti ROS e gli strumenti che ho utilizzato per simulare il robot. In questa sezione illustrerò l'architettura e i nodi creati per il progetto, soffermandomi anche su concetti di cinematica e di motion planning.
 Infine un capitolo sarà dedicato alle conclusioni e ai lavori futuri.
 
-Iniziamo ora introducendo appunto lo stato dell'arte di prolog e le pubblicazioni notabili, andando a dare un approfondimento anche al mondo dell'industria.
+Iniziamo ora introducendo appunto lo stato dell'arte di Prolog e le pubblicazioni notabili, andando a dare un approfondimento anche al mondo dell'industria.
 

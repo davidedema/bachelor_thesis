@@ -6,7 +6,7 @@ Iniziamo quindi discutendo dei risultati ottenuti e delle considerazioni.
 
 \section{Risultati ottenuti e considerazioni}
 \label{sec:risultati}
-Il prodotto finale a cui sono arrivaato è un task planner sviluppato in prolog, il goal principale del planner è quello di risolvere il problema della costruzione di pilastri con dei blocchi di lego.
+Il prodotto finale a cui sono arrivaato è un task planner sviluppato in Prolog, il goal principale del planner è quello di risolvere il problema della costruzione di pilastri con dei blocchi di lego.
 Questo poi è stato incapsulato in un nodo ROS per rendere il planner utilizzabile in un contesto reale (e simulato). 
 Il goal prefissato dal prof. Palopoli, quindi, è stato raggiunto e completato nella sua interezza.
 
@@ -15,13 +15,13 @@ Ritengo che Prolog sia uno strumento molto potente che permette di risolvere pro
 Prolog è sicuramente uno dei linguaggi che più si adattano a risolvere problemi di questo tipo, le ragioni sono molteplici, qui di seguito elenco quelle che ritengo più importanti:
 \begin{itemize}
     \item Paradigma dichiarativo: il programmatore non deve preoccuparsi di come risolvere il problema, ma deve soltanto descriverlo. 
-          Questo è particolarmente adatto ai problemi di pianificazione dove è importante descrivere il dominio del problema piuttosto che la soluzione e prolog è perfetto per questo scopo.
+          Questo è particolarmente adatto ai problemi di pianificazione dove è importante descrivere il dominio del problema piuttosto che la soluzione e Prolog è perfetto per questo scopo.
     \item Motore di inferenza: Prolog dispone di un motore di inferenza integrato che utilizza un algoritmo di ricerca ad-hoc per raggiungere gli obiettivi specificati dal programma. 
           La potenza sta nell'esplorazione automatica delle soluzioni, questo rende il planner più semplice poichè il ragionamento è delegato al motore di inferenza.
     \item Backtracking: il backtracking consente di esplorare diverse "strade" per raggiungere lo stesso obiettivo. Se una di queste non dovesse funzionare, Prolog "torna indietro" per provarne un'altra fino a trovarne una valida.
-    \item Pattern matching: il potente strumento di pattern matching di prolog (unificazione) permette di confrontare stati con obiettivi e condizioni per stabilire che azione compiere.
-    \item Logica del prim'ordine: la logica dei predicati di prim'ordine permette a prolog di essere più espressivo e di poter descrivere in modo più semplice e naturale il dominio del problema.
-    \item Rappresentazione della conoscenza: prolog permette di rappresentare la conoscenza in modo semplice e naturale, questo è molto importante per la pianificazione automatica poichè è necessario descrivere il dominio del problema.
+    \item Pattern matching: il potente strumento di pattern matching di Prolog (unificazione) permette di confrontare stati con obiettivi e condizioni per stabilire che azione compiere.
+    \item Logica del prim'ordine: la logica dei predicati di prim'ordine permette a Prolog di essere più espressivo e di poter descrivere in modo più semplice e naturale il dominio del problema.
+    \item Rappresentazione della conoscenza: Prolog permette di rappresentare la conoscenza in modo semplice e naturale, questo è molto importante per la pianificazione automatica poichè è necessario descrivere il dominio del problema.
 \end{itemize} 
 
 Inoltre il progetto mi ha permesso di approfondire le mie conoscenze riguardo al mondo della robotica e dell'intelligenza artificiale affermandone anche il mio interesse. In questi mesi di lavoro il prof. Palopoli ha costruito un vero e proprio team composto dal prof. Roveri, il dott. Lamon e il dott. Saccon.
@@ -52,13 +52,13 @@ Un possibile modo per integrare questo aspetto è quello di usare le varie libre
 Un altra possibile evoluzione sarebbe legata all'istanziazione dei fatti. Come già presentato nei precedenti capitoli, i fatti \verb+block/13+ al momento sono \textit{grounded}. 
 Questo significa che sono sempre veri siccome sono stati definiti a priori. 
 
-Un possibile miglioramento sarebbe quindi di utilizzare un implementazione di prolog neuroprobabilistica, questo renderebbe possibile istanziare i fatti tramite una rete neurale.
-L'idea sarebbe quindi di collegare un sensore, ad esempio una telecamera, al mio programma prolog e di utilizzare i dati ricevuti da essa e una rete neurale per istanziare i fatti \verb+block/13+.
-Un implementazione di prolog neuroprobabilistica è \textit{DeepProbLog} \cite{MANHAEVE2021103504} ma ne esistono anche altre.
+Un possibile miglioramento sarebbe quindi di utilizzare un implementazione di Prolog neuroprobabilistica, questo renderebbe possibile istanziare i fatti tramite una rete neurale.
+L'idea sarebbe quindi di collegare un sensore, ad esempio una telecamera, al mio programma Prolog e di utilizzare i dati ricevuti da essa e una rete neurale per istanziare i fatti \verb+block/13+.
+Un implementazione di Prolog neuroprobabilistica è \textit{DeepProbLog} \cite{MANHAEVE2021103504} ma ne esistono anche altre.
 
 \subsection*{Scenari di paralelizzazione con più agenti}
 \label{subsec:parallel}
 L'ultimo scenario identificato è quello della possibilità di paralelizzare il piano per la cooperazione multi-agente.
 Questo sviluppo è molto legato al primo punto, infatti per poterlo realizzare è necessario che le azioni siano temporali e che quindi sia possibile eseguirle contemporaneamente.
 La sfida quindi sarebbe inizialmente di dividere le azioni che ho identificato in sotto azioni e quindi capire quando la possibilità di cooperazione tra agenti è possibile. 
-Il dott. Saccon sta già lavorando su questo aspetto e quindi questo potrebbe essere un possibile sviluppo futuro del progetto che sarà applicato realmente nell'immediato futuro.
+Il dott. Saccon sta già lavorando su questo aspetto e quindi questo potrebbe essere un possibile sviluppo del progetto che sarà applicato realmente nell'immediato futuro.
