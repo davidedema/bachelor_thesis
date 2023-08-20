@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  10 AUG 2023 17:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.7.3)  20 AUG 2023 15:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -306,121 +306,97 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ] (./sommario.tex (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
-)) (./capitolo1.tex
-Capitolo 1.
-[2
+)) (./capitolo1.tex [2
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3]) (./capitolo2.tex
+Capitolo 1.
+[3]) (./capitolo2.tex [4]
 Capitolo 2.
-[4]
-Overfull \hbox (1.20468pt too wide) in paragraph at lines 37--39
+
+Overfull \hbox (1.20468pt too wide) in paragraph at lines 39--41
 \OT1/cmr/m/n/10.95 e que-sta pu^^Ro es-se-re in-ter-ro-ga-ta in dif-fe-ren-ti mo-di: fa-re l'ap-pend tra due li-ste [][]\OT1/cmtt/m/n/10.95 append([1,2],[c,d], R)[]\OT1/cmr/m/n/10.95 ,
  []
 
-[5] [6]
-<images/prologhist.png, id=48, 607.26875pt x 236.885pt>
+[5] [6] [7]
+<images/prologhist.png, id=51, 607.26875pt x 236.885pt>
 File: images/prologhist.png Graphic file (type png)
 <use images/prologhist.png>
-Package pdftex.def Info: images/prologhist.png  used on input line 172.
+Package pdftex.def Info: images/prologhist.png  used on input line 174.
 (pdftex.def)             Requested size: 303.63364pt x 118.4422pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[7]
-<images/prologimpl.png, id=53, 625.33624pt x 385.44pt>
+ [8 <./images/prologhist.png>]
+<images/prologimpl.png, id=57, 625.33624pt x 385.44pt>
 File: images/prologimpl.png Graphic file (type png)
 <use images/prologimpl.png>
-Package pdftex.def Info: images/prologimpl.png  used on input line 209.
+Package pdftex.def Info: images/prologimpl.png  used on input line 211.
 (pdftex.def)             Requested size: 343.93599pt x 211.99265pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8 <./images/prologhist.png>]
-<images/deliberativerobot.png, id=58, 643.40375pt x 406.51875pt>
+ [9 <./images/prologimpl.png>]
+<images/deliberativerobot.png, id=62, 643.40375pt x 406.51875pt>
 File: images/deliberativerobot.png Graphic file (type png)
 <use images/deliberativerobot.png>
-Package pdftex.def Info: images/deliberativerobot.png  used on input line 242.
+Package pdftex.def Info: images/deliberativerobot.png  used on input line 244.
 (pdftex.def)             Requested size: 353.87315pt x 223.586pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[9 <./images/prologimpl.png>]) (./capitolo3.tex
+ [10 <./images/deliberativerobot.png>]) (./capitolo3.tex [11]
 Capitolo 3.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10 <./images/deliberativerobot.png>] [11]
+[12]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 74.
+(Font)              <9> on input line 76.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 74.
- [12] [13]
+(Font)              <5> on input line 76.
+ [13] [14]
 Underfull \vbox (badness 1527) has occurred while \output is active []
 
- [14] [15]) (./capitolo4.tex
+ [15] [16]) (./capitolo4.tex [17]
 Capitolo 4.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [16] [17]
-<images/turtlesim.png, id=93, 458.46281pt x 195.73125pt>
+[18]
+<images/turtlesim.png, id=96, 458.46281pt x 195.73125pt>
 File: images/turtlesim.png Graphic file (type png)
 <use images/turtlesim.png>
-Package pdftex.def Info: images/turtlesim.png  used on input line 51.
+Package pdftex.def Info: images/turtlesim.png  used on input line 53.
 (pdftex.def)             Requested size: 229.23083pt x 97.86537pt.
-<images/turtlesimes.png, id=94, 503.8825pt x 541.02126pt>
+<images/turtlesimes.png, id=97, 503.8825pt x 541.02126pt>
 File: images/turtlesimes.png Graphic file (type png)
 <use images/turtlesimes.png>
-Package pdftex.def Info: images/turtlesimes.png  used on input line 59.
+Package pdftex.def Info: images/turtlesimes.png  used on input line 61.
 (pdftex.def)             Requested size: 201.54942pt x 216.40466pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[18 <./images/turtlesim.png>] [19 <./images/turtlesimes.png>]
-<images/ArchROS.drawio.png, id=103, 783.92876pt x 593.21625pt>
+[19 <./images/turtlesim.png>] [20 <./images/turtlesimes.png>]
+<images/ArchROS.drawio.png, id=106, 783.92876pt x 593.21625pt>
 File: images/ArchROS.drawio.png Graphic file (type png)
 <use images/ArchROS.drawio.png>
-Package pdftex.def Info: images/ArchROS.drawio.png  used on input line 111.
+Package pdftex.def Info: images/ArchROS.drawio.png  used on input line 113.
 (pdftex.def)             Requested size: 391.96342pt x 296.60739pt.
- [20 <./images/ArchROS.drawio.png>] [21] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [21 <./images/ArchROS.drawio.png>] [22] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-)) (./capitolo5.tex
+)) (./capitolo5.tex [23]
 Capitolo 5.
-
-Underfull \vbox (badness 6412) has occurred while \output is active []
-
- [22] [23]) (./de_martini_davide_ice_2022_2023.bbl [24] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+[24]) (./de_martini_davide_ice_2022_2023.bbl [25] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 File: uni-1.def 2013/05/13 UCS: Unicode data U+0100..U+01FF
 )
 Underfull \hbox (badness 1057) in paragraph at lines 83--88
 \OT1/cmr/m/n/10.95 unitrento-il-nuovo-ibm-faculty-award.  Pa-gi-na del we-b-ga-zi-ne di UniTn che do-cu-men-ta la
  []
 
-) [25
+) [26
 
 ] (./de_martini_davide_ice_2022_2023.aux) ) 
 Here is how much of TeX's memory you used:
- 8242 strings out of 480163
- 120866 string characters out of 5894094
- 731675 words of memory out of 5000000
- 26071 multiletter control sequences out of 15000+600000
+ 8239 strings out of 480163
+ 120805 string characters out of 5894094
+ 731643 words of memory out of 5000000
+ 26068 multiletter control sequences out of 15000+600000
  477920 words of font info for 57 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 70i,8n,76p,999b,1874s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,8n,76p,999b,1876s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on de_martini_davide_ice_2022_2023.pdf (27 pages, 688032 bytes).
+Output written on de_martini_davide_ice_2022_2023.pdf (28 pages, 688247 bytes).
 PDF statistics:
- 189 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
+ 192 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
