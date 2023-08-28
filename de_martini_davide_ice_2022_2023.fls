@@ -376,19 +376,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT ./ringraziamenti.tex
-INPUT ./ringraziamenti.tex
-INPUT ./ringraziamenti.tex
-INPUT ringraziamenti.tex
-INPUT ./ringraziamenti.tex
-INPUT ./ringraziamenti.tex
-INPUT ringraziamenti.tex
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./de_martini_davide_ice_2022_2023.toc
 INPUT de_martini_davide_ice_2022_2023.toc
 INPUT de_martini_davide_ice_2022_2023.toc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -416,6 +408,7 @@ INPUT capitolo1.tex
 INPUT ./capitolo1.tex
 INPUT ./capitolo1.tex
 INPUT capitolo1.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./capitolo2.tex
 INPUT ./capitolo2.tex
@@ -500,7 +493,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 INPUT de_martini_davide_ice_2022_2023.aux
-INPUT /home/davide/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk
+INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
@@ -515,3 +508,4 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb
